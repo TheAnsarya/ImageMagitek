@@ -26,9 +26,7 @@ public abstract class ProjectCommandHandler<T> {
 		var openResult = ProjectService.OpenProjectFile(projectFileName);
 
 		return openResult.Match(
-			success => {
-				return success.Result;
-			},
+			success => success.Result,
 			fail => {
 				var errorMessages = Enumerable.Range(0, fail.Reasons.Count)
 					.Select(x => $"{x + 1}: {fail.Reasons[x]}")

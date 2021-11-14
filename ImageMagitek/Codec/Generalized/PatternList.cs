@@ -153,8 +153,8 @@ public sealed class PatternList {
 
 			// Extend pattern to fill entire plane
 			var extendedPattern = ExtendPattern(planeDecodePattern, width, height, plane, planePatternSize, patternSize);
-			foreach (var item in extendedPattern) {
-				decodePattern[item.MapIndex] = item.Coordinate;
+			foreach (var (Coordinate, MapIndex) in extendedPattern) {
+				decodePattern[MapIndex] = Coordinate;
 			}
 
 			plane++;
@@ -244,8 +244,8 @@ public sealed class PatternList {
 
 		// Extend pattern to fill entire image
 		var extendedPattern = ExtendChunkyPattern(decodePattern, width, height, planes, patternSize);
-		foreach (var item in extendedPattern) {
-			imageDecodePattern[item.MapIndex] = item.Coordinate;
+		foreach (var (Coordinate, MapIndex) in extendedPattern) {
+			imageDecodePattern[MapIndex] = Coordinate;
 		}
 
 		var encodePattern = imageDecodePattern.Select((x, i) => new { Coordinate = x, Index = i })

@@ -35,9 +35,7 @@ public sealed class XmlGraphicsFormatReader : IGraphicsFormatReader {
 
 		var validationErrors = new List<string>();
 
-		doc.Validate(_schemas, (o, e) => {
-			validationErrors.Add(e.Message);
-		});
+		doc.Validate(_schemas, (o, e) => validationErrors.Add(e.Message));
 
 		if (validationErrors.Any()) {
 			validationErrors.Insert(0, $"Codec '{fileName}' failed to be validated");
@@ -323,9 +321,7 @@ public sealed class XmlGraphicsFormatReader : IGraphicsFormatReader {
 		var patternResult = PatternList.TryCreatePatternList(patternStrings, packing, width, height, colorDepth, patternSize);
 
 		patternResult.Switch(
-			success => {
-				format.SetPattern(success.Result);
-			},
+			success => format.SetPattern(success.Result),
 			failed => errors.Add(failed.Reason));
 
 		if (errors.Any()) {

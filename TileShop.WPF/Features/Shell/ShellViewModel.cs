@@ -48,9 +48,7 @@ public class ShellViewModel : Screen, IHandle<ShowToolWindowEvent> {
 
 	public ApplicationTheme Theme {
 		get => ThemeManager.Current.ActualApplicationTheme;
-		set => Dispatcher.CurrentDispatcher.Invoke(() => {
-			ThemeManager.Current.SetValue(ThemeManager.ApplicationThemeProperty, value);
-		});
+		set => Dispatcher.CurrentDispatcher.Invoke(() => ThemeManager.Current.SetValue(ThemeManager.ApplicationThemeProperty, value));
 	}
 
 	public ShellViewModel(Tracker tracker, IEventAggregator events, IProjectService projectService, MenuViewModel activeMenu,

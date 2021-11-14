@@ -29,9 +29,7 @@ public class CodecService : ICodecService {
 		foreach (var formatFileName in Directory.GetFiles(codecsPath).Where(x => x.EndsWith(".xml"))) {
 			var result = serializer.LoadFromFile(formatFileName);
 
-			result.Switch(success => {
-				formats.Add(success.Result.Name, success.Result);
-			},
+			result.Switch(success => formats.Add(success.Result.Name, success.Result),
 				fail => {
 					errors.Add($"Failed to load XML codec '{formatFileName}'");
 					errors.AddRange(fail.Reasons);

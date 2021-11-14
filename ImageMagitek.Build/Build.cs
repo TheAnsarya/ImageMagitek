@@ -70,33 +70,28 @@ class Build : NukeBuild {
 
 	Target Restore => _ => _
 		.DependsOn(Clean)
-		.Executes(() => {
-			DotNetRestore(s => s
-				.SetProjectFile(Solution));
-		});
+		.Executes(() => DotNetRestore(s => s.SetProjectFile(Solution)));
 
 	Target Compile => _ => _
 		.DependsOn(Restore)
-		.Executes(() => {
+		.Executes(() =>
 			DotNetBuild(s => s
 				.SetProjectFile(Solution)
 				.SetConfiguration(Configuration)
-				.EnableNoRestore());
-		});
+				.EnableNoRestore()));
 
 	Target Test => _ => _
 		.DependsOn(Compile)
-		.Executes(() => {
+		.Executes(() =>
 			DotNetTest(_ => _
 				.SetProjectFile(TestProject)
 				.SetConfiguration(Configuration)
 				.EnableNoRestore()
-				.EnableNoBuild());
-		});
+				.EnableNoBuild()));
 
 	Target PublishTileShop => _ => _
 		.DependsOn(Test)
-		.Executes(() => {
+		.Executes(() =>
 			// win-x64 single file
 			DotNetPublish(_ => _
 				.SetProject(TileShopProject)
@@ -107,8 +102,7 @@ class Build : NukeBuild {
 				.SetRuntime(TileShopRuntime)
 				.SetFramework(TileShopFramework)
 				.AddProperty("SelfContained", false)
-				.AddProperty("PublishSingleFile", true));
-		});
+				.AddProperty("PublishSingleFile", true)));
 
 	Target PublishTileShopCLI => _ => _
 		.DependsOn(Test)

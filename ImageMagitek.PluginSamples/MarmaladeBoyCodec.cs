@@ -80,7 +80,7 @@ public class MarmaladeBoyCodec : IndexedCodec {
 				yPos += 2;
 			}
 		} catch (Exception ex) {
-
+			// TODO: deal with exception
 		}
 
 

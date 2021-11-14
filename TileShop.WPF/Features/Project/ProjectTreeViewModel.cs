@@ -80,9 +80,7 @@ public class ProjectTreeViewModel : ToolViewModel, IDropTarget, IHandle<AddScatt
 				SelectedNode = folderVM;
 				IsModified = true;
 			},
-			fail => {
-				_windowManager.ShowMessageBox(fail.Reason, "Folder Creation Error");
-			});
+			fail => _windowManager.ShowMessageBox(fail.Reason, "Folder Creation Error"));
 
 	public void AddNewDataFile(ResourceNodeViewModel parentNodeModel) {
 		var dataFileName = _fileSelect.GetExistingDataFileNameByUser();
@@ -105,9 +103,7 @@ public class ProjectTreeViewModel : ToolViewModel, IDropTarget, IHandle<AddScatt
 				SelectedNode = dfVM;
 				IsModified = true;
 			},
-			fail => {
-				_windowManager.ShowMessageBox(fail.Reason, "Resource Error");
-			});
+			fail => _windowManager.ShowMessageBox(fail.Reason, "Resource Error"));
 		}
 	}
 
@@ -144,9 +140,7 @@ public class ProjectTreeViewModel : ToolViewModel, IDropTarget, IHandle<AddScatt
 				_tracker.Persist(dialogModel);
 				_editors.ActivateEditor(pal);
 			},
-			fail => {
-				_windowManager.ShowMessageBox(fail.Reason, "Resource Error");
-			});
+			fail => _windowManager.ShowMessageBox(fail.Reason, "Resource Error"));
 		}
 	}
 
@@ -170,9 +164,7 @@ public class ProjectTreeViewModel : ToolViewModel, IDropTarget, IHandle<AddScatt
 				_tracker.Persist(dialogModel);
 				_editors.ActivateEditor(arranger);
 			},
-			fail => {
-				_windowManager.ShowMessageBox(fail.Reason, "Resource Error");
-			});
+			fail => _windowManager.ShowMessageBox(fail.Reason, "Resource Error"));
 		}
 	}
 
@@ -479,9 +471,7 @@ public class ProjectTreeViewModel : ToolViewModel, IDropTarget, IHandle<AddScatt
 							NotifyOfPropertyChange(() => HasProject);
 							_events.PublishOnUIThread(new ProjectLoadedEvent(projectVM.Node.DiskLocation));
 						},
-						fail => {
-							_windowManager.ShowMessageBox(fail.Reason, "Resource Error adding {dataFileName}");
-						});
+						fail => _windowManager.ShowMessageBox(fail.Reason, "Resource Error adding {dataFileName}"));
 					},
 					fail => _windowManager.ShowMessageBox($"{fail.Reason}", "Project Error"));
 			}
@@ -533,9 +523,7 @@ public class ProjectTreeViewModel : ToolViewModel, IDropTarget, IHandle<AddScatt
 		}
 
 		return _projectService.SaveProjectAs(projectTree, newFileName).Match(
-			success => {
-				return true;
-			},
+			success => true,
 			fail => {
 				_windowManager.ShowMessageBox(fail.Reason, "Project Save Error");
 				return false;

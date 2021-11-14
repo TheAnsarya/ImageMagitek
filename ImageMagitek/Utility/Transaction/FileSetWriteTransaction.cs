@@ -22,9 +22,7 @@ public sealed class FileSetWriteTransaction : IFileChangeTransactionRunner {
 				};
 
 				return TrySetRollback().Match(
-					rollBackSuccess => {
-						return new MagitekResults.Failed(compositeErrors);
-					},
+					rollBackSuccess => new MagitekResults.Failed(compositeErrors),
 					rollbackFailure => {
 						compositeErrors.AddRange(rollbackFailure.Reasons);
 						return new MagitekResults.Failed(compositeErrors);

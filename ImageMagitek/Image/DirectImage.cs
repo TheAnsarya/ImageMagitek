@@ -65,8 +65,8 @@ public sealed class DirectImage : ImageBase<ColorRgba32> {
 
 		var imageRect = new Rectangle(Left, Top, Width, Height);
 
-		foreach (var location in locations) {
-			var el = Arranger.GetElement(location.X, location.Y);
+		foreach (var (X, Y) in locations) {
+			var el = Arranger.GetElement(X, Y);
 			if (el is ArrangerElement element && element.Codec is IDirectCodec codec) {
 				var encodedBuffer = codec.ReadElement(element);
 
