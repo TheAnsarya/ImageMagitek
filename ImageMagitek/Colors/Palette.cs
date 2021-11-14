@@ -447,41 +447,27 @@ public class Palette : IProjectResource {
 	/// <param name="ColorModelName">Name of the ColorModel to retrieve</param>
 	/// <returns>A string name describing the ColorModel</returns>
 	public static ColorModel StringToColorModel(string ColorModelName) {
-		switch (ColorModelName) {
-			case "Rgba32":
-				return ColorModel.Rgba32;
-			case "Bgr15":
-				return ColorModel.Bgr15;
-			case "Abgr16":
-				return ColorModel.Abgr16;
-			case "Nes":
-				return ColorModel.Nes;
-			case "Bgr9":
-				return ColorModel.Bgr9;
-			case "Bgr6":
-				return ColorModel.Bgr6;
-			default:
-				throw new ArgumentException($"{nameof(StringToColorModel)} {nameof(ColorModel)} '{ColorModelName}' is not supported");
-		}
+		return ColorModelName switch {
+			"Rgba32" => ColorModel.Rgba32,
+			"Bgr15" => ColorModel.Bgr15,
+			"Abgr16" => ColorModel.Abgr16,
+			"Nes" => ColorModel.Nes,
+			"Bgr9" => ColorModel.Bgr9,
+			"Bgr6" => ColorModel.Bgr6,
+			_ => throw new ArgumentException($"{nameof(StringToColorModel)} {nameof(ColorModel)} '{ColorModelName}' is not supported"),
+		};
 	}
 
 	public static string ColorModelToString(ColorModel model) {
-		switch (model) {
-			case ColorModel.Bgr15:
-				return "Bgr15";
-			case ColorModel.Abgr16:
-				return "Abgr16";
-			case ColorModel.Rgba32:
-				return "Rgba32";
-			case ColorModel.Nes:
-				return "Nes";
-			case ColorModel.Bgr9:
-				return "Bgr9";
-			case ColorModel.Bgr6:
-				return "Bgr6";
-			default:
-				throw new ArgumentException($"{nameof(ColorModelToString)} {nameof(ColorModel)} '{model}' is not supported");
-		}
+		return model switch {
+			ColorModel.Bgr15 => "Bgr15",
+			ColorModel.Abgr16 => "Abgr16",
+			ColorModel.Rgba32 => "Rgba32",
+			ColorModel.Nes => "Nes",
+			ColorModel.Bgr9 => "Bgr9",
+			ColorModel.Bgr6 => "Bgr6",
+			_ => throw new ArgumentException($"{nameof(ColorModelToString)} {nameof(ColorModel)} '{model}' is not supported"),
+		};
 	}
 
 	public static IEnumerable<string> GetColorModelNames() => Enum.GetNames(typeof(ColorModel)).Cast<string>().ToList();

@@ -121,20 +121,15 @@ internal static class ColorSpaceHelper {
 		var q = v * (1 - (s * f));
 		var t = v * (1 - (s * (1 - f)));
 
-		switch (i) {
-			case 0:
-				return new Tuple<double, double, double>(v, t, p);
-			case 1:
-				return new Tuple<double, double, double>(q, v, p);
-			case 2:
-				return new Tuple<double, double, double>(p, v, t);
-			case 3:
-				return new Tuple<double, double, double>(p, q, v);
-			case 4:
-				return new Tuple<double, double, double>(t, p, v);
-			default:
-				return new Tuple<double, double, double>(v, p, q);
+		return i switch {
+			0 => new Tuple<double, double, double>(v, t, p),
+			1 => new Tuple<double, double, double>(q, v, p),
+			2 => new Tuple<double, double, double>(p, v, t),
+			3 => new Tuple<double, double, double>(p, q, v),
+			4 => new Tuple<double, double, double>(t, p, v),
+			_ => new Tuple<double, double, double>(v, p, q),
 		};
+		;
 	}
 
 	/// <summary>
@@ -171,20 +166,14 @@ internal static class ColorSpaceHelper {
 		var minRGB = (2 * l) - maxRGB;
 		var delta = maxRGB - minRGB;
 
-		switch (hueCircleSegment) {
-			case 0:
-				return new Tuple<double, double, double>(maxRGB, (delta * circleSegmentFraction) + minRGB, minRGB); //red-yellow
-			case 1:
-				return new Tuple<double, double, double>((delta * (1 - circleSegmentFraction)) + minRGB, maxRGB, minRGB); //yellow-green
-			case 2:
-				return new Tuple<double, double, double>(minRGB, maxRGB, (delta * circleSegmentFraction) + minRGB); //green-cyan
-			case 3:
-				return new Tuple<double, double, double>(minRGB, (delta * (1 - circleSegmentFraction)) + minRGB, maxRGB); //cyan-blue
-			case 4:
-				return new Tuple<double, double, double>((delta * circleSegmentFraction) + minRGB, minRGB, maxRGB); //blue-purple
-			default:
-				return new Tuple<double, double, double>(maxRGB, minRGB, (delta * (1 - circleSegmentFraction)) + minRGB); //purple-red and invalid values
-		}
+		return hueCircleSegment switch {
+			0 => new Tuple<double, double, double>(maxRGB, (delta * circleSegmentFraction) + minRGB, minRGB),//red-yellow
+			1 => new Tuple<double, double, double>((delta * (1 - circleSegmentFraction)) + minRGB, maxRGB, minRGB),//yellow-green
+			2 => new Tuple<double, double, double>(minRGB, maxRGB, (delta * circleSegmentFraction) + minRGB),//green-cyan
+			3 => new Tuple<double, double, double>(minRGB, (delta * (1 - circleSegmentFraction)) + minRGB, maxRGB),//cyan-blue
+			4 => new Tuple<double, double, double>((delta * circleSegmentFraction) + minRGB, minRGB, maxRGB),//blue-purple
+			_ => new Tuple<double, double, double>(maxRGB, minRGB, (delta * (1 - circleSegmentFraction)) + minRGB),//purple-red and invalid values
+		};
 	}
 
 	/// <summary>

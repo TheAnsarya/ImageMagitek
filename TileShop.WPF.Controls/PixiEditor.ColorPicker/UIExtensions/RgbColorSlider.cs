@@ -31,17 +31,13 @@ internal class RgbColorSlider : PreviewColorSlider {
 		var r = (byte)(CurrentColorState.RGB_R * 255);
 		var g = (byte)(CurrentColorState.RGB_G * 255);
 		var b = (byte)(CurrentColorState.RGB_B * 255);
-		switch (SliderArgbType) {
-			case "A":
-				return Color.FromArgb((byte)value, r, g, b);
-			case "R":
-				return Color.FromArgb(a, (byte)value, g, b);
-			case "G":
-				return Color.FromArgb(a, r, (byte)value, b);
-			case "B":
-				return Color.FromArgb(a, r, g, (byte)value);
-			default:
-				return Color.FromArgb(a, r, g, b);
+		return SliderArgbType switch {
+			"A" => Color.FromArgb((byte)value, r, g, b),
+			"R" => Color.FromArgb(a, (byte)value, g, b),
+			"G" => Color.FromArgb(a, r, (byte)value, b),
+			"B" => Color.FromArgb(a, r, g, (byte)value),
+			_ => Color.FromArgb(a, r, g, b),
 		};
+		;
 	}
 }
