@@ -386,7 +386,7 @@ public class ProjectTreeViewModel : ToolViewModel, IDropTarget, IHandle<AddScatt
 	public void Drop(IDropInfo dropInfo) {
 		var targetModel = dropInfo.TargetItem as ResourceNodeViewModel;
 
-		if (dropInfo.Data is ResourceNodeViewModel sourceModel && (targetModel is ResourceNodeViewModel || targetModel is FolderNodeViewModel)) {
+		if (dropInfo.Data is ResourceNodeViewModel sourceModel && (targetModel is not null || targetModel is FolderNodeViewModel)) {
 			var result = _projectService.MoveNode(sourceModel.Node, targetModel.Node);
 
 			result.Switch(

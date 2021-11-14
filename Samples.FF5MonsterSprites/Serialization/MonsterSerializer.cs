@@ -103,9 +103,7 @@ public class MonsterSerializer {
 
 	private void EndianSwapArray(byte[] array) {
 		for (var i = 0; i < array.Length; i += 2) {
-			var temp = array[i];
-			array[i] = array[i + 1];
-			array[i + 1] = temp;
+			(array[i + 1], array[i]) = (array[i], array[i + 1]);
 		}
 	}
 }

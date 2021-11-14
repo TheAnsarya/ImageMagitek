@@ -28,11 +28,7 @@ public class DualPickerControlBase : PickerControlBase, ISecondColorStorage {
 		set => SetValue(SecondaryColorProperty, value);
 	}
 
-	public void SwapColors() {
-		var temp = ColorState;
-		ColorState = SecondColorState;
-		SecondColorState = temp;
-	}
+	public void SwapColors() => (SecondColorState, ColorState) = (ColorState, SecondColorState);
 
 	private bool ignoreSecondaryColorChange = false;
 	private bool ignoreSecondaryColorPropertyChange = false;

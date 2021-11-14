@@ -446,29 +446,25 @@ public class Palette : IProjectResource {
 	/// </summary>
 	/// <param name="ColorModelName">Name of the ColorModel to retrieve</param>
 	/// <returns>A string name describing the ColorModel</returns>
-	public static ColorModel StringToColorModel(string ColorModelName) {
-		return ColorModelName switch {
-			"Rgba32" => ColorModel.Rgba32,
-			"Bgr15" => ColorModel.Bgr15,
-			"Abgr16" => ColorModel.Abgr16,
-			"Nes" => ColorModel.Nes,
-			"Bgr9" => ColorModel.Bgr9,
-			"Bgr6" => ColorModel.Bgr6,
-			_ => throw new ArgumentException($"{nameof(StringToColorModel)} {nameof(ColorModel)} '{ColorModelName}' is not supported"),
-		};
-	}
+	public static ColorModel StringToColorModel(string ColorModelName) => ColorModelName switch {
+		"Rgba32" => ColorModel.Rgba32,
+		"Bgr15" => ColorModel.Bgr15,
+		"Abgr16" => ColorModel.Abgr16,
+		"Nes" => ColorModel.Nes,
+		"Bgr9" => ColorModel.Bgr9,
+		"Bgr6" => ColorModel.Bgr6,
+		_ => throw new ArgumentException($"{nameof(StringToColorModel)} {nameof(ColorModel)} '{ColorModelName}' is not supported"),
+	};
 
-	public static string ColorModelToString(ColorModel model) {
-		return model switch {
-			ColorModel.Bgr15 => "Bgr15",
-			ColorModel.Abgr16 => "Abgr16",
-			ColorModel.Rgba32 => "Rgba32",
-			ColorModel.Nes => "Nes",
-			ColorModel.Bgr9 => "Bgr9",
-			ColorModel.Bgr6 => "Bgr6",
-			_ => throw new ArgumentException($"{nameof(ColorModelToString)} {nameof(ColorModel)} '{model}' is not supported"),
-		};
-	}
+	public static string ColorModelToString(ColorModel model) => model switch {
+		ColorModel.Bgr15 => "Bgr15",
+		ColorModel.Abgr16 => "Abgr16",
+		ColorModel.Rgba32 => "Rgba32",
+		ColorModel.Nes => "Nes",
+		ColorModel.Bgr9 => "Bgr9",
+		ColorModel.Bgr6 => "Bgr6",
+		_ => throw new ArgumentException($"{nameof(ColorModelToString)} {nameof(ColorModel)} '{model}' is not supported"),
+	};
 
 	public static IEnumerable<string> GetColorModelNames() => Enum.GetNames(typeof(ColorModel)).Cast<string>().ToList();
 

@@ -151,11 +151,7 @@ public static class RectangularArrayExtensions {
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		static void SwapItem(T[,] source, int ax, int ay, int bx, int by) {
-			var temp = source[ay, ax];
-			source[ay, ax] = source[by, bx];
-			source[by, bx] = temp;
-		}
+		static void SwapItem(T[,] source, int ax, int ay, int bx, int by) => (source[by, bx], source[ay, ax]) = (source[ay, ax], source[by, bx]);
 	}
 
 	/// <summary>
@@ -241,9 +237,7 @@ public static class RectangularArrayExtensions {
 
 		for (var i = 0; i < len; i++) {
 			for (var j = i + 1; j < len; j++) {
-				var temp = source[i, j];
-				source[i, j] = source[j, i];
-				source[j, i] = temp;
+				(source[j, i], source[i, j]) = (source[i, j], source[j, i]);
 			}
 		}
 	}
