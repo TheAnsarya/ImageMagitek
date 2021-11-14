@@ -83,8 +83,8 @@ public sealed class IndexedImage : ImageBase<byte> {
 
 		var imageRect = new Rectangle(Left, Top, Width, Height);
 
-		foreach (var location in locations) {
-			var el = Arranger.GetElement(location.X, location.Y);
+		foreach (var (X, Y) in locations) {
+			var el = Arranger.GetElement(X, Y);
 			if (el is ArrangerElement element && element.Codec is IIndexedCodec codec) {
 				var encodedBuffer = codec.ReadElement(element);
 
@@ -112,7 +112,7 @@ public sealed class IndexedImage : ImageBase<byte> {
 				decodedImage.MirrorArray2D(element.Mirror);
 
 				for (var y = 0; y <= maxY - minY; y++) {
-					var destidx = (element.Y1 + deltaY + y - Top) * Width + (element.X1 + deltaX - Left);
+					var destidx = ((element.Y1 + deltaY + y - Top) * Width) + (element.X1 + deltaX - Left);
 					for (var x = 0; x <= maxX - minX; x++) {
 						Image[destidx] = decodedImage[y + deltaY, x + deltaX];
 						destidx++;
@@ -136,7 +136,7 @@ public sealed class IndexedImage : ImageBase<byte> {
 
 		for (var y = 0; y < Height; y++) {
 			for (var x = 0; x < Width; x++) {
-				fullImage.Image[(y + Top) * fullImage.Width + x + Left] = Image[y * Width + x];
+				fullImage.Image[((y + Top) * fullImage.Width) + x + Left] = Image[(y * Width) + x];
 			}
 		}
 
@@ -179,7 +179,7 @@ public sealed class IndexedImage : ImageBase<byte> {
 				throw new ArgumentOutOfRangeException($"{nameof(SetPixel)} ({nameof(color)} ({color}): index exceeded the max number of colors in codec '{el.Codec.Name}' ({codecColors})");
 			}
 
-			Image[x + Width * y] = color;
+			Image[x + (Width * y)] = color;
 		} else {
 			throw new InvalidOperationException($"{nameof(SetPixel)} cannot set a pixel on the undefined {nameof(ArrangerElement)} at ({x}, {y})");
 		}
@@ -213,7 +213,7 @@ public sealed class IndexedImage : ImageBase<byte> {
 
 		if (el?.Palette is Palette pal) {
 			var index = pal.GetIndexByNativeColor(color, ColorMatchStrategy.Exact);
-			Image[x + Width * y] = index;
+			Image[x + (Width * y)] = index;
 		} else {
 			throw new InvalidOperationException($"{nameof(SetPixel)} cannot set pixel at ({x}, {y}) because there is no associated palette");
 		}
@@ -267,7 +267,7 @@ public sealed class IndexedImage : ImageBase<byte> {
 		var el = Arranger.GetElementAtPixel(x + Left, y + Top);
 
 		if (el?.Palette is Palette pal) {
-			var palIndex = Image[x + Width * y];
+			var palIndex = Image[x + (Width * y)];
 			return pal[palIndex];
 		} else {
 			throw new InvalidOperationException($"{nameof(GetPixelColor)} has no defined palette at ({x}, {y})");

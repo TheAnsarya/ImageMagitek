@@ -160,15 +160,15 @@ public abstract class ArrangerEditorViewModel : ResourceEditorBaseViewModel, IMo
 		_gridlines = new BindableCollection<Gridline>();
 		for (var x = x1; x <= x2; x += xSpacing) // Vertical gridlines
 		{
-			var gridline = new Gridline(x * Zoom + 1, 0,
-				x * Zoom + 1, y2 * Zoom);
+			var gridline = new Gridline((x * Zoom) + 1, 0,
+				(x * Zoom) + 1, y2 * Zoom);
 			_gridlines.Add(gridline);
 		}
 
 		for (var y = y1; y <= y2; y += ySpacing) // Horizontal gridlines
 		{
-			var gridline = new Gridline(0, y * Zoom + 1,
-				x2 * Zoom, y * Zoom + 1);
+			var gridline = new Gridline(0, (y * Zoom) + 1,
+				x2 * Zoom, (y * Zoom) + 1);
 			_gridlines.Add(gridline);
 		}
 

@@ -179,7 +179,7 @@ public sealed class PatternList {
 					var x = (short)(pixelIndex % width);
 					var y = (short)(pixelIndex / width);
 					var coord = new PlaneCoordinate(x, y, plane);
-					var index = bitIndex + repeat * patternSize;
+					var index = bitIndex + (repeat * patternSize);
 
 					yield return (coord, index);
 					pixelIndex++;
@@ -265,7 +265,7 @@ public sealed class PatternList {
 				for (var i = 0; i < extendSize; i++) {
 					var bitIndex = decodePattern[pixelIndex % patternSize];
 					var x = (short)(pixelIndex / bitsPerPixel % width);
-					var y = (short)((pixelIndex / bitsPerPixel) / width);
+					var y = (short)(pixelIndex / bitsPerPixel / width);
 					var p = (short)(pixelIndex % bitsPerPixel);
 					var coord = new PlaneCoordinate(x, y, p);
 					var index = bitIndex + (repeat * patternSize);

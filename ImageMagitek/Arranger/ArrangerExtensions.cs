@@ -171,7 +171,7 @@ public static class ArrangerExtensions {
 				newAddress = 0;
 				break;
 			case ArrangerMoveType.End:
-				newAddress = new FileBitAddress(arranger.FileSize * 8 - arranger.ArrangerBitSize);
+				newAddress = new FileBitAddress((arranger.FileSize * 8) - arranger.ArrangerBitSize);
 				break;
 		}
 

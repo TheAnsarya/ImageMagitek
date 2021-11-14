@@ -44,9 +44,9 @@ public class ImageRgba32Source : BitmapSourceBase {
 
 					for (var x = 0; x < sourceRect.Width; x++) {
 						pBytes[x * 4] = row[x].B;
-						pBytes[x * 4 + 1] = row[x].G;
-						pBytes[x * 4 + 2] = row[x].R;
-						pBytes[x * 4 + 3] = row[x].A;
+						pBytes[(x * 4) + 1] = row[x].G;
+						pBytes[(x * 4) + 2] = row[x].R;
+						pBytes[(x * 4) + 3] = row[x].A;
 					}
 
 					pBytes += stride;

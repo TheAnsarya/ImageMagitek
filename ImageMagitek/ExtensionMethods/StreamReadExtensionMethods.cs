@@ -82,7 +82,7 @@ public static class StreamReadExtensionMethods {
 			var readBuffer = buffer[..totalReadBytes];
 			var lastByte = stream.ReadByte();
 			lastByte >>= 8 - (skipBits + readBits);
-			lastByte <<= (8 - readBits);
+			lastByte <<= 8 - readBits;
 			buffer[0] = (byte)lastByte;
 		} else if (totalReadBytes == firstReadBytes) {
 			var readBuffer = buffer[..totalReadBytes];

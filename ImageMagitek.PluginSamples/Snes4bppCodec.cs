@@ -51,7 +51,7 @@ public class Snes4bppCodec : IndexedCodec {
 		var offsetPlane1 = 0;
 		var offsetPlane2 = Width;
 		var offsetPlane3 = Width * Height * 2;
-		var offsetPlane4 = Width * Height * 2 + Width;
+		var offsetPlane4 = (Width * Height * 2) + Width;
 
 		for (var y = 0; y < Height; y++) {
 			for (var x = 0; x < Width; x++) {
@@ -92,7 +92,7 @@ public class Snes4bppCodec : IndexedCodec {
 		var offsetPlane1 = 0;
 		var offsetPlane2 = Width;
 		var offsetPlane3 = Width * Height * 2;
-		var offsetPlane4 = Width * Height * 2 + Width;
+		var offsetPlane4 = (Width * Height * 2) + Width;
 
 		for (var y = 0; y < Height; y++) {
 			for (var x = 0; x < Width; x++) {

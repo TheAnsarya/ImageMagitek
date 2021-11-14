@@ -235,7 +235,7 @@ public class PaletteEditorViewModel : ResourceEditorBaseViewModel {
 		while (i < pal.ColorSources.Length) {
 			if (pal.ColorSources[i] is FileColorSource fileSource) {
 				var sources = pal.ColorSources.Skip(i)
-					.TakeWhile((x, i) => x is FileColorSource && (x as FileColorSource).Offset == (fileSource.Offset + i * size))
+					.TakeWhile((x, i) => x is FileColorSource && (x as FileColorSource).Offset == (fileSource.Offset + (i * size)))
 					.ToList();
 
 				var fileSourceModel = new FileColorSourceModel(fileSource.Offset.FileOffset, sources.Count, fileSource.Endian);
@@ -280,7 +280,7 @@ public class PaletteEditorViewModel : ResourceEditorBaseViewModel {
 			if (sourceModel is FileColorSourceModel fileModel) {
 				var offset = new FileBitAddress(fileModel.FileAddress, 0);
 				for (var j = 0; j < fileModel.Entries; j++) {
-					yield return new FileColorSource(offset + j * size, fileModel.Endian);
+					yield return new FileColorSource(offset + (j * size), fileModel.Endian);
 				}
 			} else if (sourceModel is NativeColorSourceModel nativeModel) {
 				ColorParser.TryParse(nativeModel.NativeHexColor, ColorModel.Rgba32, out var nativeColor);

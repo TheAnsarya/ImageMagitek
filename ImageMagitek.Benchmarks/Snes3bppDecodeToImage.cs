@@ -56,7 +56,7 @@ public class Snes3bppDecodeToImage {
 
 		for (var y = 0; y < _arranger.ArrangerElementSize.Height; y++) {
 			for (var x = 0; x < _arranger.ArrangerElementSize.Width; x++) {
-				var el = new ArrangerElement(x * 8, y * 8, _df, 24 * x + 24 * x * y, _codec, _pal);
+				var el = new ArrangerElement(x * 8, y * 8, _df, (24 * x) + (24 * x * y), _codec, _pal);
 				_arranger.SetElement(el, x, y);
 			}
 		}

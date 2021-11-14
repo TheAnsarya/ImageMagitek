@@ -79,7 +79,7 @@ public class MouseCaptureBehavior : Behavior<FrameworkElement> {
 			var args = new MouseCaptureArgs {
 				X = pos.X,
 				Y = pos.Y,
-				LeftButton = (e.LeftButton == MouseButtonState.Pressed),
+				LeftButton = e.LeftButton == MouseButtonState.Pressed,
 				RightButton = e.RightButton == MouseButtonState.Pressed
 			};
 			proxy.OnMouseDown(this, args);

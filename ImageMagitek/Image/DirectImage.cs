@@ -94,7 +94,7 @@ public sealed class DirectImage : ImageBase<ColorRgba32> {
 				decodedImage.MirrorArray2D(element.Mirror);
 
 				for (var y = 0; y <= maxY - minY; y++) {
-					var destidx = (element.Y1 + deltaY + y - Top) * Width + (element.X1 + deltaX - Left);
+					var destidx = ((element.Y1 + deltaY + y - Top) * Width) + (element.X1 + deltaX - Left);
 					for (var x = 0; x <= maxX - minX; x++) {
 						Image[destidx] = decodedImage[y + deltaY, x + deltaX];
 						destidx++;

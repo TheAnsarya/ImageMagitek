@@ -85,7 +85,7 @@ internal partial class SquareSlider : UserControl, INotifyPropertyChanged {
 			for (var i = 0; i < w; i++) {
 				var rgbtuple = colorSpaceConversionMethod(hue, i / (double)(w - 1), (h - 1 - j) / (double)(h - 1));
 				double r = rgbtuple.Item1, g = rgbtuple.Item2, b = rgbtuple.Item3;
-				var pos = (j * h + i) * 3;
+				var pos = ((j * h) + i) * 3;
 				pixels[pos] = (byte)(r * 255);
 				pixels[pos + 1] = (byte)(g * 255);
 				pixels[pos + 2] = (byte)(b * 255);

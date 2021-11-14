@@ -58,7 +58,7 @@ public class MonsterSerializer {
 		var palEntries = metadata.ColorDepth == TileColorDepth.Bpp4 ? 16 : 8;
 
 		var paletteSources = Enumerable.Range(0, palEntries)
-			.Select(x => (IColorSource)new FileColorSource(8 * (PaletteOffset + 16 * metadata.PaletteID + x * 2), Endian.Little))
+			.Select(x => (IColorSource)new FileColorSource(8 * (PaletteOffset + (16 * metadata.PaletteID) + (x * 2)), Endian.Little))
 			.ToList();
 
 		var pal = new Palette("monsterPalette", new ColorFactory(), ColorModel.Bgr15, paletteSources, true, PaletteStorageSource.Project) {
@@ -71,7 +71,7 @@ public class MonsterSerializer {
 		var arrangerHeight = metadata.TileSetSize == TileSetSize.Small ? 8 : 16;
 
 		var formData = new byte[arrangerWidth * arrangerHeight / 8];
-		var formAddress = metadata.TileSetSize == TileSetSize.Small ? FormSmallOffset + 8 * metadata.FormID : FormLargeOffset + 32 * metadata.FormID;
+		var formAddress = metadata.TileSetSize == TileSetSize.Small ? FormSmallOffset + (8 * metadata.FormID) : FormLargeOffset + (32 * metadata.FormID);
 		dataFile.Stream.Seek(formAddress, SeekOrigin.Begin);
 		var length = await dataFile.Stream.ReadAsync(formData, 0, formData.Length);
 		if (metadata.TileSetSize == TileSetSize.Large) // Requires endian swapping the tile form
@@ -83,7 +83,7 @@ public class MonsterSerializer {
 
 		var arranger = new ScatteredArranger("monsterArranger", PixelColorType.Indexed, ElementLayout.Tiled, arrangerWidth, arrangerHeight, 8, 8);
 		var elementsStored = 0;
-		var tileAddress = TileSetOffset + 8 * metadata.TileSetID;
+		var tileAddress = TileSetOffset + (8 * metadata.TileSetID);
 		var tileSize = metadata.ColorDepth == TileColorDepth.Bpp4 ? 32 : 24;
 
 		for (var y = 0; y < arrangerHeight; y++) {

@@ -87,8 +87,8 @@ public class IndexedPixelEditorViewModel : PixelEditorViewModel<byte> {
 		} else if (WorkingArranger.Layout == ElementLayout.Tiled) {
 			var location = WorkingArranger.PointToElementLocation(new Point(_viewX, _viewY));
 
-			var x = WorkingArranger.ElementPixelSize.Width - (_viewX - location.X * WorkingArranger.ElementPixelSize.Width);
-			var y = WorkingArranger.ElementPixelSize.Height - (_viewY - location.Y * WorkingArranger.ElementPixelSize.Height);
+			var x = WorkingArranger.ElementPixelSize.Width - (_viewX - (location.X * WorkingArranger.ElementPixelSize.Width));
+			var y = WorkingArranger.ElementPixelSize.Height - (_viewY - (location.Y * WorkingArranger.ElementPixelSize.Height));
 
 			CreateGridlines(x, y, _viewWidth, _viewHeight,
 				WorkingArranger.ElementPixelSize.Width, WorkingArranger.ElementPixelSize.Height);

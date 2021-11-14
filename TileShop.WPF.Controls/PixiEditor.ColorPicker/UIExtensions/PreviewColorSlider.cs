@@ -77,7 +77,7 @@ internal abstract class PreviewColorSlider : Slider, INotifyPropertyChanged {
 	private static void SmallChangeBindableChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e) => ((PreviewColorSlider)d).SmallChange = (double)e.NewValue;
 
 	private void OnPreviewMouseWheel(object sender, MouseWheelEventArgs args) {
-		Value = MathHelper.Clamp(Value + SmallChange * args.Delta / 120, Minimum, Maximum);
+		Value = MathHelper.Clamp(Value + (SmallChange * args.Delta / 120), Minimum, Maximum);
 		args.Handled = true;
 	}
 }

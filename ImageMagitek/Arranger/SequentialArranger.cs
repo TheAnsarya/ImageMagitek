@@ -94,7 +94,7 @@ public sealed class SequentialArranger : Arranger {
 			for (var x = 0; x < patternsX; x++) {
 				foreach (var pos in TileLayout.Pattern) {
 					var posX = (x * TileLayout.Width) + pos.X;
-					var posY = y * TileLayout.Height + pos.Y;
+					var posY = (y * TileLayout.Height) + pos.Y;
 
 					var el = new ArrangerElement(posX * ElementPixelSize.Width,
 						posY * ElementPixelSize.Height, ActiveDataFile, address, ActiveCodec, ActivePalette);
@@ -133,7 +133,7 @@ public sealed class SequentialArranger : Arranger {
 			FileAddress = new FileBitAddress(0, 0);
 		} else if (testaddress.Bits() > FileSize * 8) // Clamp arranger to edge of viewable file
 {
-			FileAddress = new FileBitAddress(FileSize * 8 - ArrangerBitSize);
+			FileAddress = new FileBitAddress((FileSize * 8) - ArrangerBitSize);
 		} else {
 			FileAddress = absoluteAddress;
 		}

@@ -32,7 +32,7 @@ public struct ColorAbgr16 : IColor32 {
 		get {
 			uint value = r;
 			value |= (uint)g << 5;
-			value |= ((uint)b << 10);
+			value |= (uint)b << 10;
 			value |= (uint)a << 15;
 			return value;
 		}

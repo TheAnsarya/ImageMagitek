@@ -135,7 +135,7 @@ public sealed class BitStream {
 	}
 
 	public void SeekRelative(int seekBits) {
-		var seekOffset = _index * 8 + (8 - _bitIndex) + seekBits;
+		var seekOffset = (_index * 8) + (8 - _bitIndex) + seekBits;
 
 		if (seekOffset < 0 || seekOffset >= StreamSize) {
 			throw new ArgumentOutOfRangeException($"{nameof(SeekRelative)} parameter '{nameof(seekOffset)} is out of range ({seekOffset})'");
@@ -259,7 +259,7 @@ public sealed class BitStream {
 	/// </summary>
 	/// <param name="advanceLength">Number of bits to advance</param>
 	private void Advance(int advanceLength) {
-		var offset = (8 - _bitIndex) + advanceLength;
+		var offset = 8 - _bitIndex + advanceLength;
 		_index += offset / 8;
 		_bitIndex = 8 - (offset % 8);
 		_bitsRemaining -= advanceLength;

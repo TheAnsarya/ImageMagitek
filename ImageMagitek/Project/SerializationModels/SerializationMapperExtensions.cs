@@ -41,7 +41,7 @@ public static class SerializationMapperExtensions {
 		while (i < pal.ColorSources.Length) {
 			if (pal.ColorSources[i] is FileColorSource fileSource) {
 				var sources = pal.ColorSources.Skip(i)
-					.TakeWhile((x, i) => x is FileColorSource && (x as FileColorSource).Offset == (fileSource.Offset + i * size))
+					.TakeWhile((x, i) => x is FileColorSource && (x as FileColorSource).Offset == (fileSource.Offset + (i * size)))
 					.ToList();
 
 				var sourceModel = new FileColorSourceModel(fileSource.Offset, sources.Count, fileSource.Endian);
@@ -70,7 +70,7 @@ public static class SerializationMapperExtensions {
 		foreach (var source in model.ColorSources) {
 			if (source is FileColorSourceModel fileSource) {
 				var fileSources = Enumerable.Range(0, fileSource.Entries)
-					.Select(x => fileSource.FileAddress + size * x)
+					.Select(x => fileSource.FileAddress + (size * x))
 					.Select(x => new FileColorSource(x, fileSource.Endian))
 					.ToList();
 				sources.AddRange(fileSources);

@@ -24,7 +24,7 @@ public class RemeasureWindowBehavior : Behavior<Window> {
 			return;
 		}
 
-		if (e.NewValue is bool == false) {
+		if ((e.NewValue is bool) == false) {
 			return;
 		}
 

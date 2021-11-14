@@ -27,7 +27,7 @@ public class SelectAllFocusBehavior : Behavior<TextBox> {
 			return;
 		}
 
-		if (e.NewValue is bool == false) {
+		if ((e.NewValue is bool) == false) {
 			return;
 		}
 

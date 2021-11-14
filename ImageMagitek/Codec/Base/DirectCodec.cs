@@ -75,6 +75,6 @@ public abstract class DirectCodec : IDirectCodec {
 			return DefaultHeight;
 		}
 
-		return Math.Clamp(height - height % HeightResizeIncrement, HeightResizeIncrement, int.MaxValue);
+		return Math.Clamp(height - (height % HeightResizeIncrement), HeightResizeIncrement, int.MaxValue);
 	}
 }

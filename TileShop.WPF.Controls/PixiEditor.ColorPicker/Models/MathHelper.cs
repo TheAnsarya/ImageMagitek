@@ -13,5 +13,5 @@ internal static class MathHelper {
 		return value;
 	}
 
-	public static double Mod(double value, double m) => (value % m + m) % m;
+	public static double Mod(double value, double m) => ((value % m) + m) % m;
 }

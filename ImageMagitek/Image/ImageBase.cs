@@ -50,7 +50,7 @@ public abstract class ImageBase<TPixel> where TPixel : struct {
 			throw new ArgumentOutOfRangeException($"{nameof(GetPixel)} ({nameof(x)}: {x}, {nameof(y)}: {y}) were outside the image bounds ({nameof(Width)}: {Width}, {nameof(Height)}: {Height}");
 		}
 
-		return Image[x + Width * y];
+		return Image[x + (Width * y)];
 	}
 
 	public virtual Span<TPixel> GetPixelSpan() {
@@ -96,7 +96,7 @@ public abstract class ImageBase<TPixel> where TPixel : struct {
 			throw new ArgumentOutOfRangeException($"{nameof(GetPixel)} ({nameof(x)}: {x}, {nameof(y)}: {y}) were outside the image bounds ({nameof(Width)}: {Width}, {nameof(Height)}: {Height}");
 		}
 
-		Image[x + Width * y] = color;
+		Image[x + (Width * y)] = color;
 	}
 
 	/// <summary>

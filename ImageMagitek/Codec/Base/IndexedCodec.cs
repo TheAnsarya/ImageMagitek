@@ -72,6 +72,6 @@ public abstract class IndexedCodec : IIndexedCodec {
 			return DefaultHeight;
 		}
 
-		return Math.Clamp(height - height % HeightResizeIncrement, HeightResizeIncrement, int.MaxValue);
+		return Math.Clamp(height - (height % HeightResizeIncrement), HeightResizeIncrement, int.MaxValue);
 	}
 }

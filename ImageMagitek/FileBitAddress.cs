@@ -36,7 +36,7 @@ public struct FileBitAddress : IEquatable<FileBitAddress> {
 		BitOffset = (int)(bits % 8);
 	}
 
-	public long Bits() => FileOffset * 8 + BitOffset;
+	public long Bits() => (FileOffset * 8) + BitOffset;
 
 	public bool Equals(FileBitAddress other) =>
 		FileOffset == other.FileOffset && BitOffset == other.BitOffset;

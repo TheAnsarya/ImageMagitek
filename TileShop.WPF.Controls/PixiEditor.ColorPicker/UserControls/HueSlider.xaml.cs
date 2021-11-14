@@ -50,7 +50,7 @@ internal partial class HueSlider : UserControl {
 		var x = mousePos.X / (width * 2);
 		var y = mousePos.Y / (height * 2);
 
-		var length = Math.Sqrt(x * x + y * y);
+		var length = Math.Sqrt((x * x) + (y * y));
 		if (length == 0) {
 			return;
 		}
@@ -60,12 +60,12 @@ internal partial class HueSlider : UserControl {
 			angle = -angle;
 		}
 
-		angle = angle * 360 / (Math.PI * 2) + 180;
+		angle = (angle * 360 / (Math.PI * 2)) + 180;
 		Value = MathHelper.Clamp(angle, 0, 360);
 	}
 
 	private void OnPreviewMouseWheel(object sender, MouseWheelEventArgs args) {
-		Value = MathHelper.Mod(Value + SmallChange * args.Delta / 120, 360);
+		Value = MathHelper.Mod(Value + (SmallChange * args.Delta / 120), 360);
 		args.Handled = true;
 	}
 }
