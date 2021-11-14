@@ -207,6 +207,7 @@ public class SnappedRectangle : INotifyPropertyChanged {
 			SnappedTop = (int)(Math.Ceiling(Math.Min(Top, Bottom) / _elementSize.Height) * _elementSize.Height);
 			SnappedBottom = (int)(Math.Ceiling(Math.Max(Top, Bottom) / _elementSize.Height) * _elementSize.Height);
 		}
+
 		if (SnapRounding == ElementSnapRounding.Collapse) {
 			SnappedLeft = (int)(Math.Ceiling(Math.Min(Left, Right) / _elementSize.Width) * _elementSize.Width);
 			SnappedRight = (int)(Math.Floor(Math.Max(Left, Right) / _elementSize.Width) * _elementSize.Width);

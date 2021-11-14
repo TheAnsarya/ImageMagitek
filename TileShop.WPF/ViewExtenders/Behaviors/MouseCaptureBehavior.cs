@@ -80,7 +80,7 @@ public class MouseCaptureBehavior : Behavior<FrameworkElement> {
 				X = pos.X,
 				Y = pos.Y,
 				LeftButton = (e.LeftButton == MouseButtonState.Pressed),
-				RightButton = (e.RightButton == MouseButtonState.Pressed)
+				RightButton = e.RightButton == MouseButtonState.Pressed
 			};
 			proxy.OnMouseDown(this, args);
 		}
@@ -93,8 +93,8 @@ public class MouseCaptureBehavior : Behavior<FrameworkElement> {
 			var args = new MouseCaptureArgs {
 				X = pos.X,
 				Y = pos.Y,
-				LeftButton = (e.LeftButton == MouseButtonState.Pressed),
-				RightButton = (e.RightButton == MouseButtonState.Pressed)
+				LeftButton = e.LeftButton == MouseButtonState.Pressed,
+				RightButton = e.RightButton == MouseButtonState.Pressed
 			};
 			proxy.OnMouseMove(this, args);
 		}
@@ -107,8 +107,8 @@ public class MouseCaptureBehavior : Behavior<FrameworkElement> {
 			var args = new MouseCaptureArgs {
 				X = pos.X,
 				Y = pos.Y,
-				LeftButton = (e.LeftButton == MouseButtonState.Pressed),
-				RightButton = (e.RightButton == MouseButtonState.Pressed)
+				LeftButton = e.LeftButton == MouseButtonState.Pressed,
+				RightButton = e.RightButton == MouseButtonState.Pressed
 			};
 			proxy.OnMouseUp(this, args);
 		}
@@ -121,8 +121,8 @@ public class MouseCaptureBehavior : Behavior<FrameworkElement> {
 			var args = new MouseCaptureArgs {
 				X = pos.X,
 				Y = pos.Y,
-				LeftButton = (e.LeftButton == MouseButtonState.Pressed),
-				RightButton = (e.RightButton == MouseButtonState.Pressed)
+				LeftButton = e.LeftButton == MouseButtonState.Pressed,
+				RightButton = e.RightButton == MouseButtonState.Pressed
 			};
 			proxy.OnMouseLeave(this, args);
 		}
@@ -136,8 +136,8 @@ public class MouseCaptureBehavior : Behavior<FrameworkElement> {
 				var args = new MouseCaptureArgs {
 					X = pos.X,
 					Y = pos.Y,
-					LeftButton = (e.LeftButton == MouseButtonState.Pressed),
-					RightButton = (e.RightButton == MouseButtonState.Pressed),
+					LeftButton = e.LeftButton == MouseButtonState.Pressed,
+					RightButton = e.RightButton == MouseButtonState.Pressed,
 					WheelDelta = e.Delta
 				};
 				proxy.OnMouseWheel(this, args);

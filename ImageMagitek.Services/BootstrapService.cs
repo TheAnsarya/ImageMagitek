@@ -59,6 +59,7 @@ public class BootstrapService {
 			var palette = _paletteService.ReadJsonPalette(paletteFileName);
 			_paletteService.GlobalPalettes.Add(palette);
 		}
+
 		_paletteService.SetDefaultPalette(_paletteService.GlobalPalettes.First());
 
 		var nesPaletteFileName = Path.Combine(palettesPath, $"{settings.NesPalette}.json");

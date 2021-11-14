@@ -196,6 +196,7 @@ public class IndexedPixelEditorViewModel : PixelEditorViewModel<byte> {
 					IsModified = true;
 					BitmapAdapter.Invalidate(x, y, 1, 1);
 				}
+
 				return new NotifyOperationEvent("");
 			},
 			fail => new NotifyOperationEvent(fail.Reason)

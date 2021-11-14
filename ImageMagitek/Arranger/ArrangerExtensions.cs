@@ -177,7 +177,7 @@ public static class ArrangerExtensions {
 
 		if (newAddress + arranger.ArrangerBitSize > arranger.FileSize * 8) // Calculated address is past EOF (first)
 {
-			newAddress = new FileBitAddress(arranger.FileSize * 8 - arranger.ArrangerBitSize);
+			newAddress = new FileBitAddress((arranger.FileSize * 8) - arranger.ArrangerBitSize);
 		}
 
 		if (newAddress < 0) // Calculated address is before start of file (second)

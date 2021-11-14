@@ -117,6 +117,7 @@ public class Snes4bppCodec : IndexedCodec {
 				offsetPlane3++;
 				offsetPlane3++;
 			}
+
 			offsetPlane1 += Width;
 			offsetPlane2 += Width;
 			offsetPlane3 += Width;

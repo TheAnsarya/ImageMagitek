@@ -130,7 +130,7 @@ public sealed class BitStream {
 		}
 
 		_index = (_streamStartOffset + seekBits) / 8;
-		_bitIndex = 8 - (_streamStartOffset + seekBits) % 8;
+		_bitIndex = 8 - ((_streamStartOffset + seekBits) % 8);
 		_bitsRemaining = _streamEndOffset - (_streamStartOffset + seekBits);
 	}
 
@@ -142,7 +142,7 @@ public sealed class BitStream {
 		}
 
 		_index = (_streamStartOffset + seekOffset) / 8;
-		_bitIndex = 8 - (_streamStartOffset + seekOffset) % 8;
+		_bitIndex = 8 - ((_streamStartOffset + seekOffset) % 8);
 		_bitsRemaining = _streamEndOffset - (_streamStartOffset + seekOffset);
 	}
 
@@ -244,8 +244,8 @@ public sealed class BitStream {
 	/// <param name="bitReadLength"></param>
 	/// <returns></returns>
 	private int PartialRead(int bitReadLength) {
-		var mask = ((1 << bitReadLength) - 1); // Make mask for the bits to be read
-		mask <<= (_bitIndex - bitReadLength); // Shift mask to the bit index
+		var mask = (1 << bitReadLength) - 1; // Make mask for the bits to be read
+		mask <<= _bitIndex - bitReadLength; // Shift mask to the bit index
 
 		var result = (Data[_index] & mask) >> (_bitIndex - bitReadLength);
 
@@ -352,8 +352,8 @@ public sealed class BitStream {
 	}
 
 	private void PartialWrite(int val, int bitWriteLength) {
-		var mask = ((1 << bitWriteLength) - 1); // Make mask for the bits to be read
-		mask <<= (_bitIndex - bitWriteLength); // Shift mask to the bit index
+		var mask = (1 << bitWriteLength) - 1; // Make mask for the bits to be read
+		mask <<= _bitIndex - bitWriteLength; // Shift mask to the bit index
 
 		Data[_index] &= (byte)~mask; // Clear bits
 		Data[_index] |= (byte)(val << (_bitIndex - bitWriteLength));

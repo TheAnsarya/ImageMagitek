@@ -93,7 +93,7 @@ public sealed class SequentialArranger : Arranger {
 		for (var y = 0; y < patternsY; y++) {
 			for (var x = 0; x < patternsX; x++) {
 				foreach (var pos in TileLayout.Pattern) {
-					var posX = x * TileLayout.Width + pos.X;
+					var posX = (x * TileLayout.Width) + pos.X;
 					var posY = y * TileLayout.Height + pos.Y;
 
 					var el = new ArrangerElement(posX * ElementPixelSize.Width,

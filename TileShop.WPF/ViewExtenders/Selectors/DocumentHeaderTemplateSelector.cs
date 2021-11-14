@@ -14,8 +14,7 @@ public class DocumentHeaderTemplateSelector : DataTemplateSelector {
 	public DataTemplate ProjectDocumentHeaderTemplate { get; set; }
 
 	public override DataTemplate SelectTemplate(object item, DependencyObject container) {
-		var document = item as LayoutDocument;
-		if (document == null || container is null) {
+		if (item is not LayoutDocument document || container is null) {
 			return null;
 		}
 

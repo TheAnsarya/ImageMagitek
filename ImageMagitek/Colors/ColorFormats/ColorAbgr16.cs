@@ -31,9 +31,9 @@ public struct ColorAbgr16 : IColor32 {
 	public uint Color {
 		get {
 			uint value = r;
-			value |= ((uint)g << 5);
+			value |= (uint)g << 5;
 			value |= ((uint)b << 10);
-			value |= ((uint)a << 15);
+			value |= (uint)a << 15;
 			return value;
 		}
 		set {

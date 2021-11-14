@@ -11,6 +11,7 @@ public class ColorConverterNes : IColorConverter<ColorNes> {
 		if (_nesPalette.TryGetIndexByNativeColor(nc, ColorMatchStrategy.Nearest, out var index)) {
 			return (ColorNes)_nesPalette.GetForeignColor(index);
 		}
+
 		throw new ArgumentException($"{nameof(ToForeignColor)} parameter (R: {nc.R}, G: {nc.G}, B: {nc.B}, A: {nc.A}) could not be matched in palette '{_nesPalette.Name}'");
 	}
 

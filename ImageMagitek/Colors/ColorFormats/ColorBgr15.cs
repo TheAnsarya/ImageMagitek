@@ -31,7 +31,7 @@ public struct ColorBgr15 : IColor32 {
 	public uint Color {
 		get {
 			uint value = r;
-			value |= ((uint)g << 5);
+			value |= (uint)g << 5;
 			value |= ((uint)b << 10);
 			return value;
 		}

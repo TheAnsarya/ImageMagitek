@@ -67,7 +67,7 @@ public abstract class DirectCodec : IDirectCodec {
 			return DefaultWidth;
 		}
 
-		return Math.Clamp(width - width % WidthResizeIncrement, WidthResizeIncrement, int.MaxValue);
+		return Math.Clamp(width - (width % WidthResizeIncrement), WidthResizeIncrement, int.MaxValue);
 	}
 
 	public virtual int GetPreferredHeight(int height) {

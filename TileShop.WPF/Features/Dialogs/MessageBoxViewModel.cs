@@ -132,6 +132,7 @@ public class MessageBoxViewModel : Screen, IMessageBoxViewModel {
 				throw new ArgumentException("DefaultButton set to a button which doesn't appear in Buttons");
 			}
 		}
+
 		if (CancelButton == null) {
 			if (cancelResult == MessageBoxResult.None && ButtonList.Any()) {
 				CancelButton = buttonList.Last();

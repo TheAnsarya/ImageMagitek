@@ -49,7 +49,7 @@ public sealed class ScatteredArranger : Arranger {
 		}
 
 		if (Mode != ArrangerMode.Scattered) {
-			throw new InvalidOperationException($"{nameof(Resize)} property '{nameof(Mode)}' is in invalid {nameof(ArrangerMode)} ({Mode.ToString()})");
+			throw new InvalidOperationException($"{nameof(Resize)} property '{nameof(Mode)}' is in invalid {nameof(ArrangerMode)} ({Mode})");
 		}
 
 		var newGrid = new ArrangerElement?[arrangerHeight, arrangerWidth];

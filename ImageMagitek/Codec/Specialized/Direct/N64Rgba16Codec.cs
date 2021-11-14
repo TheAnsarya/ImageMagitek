@@ -54,7 +54,7 @@ public sealed class N64Rgba16Codec : DirectCodec {
 
 		for (var y = 0; y < el.Height; y++) {
 			for (var x = 0; x < el.Width; x++) {
-				var pair = (ushort)(_bitStream.ReadByte() << 8 | _bitStream.ReadByte());
+				var pair = (ushort)((_bitStream.ReadByte() << 8) | _bitStream.ReadByte());
 				var r = (byte)((pair >> 11) << 3);
 				var g = (byte)(((pair >> 6) & 0x1F) << 3);
 				var b = (byte)(((pair >> 1) & 0x1F) << 3);

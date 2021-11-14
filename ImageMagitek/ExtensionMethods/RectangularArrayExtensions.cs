@@ -86,7 +86,7 @@ public static class RectangularArrayExtensions {
 	public static void CopyToArray2D<T>(this T[] source, T[,] dest, int sourceX, int sourceY, int sourceWidth, int destWidth, int destHeight) {
 		for (var y = 0; y < destHeight; y++) {
 			for (var x = 0; x < destWidth; x++) {
-				dest[y, x] = source[(y + sourceY) * sourceWidth + x + sourceX];
+				dest[y, x] = source[((y + sourceY) * sourceWidth) + x + sourceX];
 			}
 		}
 	}
@@ -107,7 +107,7 @@ public static class RectangularArrayExtensions {
 	public static void CopyToArray2D<T>(this T[] source, int sourceX, int sourceY, int sourceWidth, T[,] dest, int destX, int destY, int copyWidth, int copyHeight) {
 		for (var y = 0; y < copyHeight; y++) {
 			for (var x = 0; x < copyWidth; x++) {
-				dest[y + destY, x + destX] = source[(y + sourceY) * sourceWidth + x + sourceX];
+				dest[y + destY, x + destX] = source[((y + sourceY) * sourceWidth) + x + sourceX];
 			}
 		}
 	}

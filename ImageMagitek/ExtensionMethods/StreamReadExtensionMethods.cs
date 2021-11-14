@@ -81,7 +81,7 @@ public static class StreamReadExtensionMethods {
 		if (totalReadBytes == 1) {
 			var readBuffer = buffer[..totalReadBytes];
 			var lastByte = stream.ReadByte();
-			lastByte >>= (8 - (skipBits + readBits));
+			lastByte >>= 8 - (skipBits + readBits);
 			lastByte <<= (8 - readBits);
 			buffer[0] = (byte)lastByte;
 		} else if (totalReadBytes == firstReadBytes) {
@@ -89,7 +89,7 @@ public static class StreamReadExtensionMethods {
 			stream.Read(readBuffer);
 			buffer.ShiftLeft(skipBits);
 
-			var lastBits = (skipBits + readBits) - ((totalReadBytes - 1) * 8);
+			var lastBits = skipBits + readBits - ((totalReadBytes - 1) * 8);
 			var mask = ((1 << lastBits) - 1) << (8 - lastBits);
 			buffer[totalReadBytes - 1] = (byte)(buffer[totalReadBytes - 1] & mask);
 		} else {
@@ -98,9 +98,9 @@ public static class StreamReadExtensionMethods {
 			buffer.ShiftLeft(skipBits);
 
 			var lastByte = stream.ReadByte();
-			var lastBits = (skipBits + readBits) - (firstReadBytes * 8);
-			lastByte >>= (8 - lastBits);
-			lastByte <<= (skipBits - lastBits);
+			var lastBits = skipBits + readBits - (firstReadBytes * 8);
+			lastByte >>= 8 - lastBits;
+			lastByte <<= skipBits - lastBits;
 
 			buffer[firstReadBytes - 1] |= (byte)lastByte;
 		}

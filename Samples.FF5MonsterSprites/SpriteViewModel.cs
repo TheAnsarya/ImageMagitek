@@ -72,7 +72,7 @@ public class SpriteViewModel : Screen {
 		ColorDepth = metadata.ColorDepth;
 		TileSetID = metadata.TileSetID;
 		TileSetSize = metadata.TileSetSize;
-		HasShadow = metadata.hasShadow;
+		HasShadow = metadata.HasShadow;
 		PaletteID = metadata.PaletteID;
 		FormID = metadata.FormID;
 		Unused = metadata.Unused;

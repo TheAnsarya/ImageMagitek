@@ -215,7 +215,7 @@ public class IndexedFlowGraphicsCodec : IIndexedCodec {
 			return DefaultWidth;
 		}
 
-		return Math.Clamp(width - width % WidthResizeIncrement, WidthResizeIncrement, int.MaxValue);
+		return Math.Clamp(width - (width % WidthResizeIncrement), WidthResizeIncrement, int.MaxValue);
 	}
 
 	public int GetPreferredHeight(int height) {

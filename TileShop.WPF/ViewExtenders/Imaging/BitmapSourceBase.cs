@@ -80,7 +80,7 @@ public abstract class BitmapSourceBase : BitmapSource {
 			}
 
 			var minStrideInBits = (uint)(sourceRect.Width * Format.BitsPerPixel);
-			var minStrideInBytes = ((minStrideInBits + 7) / 8);
+			var minStrideInBytes = (minStrideInBits + 7) / 8;
 			if (stride < minStrideInBytes) {
 				throw new ArgumentOutOfRangeException(nameof(stride));
 			}

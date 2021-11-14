@@ -52,6 +52,7 @@ internal class ColorToHexConverter : DependencyObject, IValueConverter {
 		} else {
 			final.Append("#").Append(text);
 		}
+
 		try {
 			return ColorConverter.ConvertFromString(final.ToString());
 		} catch (Exception) {
@@ -76,6 +77,7 @@ internal class ColorToHexConverter : DependencyObject, IValueConverter {
 		  {
 			final.Append("#").Append(text);
 		}
+
 		try {
 			return ColorConverter.ConvertFromString(final.ToString());
 		} catch (Exception) {

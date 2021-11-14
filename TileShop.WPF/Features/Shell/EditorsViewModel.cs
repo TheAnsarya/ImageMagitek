@@ -191,6 +191,7 @@ public class EditorsViewModel : PropertyChangedBase, IHandle<EditArrangerPixelsE
 
 				return true;
 			}
+
 			if (result == MessageBoxResult.No) {
 				editor.DiscardChanges();
 				return true;
@@ -198,6 +199,7 @@ public class EditorsViewModel : PropertyChangedBase, IHandle<EditArrangerPixelsE
 				return false;
 			}
 		}
+
 		return true;
 	}
 

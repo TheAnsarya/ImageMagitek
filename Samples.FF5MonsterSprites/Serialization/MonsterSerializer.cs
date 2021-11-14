@@ -78,6 +78,7 @@ public class MonsterSerializer {
 		{
 			EndianSwapArray(formData);
 		}
+
 		var bitStream = BitStream.OpenRead(formData, formData.Length * 8);
 
 		var arranger = new ScatteredArranger("monsterArranger", PixelColorType.Indexed, ElementLayout.Tiled, arrangerWidth, arrangerHeight, 8, 8);

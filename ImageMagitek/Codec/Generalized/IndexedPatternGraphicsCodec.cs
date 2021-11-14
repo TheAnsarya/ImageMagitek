@@ -60,6 +60,7 @@ public sealed class IndexedPatternGraphicsCodec : IIndexedCodec {
 				for (var i = 0; i < Format.ColorDepth; i++) {
 					color |= (byte)(_planeImages[i][x, y] << Format.MergePlanePriority[i]);
 				}
+
 				NativeBuffer[y, xpos] = color;
 			}
 		}

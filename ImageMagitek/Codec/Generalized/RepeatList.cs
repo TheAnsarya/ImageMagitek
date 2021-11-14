@@ -44,7 +44,7 @@ public sealed class RepeatList : IEnumerable<int> {
 				throw new ArgumentOutOfRangeException($"{nameof(index)} ({index}) cannot be negative");
 			}
 
-			return _list[index % Count] + (index / Count) * RepeatIncrement;
+			return _list[index % Count] + (index / Count * RepeatIncrement);
 		}
 	}
 }

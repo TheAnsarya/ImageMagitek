@@ -105,6 +105,7 @@ public sealed class Snes3bppCodec : IndexedCodec {
 				offsetPlane2++;
 				offsetPlane3++;
 			}
+
 			offsetPlane1 += Width;
 			offsetPlane2 += Width;
 		}

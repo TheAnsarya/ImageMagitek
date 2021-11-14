@@ -34,6 +34,7 @@ internal class HslColorSlider : PreviewColorSlider {
 				};
 			return;
 		}
+
 		{
 			var colorStart = GetColorForSelectedArgb(0);
 			var colorEnd = GetColorForSelectedArgb(255);

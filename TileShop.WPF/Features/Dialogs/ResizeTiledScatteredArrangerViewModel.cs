@@ -49,6 +49,7 @@ public class ResizeTiledScatteredArrangerViewModel : Screen {
 				return;
 			}
 		}
+
 		RequestClose(true);
 	}
 

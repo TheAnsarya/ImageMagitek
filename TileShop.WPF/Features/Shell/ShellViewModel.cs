@@ -102,6 +102,7 @@ public class ShellViewModel : Screen, IHandle<ShowToolWindowEvent> {
 					Tools.Remove(ActiveTree);
 					Tools.Add(ActiveTree);
 				}
+
 				break;
 
 			default:

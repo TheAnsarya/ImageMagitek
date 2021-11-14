@@ -83,7 +83,7 @@ internal partial class SquareSlider : UserControl, INotifyPropertyChanged {
 		var pixels = new byte[w * h * 3];
 		for (var j = 0; j < h; j++) {
 			for (var i = 0; i < w; i++) {
-				var rgbtuple = colorSpaceConversionMethod(hue, i / (double)(w - 1), ((h - 1) - j) / (double)(h - 1));
+				var rgbtuple = colorSpaceConversionMethod(hue, i / (double)(w - 1), (h - 1 - j) / (double)(h - 1));
 				double r = rgbtuple.Item1, g = rgbtuple.Item2, b = rgbtuple.Item3;
 				var pos = (j * h + i) * 3;
 				pixels[pos] = (byte)(r * 255);
@@ -91,6 +91,7 @@ internal partial class SquareSlider : UserControl, INotifyPropertyChanged {
 				pixels[pos + 2] = (byte)(b * 255);
 			}
 		}
+
 		GradientBitmap.WritePixels(new Int32Rect(0, 0, w, h), pixels, w * 3, 0);
 	}
 

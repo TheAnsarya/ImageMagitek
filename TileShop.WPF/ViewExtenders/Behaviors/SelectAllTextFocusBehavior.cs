@@ -46,8 +46,8 @@ public class SelectAllFocusBehavior : Behavior<TextBox> {
 		var frameworkElement = e.OriginalSource as FrameworkElement;
 		if (frameworkElement is TextBox) {
 			((TextBoxBase)frameworkElement).SelectAll();
-		} else if (frameworkElement is PasswordBox) {
-			((PasswordBox)frameworkElement).SelectAll();
+		} else if (frameworkElement is PasswordBox box) {
+			box.SelectAll();
 		}
 	}
 

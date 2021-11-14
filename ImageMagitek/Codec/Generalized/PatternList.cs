@@ -140,7 +140,7 @@ public sealed class PatternList {
 					return new MagitekResult<PatternList>.Failed($"Letter '{letter}' occurs more than 8 times across all patterns");
 				}
 
-				var mapIndex = freqMap[letter] + baseIndex * 8;
+				var mapIndex = freqMap[letter] + (baseIndex * 8);
 				freqMap[letter]++;
 
 				if (mapIndex > patternSize) {
@@ -229,7 +229,7 @@ public sealed class PatternList {
 			}
 
 			for (var i = 0; i < planes; i++) {
-				var mapIndex = freqMap[letter] * planes + i + baseIndex * maxInstancesPerCharacter * planes;
+				var mapIndex = (freqMap[letter] * planes) + i + (baseIndex * maxInstancesPerCharacter * planes);
 
 				if (mapIndex > patternSize) {
 					return new MagitekResult<PatternList>.Failed($"Letter '{letter}' cannot be mapped to index '{mapIndex}' because the max index is '{patternSize - 1}'");
@@ -238,6 +238,7 @@ public sealed class PatternList {
 				decodePattern[pixel] = mapIndex;
 				pixel++;
 			}
+
 			freqMap[letter]++;
 		}
 
@@ -263,11 +264,11 @@ public sealed class PatternList {
 				var extendSize = Math.Min(patternSize, imageSize);
 				for (var i = 0; i < extendSize; i++) {
 					var bitIndex = decodePattern[pixelIndex % patternSize];
-					var x = (short)((pixelIndex / bitsPerPixel) % width);
+					var x = (short)(pixelIndex / bitsPerPixel % width);
 					var y = (short)((pixelIndex / bitsPerPixel) / width);
 					var p = (short)(pixelIndex % bitsPerPixel);
 					var coord = new PlaneCoordinate(x, y, p);
-					var index = bitIndex + repeat * patternSize;
+					var index = bitIndex + (repeat * patternSize);
 
 					yield return (coord, index);
 					pixelIndex++;

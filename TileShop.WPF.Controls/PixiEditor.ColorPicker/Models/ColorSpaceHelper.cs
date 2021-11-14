@@ -26,6 +26,7 @@ internal static class ColorSpaceHelper {
 			h = -1;
 			return new Tuple<double, double, double>(h, s, v);
 		}
+
 		if (r == max) {
 			h = (g - b) / delta;       // between yellow & magenta
 		} else if (g == max) {
@@ -108,6 +109,7 @@ internal static class ColorSpaceHelper {
 			// achromatic (grey)
 			return new Tuple<double, double, double>(v, v, v);
 		}
+
 		if (h >= 360.0) {
 			h = 0;
 		}
@@ -115,9 +117,9 @@ internal static class ColorSpaceHelper {
 		h /= 60;
 		var i = (int)h;
 		var f = h - i;
-		var p = (v * (1 - s));
+		var p = v * (1 - s);
 		var q = (v * (1 - s * f));
-		var t = (v * (1 - s * (1 - f)));
+		var t = v * (1 - s * (1 - f));
 
 		switch (i) {
 			case 0:

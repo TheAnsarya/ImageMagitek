@@ -115,6 +115,7 @@ public sealed class DirectImage : ImageBase<ColorRgba32> {
 			var encodeResult = codec.EncodeElement(el, buffer);
 			codec.WriteElement(el, encodeResult);
 		}
+
 		foreach (var fs in Arranger.EnumerateElements().OfType<ArrangerElement>().Select(x => x.DataFile.Stream).Distinct()) {
 			fs.Flush();
 		}
