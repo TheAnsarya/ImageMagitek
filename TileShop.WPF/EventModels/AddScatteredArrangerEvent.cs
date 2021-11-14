@@ -2,14 +2,10 @@
 
 namespace TileShop.WPF.EventModels;
 
-public class AddScatteredArrangerEvent
-{
-    public ResourceNodeViewModel Parent { get; set; }
+public class AddScatteredArrangerEvent {
+	public ResourceNodeViewModel Parent { get; set; }
 
-    public AddScatteredArrangerEvent() { }
+	public AddScatteredArrangerEvent() { }
 
-    public AddScatteredArrangerEvent(ResourceNodeViewModel parent)
-    {
-        Parent = parent;
-    }
+	public AddScatteredArrangerEvent(ResourceNodeViewModel parent) => Parent = parent;
 }

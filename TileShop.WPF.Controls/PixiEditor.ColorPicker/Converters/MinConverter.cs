@@ -5,15 +5,8 @@ using System.Windows.Data;
 
 namespace ColorPicker.Converters;
 
-class MinConverter : IMultiValueConverter
-{
-    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-    {
-        return values.Min();
-    }
+internal class MinConverter : IMultiValueConverter {
+	public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture) => values.Min();
 
-    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
-    }
+	public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture) => throw new NotImplementedException();
 }

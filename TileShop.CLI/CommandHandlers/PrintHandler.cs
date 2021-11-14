@@ -4,26 +4,23 @@ using Monaco.PathTree;
 
 namespace TileShop.CLI.Commands;
 
-public class PrintHandler : ProjectCommandHandler<PrintOptions>
-{
-    public PrintHandler(IProjectService projectService) :
-        base(projectService)
-    {
-    }
+public class PrintHandler : ProjectCommandHandler<PrintOptions> {
+	public PrintHandler(IProjectService projectService) :
+		base(projectService) {
+	}
 
-    public override ExitCode Execute(PrintOptions options)
-    {
-        var projectTree = OpenProject(options.ProjectFileName);
+	public override ExitCode Execute(PrintOptions options) {
+		var projectTree = OpenProject(options.ProjectFileName);
 
-        if (projectTree is null)
-            return ExitCode.ProjectOpenError;
+		if (projectTree is null) {
+			return ExitCode.ProjectOpenError;
+		}
 
-        foreach (var res in projectTree.EnumerateDepthFirst())
-        {
-            string key = projectTree.CreatePathKey(res);
-            Console.WriteLine($"{res.Name}: Type '{res.Item.GetType().Name}'; Resource Key '{key}'");
-        }
+		foreach (var res in projectTree.EnumerateDepthFirst()) {
+			var key = projectTree.CreatePathKey(res);
+			Console.WriteLine($"{res.Name}: Type '{res.Item.GetType().Name}'; Resource Key '{key}'");
+		}
 
-        return ExitCode.Success;
-    }
+		return ExitCode.Success;
+	}
 }

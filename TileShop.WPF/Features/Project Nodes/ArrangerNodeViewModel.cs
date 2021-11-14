@@ -2,14 +2,12 @@
 
 namespace TileShop.WPF.ViewModels;
 
-public class ArrangerNodeViewModel : ResourceNodeViewModel
-{
-    public override int SortPriority => 2;
+public class ArrangerNodeViewModel : ResourceNodeViewModel {
+	public override int SortPriority => 2;
 
-    public ArrangerNodeViewModel(ResourceNode node, ResourceNodeViewModel parent)
-    {
-        Node = node;
-        Name = node.Name;
-        ParentModel = parent;
-    }
+	public ArrangerNodeViewModel(ResourceNode node, ResourceNodeViewModel parent) {
+		Node = node;
+		Name = node.Name;
+		ParentModel = parent;
+	}
 }

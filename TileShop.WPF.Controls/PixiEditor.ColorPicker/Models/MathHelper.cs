@@ -1,19 +1,17 @@
 ﻿namespace ColorPicker.Models;
 
-internal static class MathHelper
+internal static class MathHelper {
+	public static double Clamp(double value, double min, double max) {
+		if (value < min) {
+			return min;
+		}
 
-{
-    public static double Clamp(double value, double min, double max)
-    {
-        if (value < min)
-            return min;
-        if (value > max)
-            return max;
-        return value;
-    }
+		if (value > max) {
+			return max;
+		}
 
-    public static double Mod(double value, double m)
-    {
-        return (value % m + m) % m;
-    }
+		return value;
+	}
+
+	public static double Mod(double value, double m) => (value % m + m) % m;
 }

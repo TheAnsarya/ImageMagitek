@@ -1,16 +1,7 @@
-﻿using ImageMagitek.Colors;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿namespace ImageMagitek.UnitTests;
 
-namespace ImageMagitek.UnitTests;
-
-public class TestImageGenerator
-{
-    /*public Image<Rgba32> GenerateImage(int width, int height, ColorModel colorModel)
+public class TestImageGenerator {
+	/*public Image<Rgba32> GenerateImage(int width, int height, ColorModel colorModel)
     {
         var color = ColorFactory.CreateColor(colorModel);
 

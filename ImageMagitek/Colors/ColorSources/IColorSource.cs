@@ -1,5 +1,4 @@
 ﻿namespace ImageMagitek.Colors;
 
-public interface IColorSource
-{
+public interface IColorSource {
 }

@@ -2,96 +2,89 @@
 
 namespace TileShop.WPF.Services;
 
-public interface IFileSelectService
-{
-    string GetProjectFileNameByUser();
-    string GetNewProjectFileNameByUser();
-    string GetExistingDataFileNameByUser();
-    string GetExportArrangerFileNameByUser(string defaultName);
-    string GetImportArrangerFileNameByUser();
+public interface IFileSelectService {
+	string GetProjectFileNameByUser();
+	string GetNewProjectFileNameByUser();
+	string GetExistingDataFileNameByUser();
+	string GetExportArrangerFileNameByUser(string defaultName);
+	string GetImportArrangerFileNameByUser();
 }
 
-public class FileSelectService : IFileSelectService
-{
-    public string GetProjectFileNameByUser()
-    {
-        var ofd = new OpenFileDialog
-        {
-            Title = "Select Project File",
-            ValidateNames = true,
-            CheckFileExists = true,
-            AddExtension = true,
-            Filter = "Project Files|*.xml"
-        };
+public class FileSelectService : IFileSelectService {
+	public string GetProjectFileNameByUser() {
+		var ofd = new OpenFileDialog {
+			Title = "Select Project File",
+			ValidateNames = true,
+			CheckFileExists = true,
+			AddExtension = true,
+			Filter = "Project Files|*.xml"
+		};
 
-        if (ofd.ShowDialog().Value)
-            return ofd.FileName;
+		if (ofd.ShowDialog().Value) {
+			return ofd.FileName;
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    public string GetNewProjectFileNameByUser()
-    {
-        var sfd = new SaveFileDialog
-        {
-            Title = "Create New Project File",
-            DefaultExt = ".xml",
-            Filter = "Project Files|*.xml",
-            ValidateNames = true
-        };
+	public string GetNewProjectFileNameByUser() {
+		var sfd = new SaveFileDialog {
+			Title = "Create New Project File",
+			DefaultExt = ".xml",
+			Filter = "Project Files|*.xml",
+			ValidateNames = true
+		};
 
-        if (sfd.ShowDialog().Value)
-            return sfd.FileName;
+		if (sfd.ShowDialog().Value) {
+			return sfd.FileName;
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    public string GetExistingDataFileNameByUser()
-    {
-        var ofd = new OpenFileDialog
-        {
-            Title = "Select File",
-            ValidateNames = true,
-            CheckFileExists = true
-        };
+	public string GetExistingDataFileNameByUser() {
+		var ofd = new OpenFileDialog {
+			Title = "Select File",
+			ValidateNames = true,
+			CheckFileExists = true
+		};
 
-        if (ofd.ShowDialog().Value)
-            return ofd.FileName;
+		if (ofd.ShowDialog().Value) {
+			return ofd.FileName;
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    public string GetExportArrangerFileNameByUser(string defaultName)
-    {
-        var sfd = new SaveFileDialog
-        {
-            FileName = defaultName,
-            Title = "Export Arranger As",
-            ValidateNames = true,
-            DefaultExt = ".png",
-            Filter = "PNG Image|*.png"
-        };
+	public string GetExportArrangerFileNameByUser(string defaultName) {
+		var sfd = new SaveFileDialog {
+			FileName = defaultName,
+			Title = "Export Arranger As",
+			ValidateNames = true,
+			DefaultExt = ".png",
+			Filter = "PNG Image|*.png"
+		};
 
-        if (sfd.ShowDialog() is true)
-            return sfd.FileName;
+		if (sfd.ShowDialog() is true) {
+			return sfd.FileName;
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    public string GetImportArrangerFileNameByUser()
-    {
-        var ofd = new OpenFileDialog
-        {
-            Title = "Import Image to Arranger",
-            ValidateNames = true,
-            DefaultExt = ".png",
-            Filter = "PNG Image|*.png",
-            CheckFileExists = true
-        };
+	public string GetImportArrangerFileNameByUser() {
+		var ofd = new OpenFileDialog {
+			Title = "Import Image to Arranger",
+			ValidateNames = true,
+			DefaultExt = ".png",
+			Filter = "PNG Image|*.png",
+			CheckFileExists = true
+		};
 
-        if (ofd.ShowDialog().Value)
-            return ofd.FileName;
+		if (ofd.ShowDialog().Value) {
+			return ofd.FileName;
+		}
 
-        return null;
-    }
+		return null;
+	}
 }

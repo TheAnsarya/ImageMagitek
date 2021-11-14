@@ -7,23 +7,22 @@
 /// </summary>
 public enum ImageLayout { Tiled = 1, Single }
 
-public interface IGraphicsCodec
-{
-    string Name { get; }
-    int Width { get; }
-    int Height { get; }
-    ImageLayout Layout { get; }
-    PixelColorType ColorType { get; }
-    int ColorDepth { get; }
-    int StorageSize { get; }
+public interface IGraphicsCodec {
+	string Name { get; }
+	int Width { get; }
+	int Height { get; }
+	ImageLayout Layout { get; }
+	PixelColorType ColorType { get; }
+	int ColorDepth { get; }
+	int StorageSize { get; }
 
-    int DefaultWidth { get; }
-    int DefaultHeight { get; }
-    bool CanResize { get; }
-    int WidthResizeIncrement { get; }
-    int HeightResizeIncrement { get; }
-    int GetPreferredWidth(int width);
-    int GetPreferredHeight(int height);
+	int DefaultWidth { get; }
+	int DefaultHeight { get; }
+	bool CanResize { get; }
+	int WidthResizeIncrement { get; }
+	int HeightResizeIncrement { get; }
+	int GetPreferredWidth(int width);
+	int GetPreferredHeight(int height);
 
-    bool CanEncode { get; }
+	bool CanEncode { get; }
 }

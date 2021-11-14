@@ -2,6 +2,5 @@
 
 namespace FF5MonsterSprites;
 
-internal class AppBootstrapper : Bootstrapper<ShellViewModel>
-{
+internal class AppBootstrapper : Bootstrapper<ShellViewModel> {
 }

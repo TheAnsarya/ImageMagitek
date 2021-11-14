@@ -2,18 +2,16 @@
 
 namespace TileShop.WPF.Models;
 
-public class MirrorElementHistoryAction : HistoryAction
-{
-    public override string Name => "Mirror Element";
+public class MirrorElementHistoryAction : HistoryAction {
+	public override string Name => "Mirror Element";
 
-    public MirrorOperation Mirror { get; }
-    public int ElementX { get; }
-    public int ElementY { get; }
+	public MirrorOperation Mirror { get; }
+	public int ElementX { get; }
+	public int ElementY { get; }
 
-    public MirrorElementHistoryAction(int elementX, int elementY, MirrorOperation mirror)
-    {
-        ElementX = elementX;
-        ElementY = elementY;
-        Mirror = mirror;
-    }
+	public MirrorElementHistoryAction(int elementX, int elementY, MirrorOperation mirror) {
+		ElementX = elementX;
+		ElementY = elementY;
+		Mirror = mirror;
+	}
 }

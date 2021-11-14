@@ -11,92 +11,81 @@ namespace ImageMagitek.PluginSamples;
 /// This codec decodes the entirety of the font into one element so an exported image can be rotated for proper viewing.
 /// This codec is view-only, adds two pixels of spacing, and does not support editing.
 /// </summary>
-public class MarmaladeBoyCodec : IndexedCodec
+public class MarmaladeBoyCodec : IndexedCodec {
+	public override string Name => "Marmalade Boy Font";
+	public override int Width => 16;
+	public override int Height => 10000;
+	public override ImageLayout Layout => ImageLayout.Single;
+	public override int ColorDepth => 1;
+	public override int StorageSize => 126820;
+	public override bool CanEncode => false;
+
+	public override int DefaultWidth => 16;
+	public override int DefaultHeight => 10000;
+	public override int WidthResizeIncrement => 0;
+	public override int HeightResizeIncrement => 0;
+	public override bool CanResize => false;
+
+	private BitStream _bitStream;
+
+	public MarmaladeBoyCodec() => Initialize();
+
+	private void Initialize() {
+		_foreignBuffer = new byte[(StorageSize + 7) / 8];
+		_nativeBuffer = new byte[Height, Width];
+		_bitStream = BitStream.OpenRead(_foreignBuffer, StorageSize);
+	}
+
+	public override byte[,] DecodeElement(in ArrangerElement el, ReadOnlySpan<byte> encodedBuffer) {
+		if (encodedBuffer.Length * 8 < StorageSize) // Decoding would require data past the end of the buffer
 {
-    public override string Name => "Marmalade Boy Font";
-    public override int Width => 16;
-    public override int Height => 10000;
-    public override ImageLayout Layout => ImageLayout.Single;
-    public override int ColorDepth => 1;
-    public override int StorageSize => 126820;
-    public override bool CanEncode => false;
+			throw new ArgumentException(nameof(encodedBuffer));
+		}
 
-    public override int DefaultWidth => 16;
-    public override int DefaultHeight => 10000;
-    public override int WidthResizeIncrement => 0;
-    public override int HeightResizeIncrement => 0;
-    public override bool CanResize => false;
+		encodedBuffer.Slice(0, _foreignBuffer.Length).CopyTo(_foreignBuffer);
 
-    private BitStream _bitStream;
+		_bitStream = BitStream.OpenRead(_foreignBuffer, StorageSize);
 
-    public MarmaladeBoyCodec()
-    {
-        Initialize();
-    }
+		try {
+			var yPos = 0;
+			while (true) {
+				int characterWidth = _bitStream.ReadByte();
 
-    private void Initialize()
-    {
-        _foreignBuffer = new byte[(StorageSize + 7) / 8];
-        _nativeBuffer = new byte[Height, Width];
-        _bitStream = BitStream.OpenRead(_foreignBuffer, StorageSize);
-    }
+				if (characterWidth == 0) {
+					break;
+				}
 
-    public override byte[,] DecodeElement(in ArrangerElement el, ReadOnlySpan<byte> encodedBuffer)
-    {
-        if (encodedBuffer.Length * 8 < StorageSize) // Decoding would require data past the end of the buffer
-            throw new ArgumentException(nameof(encodedBuffer));
+				for (var y = 0; y < characterWidth; y++, yPos++) {
+					_nativeBuffer[yPos, 8] = (byte)_bitStream.ReadBit();
+					_nativeBuffer[yPos, 9] = (byte)_bitStream.ReadBit();
+					_nativeBuffer[yPos, 10] = (byte)_bitStream.ReadBit();
+					_nativeBuffer[yPos, 11] = (byte)_bitStream.ReadBit();
 
-        encodedBuffer.Slice(0, _foreignBuffer.Length).CopyTo(_foreignBuffer);
+					_nativeBuffer[yPos, 12] = (byte)_bitStream.ReadBit();
+					_nativeBuffer[yPos, 13] = (byte)_bitStream.ReadBit();
+					_nativeBuffer[yPos, 14] = (byte)_bitStream.ReadBit();
+					_nativeBuffer[yPos, 15] = (byte)_bitStream.ReadBit();
 
-        _bitStream = BitStream.OpenRead(_foreignBuffer, StorageSize);
+					_nativeBuffer[yPos, 0] = (byte)_bitStream.ReadBit();
+					_nativeBuffer[yPos, 1] = (byte)_bitStream.ReadBit();
+					_nativeBuffer[yPos, 2] = (byte)_bitStream.ReadBit();
+					_nativeBuffer[yPos, 3] = (byte)_bitStream.ReadBit();
 
-        try
-        {
-            int yPos = 0;
-            while (true)
-            {
-                int characterWidth = _bitStream.ReadByte();
+					_nativeBuffer[yPos, 4] = (byte)_bitStream.ReadBit();
+					_nativeBuffer[yPos, 5] = (byte)_bitStream.ReadBit();
+					_nativeBuffer[yPos, 6] = (byte)_bitStream.ReadBit();
+					_nativeBuffer[yPos, 7] = (byte)_bitStream.ReadBit();
+				}
 
-                if (characterWidth == 0)
-                    break;
+				yPos += 2;
+			}
+		} catch (Exception ex) {
 
-                for (int y = 0; y < characterWidth; y++, yPos++)
-                {
-                    _nativeBuffer[yPos, 8] = (byte)_bitStream.ReadBit();
-                    _nativeBuffer[yPos, 9] = (byte)_bitStream.ReadBit();
-                    _nativeBuffer[yPos, 10] = (byte)_bitStream.ReadBit();
-                    _nativeBuffer[yPos, 11] = (byte)_bitStream.ReadBit();
-
-                    _nativeBuffer[yPos, 12] = (byte)_bitStream.ReadBit();
-                    _nativeBuffer[yPos, 13] = (byte)_bitStream.ReadBit();
-                    _nativeBuffer[yPos, 14] = (byte)_bitStream.ReadBit();
-                    _nativeBuffer[yPos, 15] = (byte)_bitStream.ReadBit();
-
-                    _nativeBuffer[yPos, 0] = (byte)_bitStream.ReadBit();
-                    _nativeBuffer[yPos, 1] = (byte)_bitStream.ReadBit();
-                    _nativeBuffer[yPos, 2] = (byte)_bitStream.ReadBit();
-                    _nativeBuffer[yPos, 3] = (byte)_bitStream.ReadBit();
-
-                    _nativeBuffer[yPos, 4] = (byte)_bitStream.ReadBit();
-                    _nativeBuffer[yPos, 5] = (byte)_bitStream.ReadBit();
-                    _nativeBuffer[yPos, 6] = (byte)_bitStream.ReadBit();
-                    _nativeBuffer[yPos, 7] = (byte)_bitStream.ReadBit();
-                }
-
-                yPos += 2;
-            }
-        }
-        catch (Exception ex)
-        {
-
-        }
+		}
 
 
-        return _nativeBuffer;
-    }
+		return _nativeBuffer;
+	}
 
-    public override ReadOnlySpan<byte> EncodeElement(in ArrangerElement el, byte[,] imageBuffer)
-    {
-        throw new NotImplementedException($"'{Name}' is a read-only codec");
-    }
+	public override ReadOnlySpan<byte> EncodeElement(in ArrangerElement el, byte[,] imageBuffer) => throw new NotImplementedException($"'{Name}' is a read-only codec");
 }

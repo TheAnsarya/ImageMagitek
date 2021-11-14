@@ -1,5 +1,4 @@
 ﻿namespace ImageMagitek.UnitTests;
 
-public class GraphicsCodecTestCases
-{
+public class GraphicsCodecTestCases {
 }

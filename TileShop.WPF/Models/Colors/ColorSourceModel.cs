@@ -2,6 +2,5 @@
 
 namespace TileShop.WPF.Models;
 
-public abstract class ColorSourceModel : Screen
-{
+public abstract class ColorSourceModel : Screen {
 }

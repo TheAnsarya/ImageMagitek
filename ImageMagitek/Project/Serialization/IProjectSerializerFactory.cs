@@ -2,10 +2,9 @@
 
 namespace ImageMagitek.Project.Serialization;
 
-public interface IProjectSerializerFactory
-{
-    List<IProjectResource> GlobalResources { get; }
+public interface IProjectSerializerFactory {
+	List<IProjectResource> GlobalResources { get; }
 
-    IProjectReader CreateReader();
-    IProjectWriter CreateWriter(ProjectTree tree);
+	IProjectReader CreateReader();
+	IProjectWriter CreateWriter(ProjectTree tree);
 }

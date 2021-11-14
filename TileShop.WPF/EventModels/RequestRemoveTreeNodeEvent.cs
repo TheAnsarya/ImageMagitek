@@ -2,12 +2,8 @@
 
 namespace TileShop.WPF.EventModels;
 
-public class RequestRemoveTreeNodeEvent
-{
-    public ResourceNodeViewModel TreeNode { get; }
+public class RequestRemoveTreeNodeEvent {
+	public ResourceNodeViewModel TreeNode { get; }
 
-    public RequestRemoveTreeNodeEvent(ResourceNodeViewModel treeNode)
-    {
-        TreeNode = treeNode;
-    }
+	public RequestRemoveTreeNodeEvent(ResourceNodeViewModel treeNode) => TreeNode = treeNode;
 }
