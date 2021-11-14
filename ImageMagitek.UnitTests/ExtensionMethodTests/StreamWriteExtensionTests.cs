@@ -11,9 +11,9 @@ public class StreamWriteExtensionTests {
 		using var stream = new MemoryStream(data);
 		stream.WriteUnshifted(offset, numBits, writeData);
 
-		stream.Seek(0, SeekOrigin.Begin);
+		_ = stream.Seek(0, SeekOrigin.Begin);
 		var actual = new byte[expected.Length];
-		stream.Read(actual);
+		_ = stream.Read(actual);
 
 		CollectionAssert.AreEqual(expected, actual);
 	}
@@ -23,9 +23,9 @@ public class StreamWriteExtensionTests {
 		using var stream = new MemoryStream(data);
 		stream.WriteShifted(offset, numBits, writeData);
 
-		stream.Seek(0, SeekOrigin.Begin);
+		_ = stream.Seek(0, SeekOrigin.Begin);
 		var actual = new byte[expected.Length];
-		stream.Read(actual);
+		_ = stream.Read(actual);
 
 		CollectionAssert.AreEqual(expected, actual);
 	}

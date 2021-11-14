@@ -124,7 +124,7 @@ public class PaletteEditorViewModel : ResourceEditorBaseViewModel {
 		_palette.SetColorSources(CreateColorSources());
 		var projectTree = _projectService.GetContainingProject(_palette);
 		var paletteNode = projectTree.GetResourceNode(_palette);
-		_projectService.SaveResource(projectTree, paletteNode, false);
+		_ = _projectService.SaveResource(projectTree, paletteNode, false);
 
 		Colors = new(CreateColorModels());
 
@@ -160,8 +160,8 @@ public class PaletteEditorViewModel : ResourceEditorBaseViewModel {
 
 		var projectTree = _projectService.GetContainingProject(_palette);
 		var paletteNode = projectTree.GetResourceNode(_palette);
-		_projectService.SaveResource(projectTree, paletteNode, false);
-		_palette.SavePalette();
+		_ = _projectService.SaveResource(projectTree, paletteNode, false);
+		_ = _palette.SavePalette();
 		IsModified = false;
 
 		var changeEvent = new PaletteChangedEvent(_palette);
@@ -169,7 +169,7 @@ public class PaletteEditorViewModel : ResourceEditorBaseViewModel {
 	}
 
 	public override void DiscardChanges() {
-		_palette.Reload();
+		_ = _palette.Reload();
 		ZeroIndexTransparent = _palette.ZeroIndexTransparent;
 		ColorSourceModels = new(CreateColorSourceModels(_palette));
 		Entries = CountSourceColors();
@@ -224,7 +224,7 @@ public class PaletteEditorViewModel : ResourceEditorBaseViewModel {
 	}
 
 	public void RemoveColorSource(ColorSourceModel model) {
-		ColorSourceModels.Remove(model);
+		_ = ColorSourceModels.Remove(model);
 		Entries = CountSourceColors();
 	}
 
@@ -283,10 +283,10 @@ public class PaletteEditorViewModel : ResourceEditorBaseViewModel {
 					yield return new FileColorSource(offset + (j * size), fileModel.Endian);
 				}
 			} else if (sourceModel is NativeColorSourceModel nativeModel) {
-				ColorParser.TryParse(nativeModel.NativeHexColor, ColorModel.Rgba32, out var nativeColor);
+				_ = ColorParser.TryParse(nativeModel.NativeHexColor, ColorModel.Rgba32, out var nativeColor);
 				yield return new ProjectNativeColorSource((ColorRgba32)nativeColor);
 			} else if (sourceModel is ForeignColorSourceModel foreignModel) {
-				ColorParser.TryParse(foreignModel.ForeignHexColor, _palette.ColorModel, out var foreignColor);
+				_ = ColorParser.TryParse(foreignModel.ForeignHexColor, _palette.ColorModel, out var foreignColor);
 				yield return new ProjectForeignColorSource(foreignColor);
 			} else if (sourceModel is ScatteredColorSourceModel scatteredModel) {
 				throw new NotSupportedException();

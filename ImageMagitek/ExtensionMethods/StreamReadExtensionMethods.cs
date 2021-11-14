@@ -14,7 +14,7 @@ public static class StreamReadExtensionMethods {
 	}
 
 	public static void ReadUnshifted(this Stream stream, FileBitAddress address, int readBits, Span<byte> buffer) {
-		stream.Seek(address.FileOffset, SeekOrigin.Begin);
+		_ = stream.Seek(address.FileOffset, SeekOrigin.Begin);
 		stream.ReadUnshifted(address.BitOffset, readBits, buffer);
 	}
 
@@ -34,7 +34,7 @@ public static class StreamReadExtensionMethods {
 		}
 
 		var readBuffer = buffer[..readBytes];
-		stream.Read(readBuffer);
+		_ = stream.Read(readBuffer);
 
 		// Mask bits skipped on the first byte
 		var mask = (1 << (8 - skipBits)) - 1;
@@ -53,7 +53,7 @@ public static class StreamReadExtensionMethods {
 	}
 
 	public static void ReadShifted(this Stream stream, FileBitAddress address, int readBits, Span<byte> buffer) {
-		stream.Seek(address.FileOffset, SeekOrigin.Begin);
+		_ = stream.Seek(address.FileOffset, SeekOrigin.Begin);
 		stream.ReadShifted(address.BitOffset, readBits, buffer);
 	}
 
@@ -86,7 +86,7 @@ public static class StreamReadExtensionMethods {
 			buffer[0] = (byte)lastByte;
 		} else if (totalReadBytes == firstReadBytes) {
 			var readBuffer = buffer[..totalReadBytes];
-			stream.Read(readBuffer);
+			_ = stream.Read(readBuffer);
 			buffer.ShiftLeft(skipBits);
 
 			var lastBits = skipBits + readBits - ((totalReadBytes - 1) * 8);
@@ -94,7 +94,7 @@ public static class StreamReadExtensionMethods {
 			buffer[totalReadBytes - 1] = (byte)(buffer[totalReadBytes - 1] & mask);
 		} else {
 			var readBuffer = buffer[..firstReadBytes];
-			stream.Read(readBuffer);
+			_ = stream.Read(readBuffer);
 			buffer.ShiftLeft(skipBits);
 
 			var lastByte = stream.ReadByte();

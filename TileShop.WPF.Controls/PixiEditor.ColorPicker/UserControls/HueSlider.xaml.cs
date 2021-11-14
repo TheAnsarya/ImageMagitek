@@ -28,7 +28,7 @@ internal partial class HueSlider : UserControl {
 	public HueSlider() => InitializeComponent();
 
 	private void OnMouseDown(object sender, MouseButtonEventArgs e) {
-		((UIElement)sender).CaptureMouse();
+		_ = ((UIElement)sender).CaptureMouse();
 		var circle = (Path)sender;
 		var mousePos = e.GetPosition(circle);
 		UpdateValue(mousePos, circle.ActualWidth, circle.ActualHeight);

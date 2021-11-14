@@ -13,7 +13,7 @@ public class SnappedRectangle : INotifyPropertyChanged {
 	public SnapMode SnapMode {
 		get => _snapMode;
 		set {
-			SetField(ref _snapMode, value);
+			_ = SetField(ref _snapMode, value);
 			Snap();
 		}
 	}
@@ -22,7 +22,7 @@ public class SnappedRectangle : INotifyPropertyChanged {
 	public Size MaximumSize {
 		get => _maximumSize;
 		set {
-			SetField(ref _maximumSize, value);
+			_ = SetField(ref _maximumSize, value);
 			Snap();
 		}
 	}
@@ -31,7 +31,7 @@ public class SnappedRectangle : INotifyPropertyChanged {
 	public Size ElementSize {
 		get => _elementSize;
 		set {
-			SetField(ref _maximumSize, value);
+			_ = SetField(ref _maximumSize, value);
 			Snap();
 		}
 	}
@@ -40,7 +40,7 @@ public class SnappedRectangle : INotifyPropertyChanged {
 	public double Left {
 		get => _left;
 		set {
-			SetField(ref _left, value);
+			_ = SetField(ref _left, value);
 			Snap();
 		}
 	}
@@ -49,7 +49,7 @@ public class SnappedRectangle : INotifyPropertyChanged {
 	public double Right {
 		get => _right;
 		set {
-			SetField(ref _right, value);
+			_ = SetField(ref _right, value);
 			Snap();
 		}
 	}
@@ -58,7 +58,7 @@ public class SnappedRectangle : INotifyPropertyChanged {
 	public double Top {
 		get => _top;
 		set {
-			SetField(ref _top, value);
+			_ = SetField(ref _top, value);
 			Snap();
 		}
 	}
@@ -67,7 +67,7 @@ public class SnappedRectangle : INotifyPropertyChanged {
 	public double Bottom {
 		get => _bottom;
 		set {
-			SetField(ref _bottom, value);
+			_ = SetField(ref _bottom, value);
 			Snap();
 		}
 	}

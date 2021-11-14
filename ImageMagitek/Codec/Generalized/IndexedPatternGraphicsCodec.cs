@@ -38,9 +38,9 @@ public sealed class IndexedPatternGraphicsCodec : IIndexedCodec {
 	}
 
 	public byte[,] DecodeElement(in ArrangerElement el, ReadOnlySpan<byte> encodedBuffer) {
-		if (encodedBuffer.Length * 8 < StorageSize) // Decoding would require data past the end of the buffer
-{
-			throw new ArgumentException(nameof(encodedBuffer));
+		if (encodedBuffer.Length * 8 < StorageSize) {
+			// Decoding would require data past the end of the buffer
+			throw new ArgumentException($"Decoding would require data past the end of the buffer. Buffer length: {encodedBuffer.Length * 8}, sotrage size: {StorageSize}", nameof(encodedBuffer));
 		}
 
 		encodedBuffer[.._foreignBuffer.Length].CopyTo(_foreignBuffer);
@@ -70,7 +70,7 @@ public sealed class IndexedPatternGraphicsCodec : IIndexedCodec {
 
 	public ReadOnlySpan<byte> EncodeElement(in ArrangerElement el, byte[,] imageBuffer) {
 		if (imageBuffer.GetLength(0) != Height || imageBuffer.GetLength(1) != Width) {
-			throw new ArgumentException(nameof(imageBuffer));
+			throw new ArgumentException($"Image buffer has incorrect width/height: h {imageBuffer.GetLength(0)}/{Height} w {imageBuffer.GetLength(1)}/{Width}", nameof(imageBuffer));
 		}
 
 		var bs = BitStream.OpenWrite(StorageSize, 8);

@@ -39,7 +39,7 @@ public class ImportImageViewModel : Screen {
 	public bool UseExactMatching {
 		get => _useExactMatching;
 		set {
-			SetAndNotify(ref _useExactMatching, value);
+			_ = SetAndNotify(ref _useExactMatching, value);
 			if (!string.IsNullOrEmpty(ImageFileName)) {
 				if (_arranger.ColorType == PixelColorType.Indexed) {
 					ImportIndexed(ImageFileName);

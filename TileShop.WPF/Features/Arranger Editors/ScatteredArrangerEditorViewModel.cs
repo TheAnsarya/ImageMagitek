@@ -50,7 +50,7 @@ public class ScatteredArrangerEditorViewModel : ArrangerEditorViewModel {
 				CancelOverlay();
 			}
 
-			SetAndNotify(ref _activeTool, value);
+			_ = SetAndNotify(ref _activeTool, value);
 		}
 	}
 
@@ -108,7 +108,7 @@ public class ScatteredArrangerEditorViewModel : ArrangerEditorViewModel {
 		}
 
 		var projectTree = _projectService.GetContainingProject(Resource);
-		projectTree.TryFindResourceNode(Resource, out var resourceNode);
+		_ = projectTree.TryFindResourceNode(Resource, out var resourceNode);
 
 		_projectService.SaveResource(projectTree, resourceNode, true)
 			 .Switch(
@@ -141,7 +141,7 @@ public class ScatteredArrangerEditorViewModel : ArrangerEditorViewModel {
 			_applyPaletteHistory = new ApplyPaletteHistoryAction(SelectedPalette.Palette);
 			TryApplyPalette(x, y, SelectedPalette.Palette);
 		} else if (ActiveTool == ScatteredArrangerTool.PickPalette && e.LeftButton) {
-			TryPickPalette(x, y);
+			_ = TryPickPalette(x, y);
 		} else if (ActiveTool == ScatteredArrangerTool.RotateLeft && e.LeftButton) {
 			var result = WorkingArranger.TryRotateElement(elementX, elementY, RotationOperation.Left);
 			if (result.HasSucceeded) {
@@ -366,7 +366,7 @@ public class ScatteredArrangerEditorViewModel : ArrangerEditorViewModel {
 
 				return result.Match(
 					success => {
-						_applyPaletteHistory.Add(pixelX, pixelY);
+						_ = _applyPaletteHistory.Add(pixelX, pixelY);
 						Render();
 						IsModified = true;
 						return true;
@@ -487,20 +487,20 @@ public class ScatteredArrangerEditorViewModel : ArrangerEditorViewModel {
 	#region Undo Redo Actions
 	public override void ApplyHistoryAction(HistoryAction action) {
 		if (action is PasteArrangerHistoryAction pasteAction) {
-			ApplyPasteInternal(pasteAction.Paste);
+			_ = ApplyPasteInternal(pasteAction.Paste);
 		} else if (action is DeleteElementSelectionHistoryAction deleteSelectionAction) {
 			DeleteElementSelection(deleteSelectionAction.Rect);
 		} else if (action is ApplyPaletteHistoryAction applyPaletteAction) {
 			foreach (var location in applyPaletteAction.ModifiedElements) {
-				_indexedImage.TrySetPalette(location.X, location.Y, applyPaletteAction.Palette);
+				_ = _indexedImage.TrySetPalette(location.X, location.Y, applyPaletteAction.Palette);
 			}
 		} else if (action is ResizeArrangerHistoryAction resizeAction) {
 			WorkingArranger.Resize(resizeAction.Width, resizeAction.Height);
 			CreateImages();
 		} else if (action is RotateElementHistoryAction rotateAction) {
-			WorkingArranger.TryRotateElement(rotateAction.ElementX, rotateAction.ElementY, rotateAction.Rotation);
+			_ = WorkingArranger.TryRotateElement(rotateAction.ElementX, rotateAction.ElementY, rotateAction.Rotation);
 		} else if (action is MirrorElementHistoryAction mirrorAction) {
-			WorkingArranger.TryMirrorElement(mirrorAction.ElementX, mirrorAction.ElementY, mirrorAction.Mirror);
+			_ = WorkingArranger.TryMirrorElement(mirrorAction.ElementX, mirrorAction.ElementY, mirrorAction.Mirror);
 		}
 	}
 

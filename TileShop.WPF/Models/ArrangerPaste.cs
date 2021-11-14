@@ -15,7 +15,7 @@ public class ArrangerPaste : PropertyChangedBase {
 	public SnapMode SnapMode {
 		get => _snapMode;
 		set {
-			SetAndNotify(ref _snapMode, value);
+			_ = SetAndNotify(ref _snapMode, value);
 			if (Rect is not null) {
 				Rect.SnapMode = value;
 			}

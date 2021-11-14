@@ -80,7 +80,7 @@ public class EditorsViewModel : PropertyChangedBase, IHandle<EditArrangerPixelsE
 			}
 		}
 
-		Editors.Remove(editor);
+		_ = Editors.Remove(editor);
 		ActiveEditor = Editors.FirstOrDefault();
 
 		return true;
@@ -148,7 +148,7 @@ public class EditorsViewModel : PropertyChangedBase, IHandle<EditArrangerPixelsE
 					return false;
 				}
 
-				savedProjects.Add(_projectService.GetContainingProject(editor.Resource));
+				_ = savedProjects.Add(_projectService.GetContainingProject(editor.Resource));
 			}
 
 			foreach (var projectTree in savedProjects) {
@@ -161,7 +161,7 @@ public class EditorsViewModel : PropertyChangedBase, IHandle<EditArrangerPixelsE
 
 			return true;
 		} catch (Exception ex) {
-			_windowManager.ShowMessageBox(ex.Message);
+			_ = _windowManager.ShowMessageBox(ex.Message);
 			Log.Error(ex, "Unhandled exception");
 			return false;
 		}

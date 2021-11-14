@@ -12,11 +12,11 @@ public class FileStreamReopenPerRead {
 	public int TotalReadSize;
 
 	private const int SizePerRead = 16;
-	private const string fileName = "FileStreamReopenPerReadTestData.bin";
+	private const string FileName = "FileStreamReopenPerReadTestData.bin";
 
 	[GlobalSetup]
 	public void GlobalSetup() {
-		using var fs = File.Create(fileName);
+		using var fs = File.Create(FileName);
 
 		var rng = new Random();
 		var data = new byte[16384];
@@ -25,27 +25,27 @@ public class FileStreamReopenPerRead {
 	}
 
 	[GlobalCleanup]
-	public void GlobalCleanup() => File.Delete(fileName);
+	public void GlobalCleanup() => File.Delete(FileName);
 
 	[Benchmark]
 	public void KeepOpen() {
-		using var fs = File.OpenRead(fileName);
+		using var fs = File.OpenRead(FileName);
 		using var br = new BinaryReader(fs);
 
 		for (var i = 0; i < TotalReadSize; i += SizePerRead) {
-			fs.Seek(i, SeekOrigin.Begin);
-			br.ReadBytes(SizePerRead);
+			_ = fs.Seek(i, SeekOrigin.Begin);
+			_ = br.ReadBytes(SizePerRead);
 		}
 	}
 
 	[Benchmark]
 	public void ReopenPerRead() {
 		for (var i = 0; i < TotalReadSize; i += SizePerRead) {
-			using var fs = File.OpenRead(fileName);
+			using var fs = File.OpenRead(FileName);
 			using var br = new BinaryReader(fs);
 
-			fs.Seek(i, SeekOrigin.Begin);
-			br.ReadBytes(SizePerRead);
+			_ = fs.Seek(i, SeekOrigin.Begin);
+			_ = br.ReadBytes(SizePerRead);
 		}
 	}
 }

@@ -406,7 +406,7 @@ public class Palette : IProjectResource {
 		}
 
 		if (index >= Entries) {
-			throw new ArgumentOutOfRangeException($"{nameof(GetNativeColor)} parameter '{nameof(index)}' was out of range");
+			throw new ArgumentOutOfRangeException(nameof(index), $"{nameof(GetNativeColor)} parameter '{nameof(index)}' was out of range");
 		}
 
 		NativePalette[index] = nativeColor;
@@ -438,7 +438,7 @@ public class Palette : IProjectResource {
 
 	public void SetColorSources(IEnumerable<IColorSource> colorSources) {
 		ColorSources = colorSources.ToArray();
-		Reload();
+		_ = Reload();
 	}
 
 	/// <summary>

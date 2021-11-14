@@ -81,7 +81,7 @@ public class ShellViewModel : Screen, IHandle<ShowToolWindowEvent> {
 	public void DocumentClosing(object sender, DocumentClosingEventArgs e) {
 		if (e.Document.Content is ResourceEditorBaseViewModel editor) {
 			if (Editors.RequestSaveUserChanges(editor, true)) {
-				Editors.Editors.Remove(editor);
+				_ = Editors.Editors.Remove(editor);
 				Editors.ActiveEditor = Editors.Editors.FirstOrDefault();
 			} else {
 				e.Cancel = true;
@@ -97,7 +97,7 @@ public class ShellViewModel : Screen, IHandle<ShowToolWindowEvent> {
 				if (!ActiveTree.IsVisible) {
 					ActiveTree.IsVisible = true;
 					ActiveTree.IsSelected = true;
-					Tools.Remove(ActiveTree);
+					_ = Tools.Remove(ActiveTree);
 					Tools.Add(ActiveTree);
 				}
 

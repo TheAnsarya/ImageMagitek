@@ -18,7 +18,7 @@ public sealed class XmlGraphicsFormatReader : IGraphicsFormatReader {
 				throw new ArgumentException($"{nameof(schemaFileName)} cannot be found");
 			} else {
 				using var schemaStream = File.OpenRead(schemaFileName);
-				_schemas.Add("", XmlReader.Create(schemaStream));
+				_ = _schemas.Add("", XmlReader.Create(schemaStream));
 			}
 		} else {
 			throw new ArgumentException($"{nameof(schemaFileName)} was null or empty");

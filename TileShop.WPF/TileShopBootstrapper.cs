@@ -44,28 +44,28 @@ public class TileShopBootstrapper : AutofacBootstrapper<ShellViewModel> {
 			codecService.CodecFactory, paletteService.ColorFactory, defaultResources);
 		var projectService = bootstrapper.CreateProjectService(serializerFactory, paletteService.ColorFactory);
 
-		builder.RegisterInstance(settings);
-		builder.RegisterInstance(paletteService);
-		builder.RegisterInstance(codecService);
-		builder.RegisterInstance(pluginService);
-		builder.RegisterInstance(layoutService);
-		builder.RegisterInstance(projectService);
+		_ = builder.RegisterInstance(settings);
+		_ = builder.RegisterInstance(paletteService);
+		_ = builder.RegisterInstance(codecService);
+		_ = builder.RegisterInstance(pluginService);
+		_ = builder.RegisterInstance(layoutService);
+		_ = builder.RegisterInstance(projectService);
 	}
 
 	private static void ConfigureServices(ContainerBuilder builder) {
-		builder.RegisterType<FileSelectService>().As<IFileSelectService>();
-		builder.RegisterType<ViewModels.MessageBoxViewModel>().As<IMessageBoxViewModel>();
-		builder.RegisterType<DiskExploreService>().As<IDiskExploreService>();
+		_ = builder.RegisterType<FileSelectService>().As<IFileSelectService>();
+		_ = builder.RegisterType<ViewModels.MessageBoxViewModel>().As<IMessageBoxViewModel>();
+		_ = builder.RegisterType<DiskExploreService>().As<IDiskExploreService>();
 	}
 
 	protected override void ConfigureViews(ContainerBuilder builder) {
 		var viewTypes = GetType().Assembly.GetTypes().Where(x => x.Name.EndsWith("View"));
 
 		foreach (var viewType in viewTypes) {
-			builder.RegisterType(viewType);
+			_ = builder.RegisterType(viewType);
 		}
 
-		builder.RegisterType<ShellView>().OnActivated(x => _tracker.Track(x.Instance));
+		_ = builder.RegisterType<ShellView>().OnActivated(x => _tracker.Track(x.Instance));
 	}
 
 	protected override void ConfigureViewModels(ContainerBuilder builder) {
@@ -76,27 +76,27 @@ public class TileShopBootstrapper : AutofacBootstrapper<ShellViewModel> {
 			.Where(x => !x.IsAbstract && !x.IsInterface);
 
 		foreach (var vmType in vmTypes) {
-			builder.RegisterType(vmType);
+			_ = builder.RegisterType(vmType);
 		}
 
-		builder.RegisterType<ShellViewModel>().SingleInstance().OnActivated(x => _tracker.Track(x.Instance));
-		builder.RegisterType<EditorsViewModel>().SingleInstance();
-		builder.RegisterType<ProjectTreeViewModel>().SingleInstance();
-		builder.RegisterType<MenuViewModel>().SingleInstance();
-		builder.RegisterType<StatusBarViewModel>().SingleInstance();
+		_ = builder.RegisterType<ShellViewModel>().SingleInstance().OnActivated(x => _tracker.Track(x.Instance));
+		_ = builder.RegisterType<EditorsViewModel>().SingleInstance();
+		_ = builder.RegisterType<ProjectTreeViewModel>().SingleInstance();
+		_ = builder.RegisterType<MenuViewModel>().SingleInstance();
+		_ = builder.RegisterType<StatusBarViewModel>().SingleInstance();
 	}
 
 	private static void ConfigureJotTracker(Tracker tracker, ContainerBuilder builder) {
-		tracker.Configure<ShellView>()
+		_ = tracker.Configure<ShellView>()
 			.Id(w => w.Name)
 			.Properties(w => new { w.Top, w.Width, w.Height, w.Left, w.WindowState })
 			.PersistOn(nameof(Window.Closing))
 			.StopTrackingOn(nameof(Window.Closing));
 
-		tracker.Configure<ShellViewModel>()
+		_ = tracker.Configure<ShellViewModel>()
 			.Property(p => p.Theme, ApplicationTheme.Light);
 
-		tracker.Configure<AddScatteredArrangerViewModel>()
+		_ = tracker.Configure<AddScatteredArrangerViewModel>()
 			.Property(p => p.ArrangerElementWidth, 8)
 			.Property(p => p.ArrangerElementHeight, 16)
 			.Property(p => p.ElementPixelWidth, 8)
@@ -104,24 +104,24 @@ public class TileShopBootstrapper : AutofacBootstrapper<ShellViewModel> {
 			.Property(p => p.ColorType, PixelColorType.Indexed)
 			.Property(p => p.Layout, ElementLayout.Tiled);
 
-		tracker.Configure<AddPaletteViewModel>()
+		_ = tracker.Configure<AddPaletteViewModel>()
 			.Property(p => p.PaletteName)
 			.Property(p => p.SelectedColorModel, "RGBA32")
 			.Property(p => p.ZeroIndexTransparent, true);
 
-		tracker.Configure<JumpToOffsetViewModel>()
+		_ = tracker.Configure<JumpToOffsetViewModel>()
 			.Property(p => p.NumericBase, NumericBase.Decimal)
 			.Property(p => p.Offset, string.Empty);
 
-		tracker.Configure<MenuViewModel>()
+		_ = tracker.Configure<MenuViewModel>()
 			.Property(p => p.RecentProjectFiles);
 
-		tracker.Configure<CustomElementLayoutViewModel>()
+		_ = tracker.Configure<CustomElementLayoutViewModel>()
 			.Property(p => p.Width, 1)
 			.Property(p => p.Height, 1)
 			.Property(p => p.FlowDirection, ElementLayoutFlowDirection.RowLeftToRight);
 
-		builder.RegisterInstance(tracker);
+		_ = builder.RegisterInstance(tracker);
 	}
 
 	private static LoggerFactory CreateLoggerFactory(string logName) {
@@ -132,7 +132,7 @@ public class TileShopBootstrapper : AutofacBootstrapper<ShellViewModel> {
 			.CreateLogger();
 
 		var factory = new LoggerFactory();
-		factory.AddSerilog(Log.Logger);
+		_ = factory.AddSerilog(Log.Logger);
 		return factory;
 	}
 
@@ -140,7 +140,7 @@ public class TileShopBootstrapper : AutofacBootstrapper<ShellViewModel> {
 		base.OnUnhandledException(e);
 
 		Log.Error(e.Exception, "Unhandled exception");
-		_container?.Resolve<IWindowManager>()?.ShowMessageBox($"{e.Exception.Message}", "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+		_ = (_container?.Resolve<IWindowManager>()?.ShowMessageBox($"{e.Exception.Message}", "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Error));
 		e.Handled = true;
 	}
 }

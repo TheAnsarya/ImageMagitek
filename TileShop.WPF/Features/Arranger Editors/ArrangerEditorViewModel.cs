@@ -87,7 +87,7 @@ public abstract class ArrangerEditorViewModel : ResourceEditorBaseViewModel, IMo
 	public SnapMode SnapMode {
 		get => _snapMode;
 		set {
-			SetAndNotify(ref _snapMode, value);
+			_ = SetAndNotify(ref _snapMode, value);
 			if (Selection is not null) {
 				Selection.SnapMode = SnapMode;
 			}
@@ -191,7 +191,7 @@ public abstract class ArrangerEditorViewModel : ResourceEditorBaseViewModel, IMo
 
 		if (SnapMode == SnapMode.Element && WorkingArranger.Layout == ElementLayout.Tiled) {
 			// Clone a subsection of the arranger and show the full subarranger
-			WorkingArranger.CopyElements();
+			_ = WorkingArranger.CopyElements();
 			var arranger = WorkingArranger.CloneArranger(rect.SnappedLeft, rect.SnappedTop, rect.SnappedWidth, rect.SnappedHeight);
 			editEvent = new EditArrangerPixelsEvent(arranger, Resource as Arranger, 0, 0, rect.SnappedWidth, rect.SnappedHeight);
 		} else {

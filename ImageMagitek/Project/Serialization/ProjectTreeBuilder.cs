@@ -49,7 +49,7 @@ internal sealed class ProjectTreeBuilder {
 			DiskLocation = diskLocation
 		};
 
-		Tree.TryGetNode(parentNodePath, out var parentNode);
+		_ = Tree.TryGetNode(parentNodePath, out var parentNode);
 		parentNode.AttachChildNode(folderNode);
 
 		return MagitekResult.SuccessResult;
@@ -63,7 +63,7 @@ internal sealed class ProjectTreeBuilder {
 			Model = dfModel
 		};
 
-		Tree.TryGetNode(parentNodePath, out var parentNode);
+		_ = Tree.TryGetNode(parentNodePath, out var parentNode);
 		parentNode.AttachChildNode(dfNode);
 
 		if (!File.Exists(df.Location)) {
@@ -81,14 +81,14 @@ internal sealed class ProjectTreeBuilder {
 		}
 
 		pal.DataFile = df;
-		pal.LazyLoadPalette(pal.DataFile, pal.ColorModel, pal.ZeroIndexTransparent);
+		_ = pal.LazyLoadPalette(pal.DataFile, pal.ColorModel, pal.ZeroIndexTransparent);
 
 		var palNode = new PaletteNode(pal.Name, pal) {
 			DiskLocation = fileLocation,
 			Model = paletteModel
 		};
 
-		Tree.TryGetNode(parentNodePath, out var parentNode);
+		_ = Tree.TryGetNode(parentNodePath, out var parentNode);
 		parentNode.AttachChildNode(palNode);
 
 		return MagitekResult.SuccessResult;
@@ -115,7 +115,7 @@ internal sealed class ProjectTreeBuilder {
 			Model = arrangerModel
 		};
 
-		Tree.TryGetNode(parentNodePath, out var parentNode);
+		_ = Tree.TryGetNode(parentNodePath, out var parentNode);
 		parentNode.AttachChildNode(arrangerNode);
 
 		return MagitekResult.SuccessResult;
@@ -151,7 +151,7 @@ internal sealed class ProjectTreeBuilder {
 			return new MagitekResult<ArrangerElement?>.Success(null);
 		} else if (arrangerModel.ColorType == PixelColorType.Indexed) {
 			if (!string.IsNullOrWhiteSpace(elementModel.DataFileKey)) {
-				Tree.TryGetItem<DataFile>(elementModel.DataFileKey, out df);
+				_ = Tree.TryGetItem<DataFile>(elementModel.DataFileKey, out df);
 			}
 
 			address = elementModel.FileAddress;
@@ -165,7 +165,7 @@ internal sealed class ProjectTreeBuilder {
 			codec = _codecFactory.GetCodec(elementModel.CodecName, new Size(arrangerModel.ElementPixelSize.Width, arrangerModel.ElementPixelSize.Height));
 		} else if (arrangerModel.ColorType == PixelColorType.Direct) {
 			if (!string.IsNullOrWhiteSpace(elementModel.DataFileKey)) {
-				Tree.TryGetItem<DataFile>(elementModel.DataFileKey, out df);
+				_ = Tree.TryGetItem<DataFile>(elementModel.DataFileKey, out df);
 			}
 
 			address = elementModel.FileAddress;

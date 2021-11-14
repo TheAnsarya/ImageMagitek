@@ -173,7 +173,7 @@ public class IndexedPixelEditorViewModel : PixelEditorViewModel<byte> {
 			var changeEvent = new ArrangerChangedEvent(_projectArranger, ArrangerChange.Pixels);
 			_events.PublishOnUIThread(changeEvent);
 		} catch (Exception ex) {
-			_windowManager.ShowMessageBox($"Could not save the pixel arranger contents\n{ex.Message}\n{ex.StackTrace}", "Save Error");
+			_ = _windowManager.ShowMessageBox($"Could not save the pixel arranger contents\n{ex.Message}\n{ex.StackTrace}", "Save Error");
 		}
 	}
 
@@ -255,11 +255,11 @@ public class IndexedPixelEditorViewModel : PixelEditorViewModel<byte> {
 				_indexedImage.SetPixel(point.X, point.Y, pencilAction.PencilColor);
 			}
 		} else if (action is FloodFillAction<byte> floodFillAction) {
-			_indexedImage.FloodFill(floodFillAction.X, floodFillAction.Y, floodFillAction.FillColor);
+			_ = _indexedImage.FloodFill(floodFillAction.X, floodFillAction.Y, floodFillAction.FillColor);
 		} else if (action is ColorRemapHistoryAction remapAction) {
 			_indexedImage.RemapColors(remapAction.FinalColors.Select(x => (byte)x.Index).ToList());
 		} else if (action is PasteArrangerHistoryAction pasteAction) {
-			ApplyPasteInternal(pasteAction.Paste);
+			_ = ApplyPasteInternal(pasteAction.Paste);
 		}
 	}
 }

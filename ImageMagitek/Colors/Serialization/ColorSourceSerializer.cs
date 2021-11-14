@@ -47,7 +47,7 @@ public class ColorSourceSerializer : IColorSourceSerializer {
 		var readSize = (size + 7) / 8;
 		var paletteData = df.Stream.ReadUnshifted(offset, readSize * 8);
 
-		df.Stream.Seek(offset.FileOffset, SeekOrigin.Begin);
+		_ = df.Stream.Seek(offset.FileOffset, SeekOrigin.Begin);
 		df.Stream.ReadUnshifted(offset, size, _colorBuffer);
 
 		uint readColor;
@@ -105,7 +105,7 @@ public class ColorSourceSerializer : IColorSourceSerializer {
 			BinaryPrimitives.WriteUInt32BigEndian(_colorBuffer, foreignColor.Color);
 		}
 
-		df.Stream.Seek(offset.FileOffset, SeekOrigin.Begin);
+		_ = df.Stream.Seek(offset.FileOffset, SeekOrigin.Begin);
 		df.Stream.Write(_colorBuffer, 0, writeSize);
 	}
 }

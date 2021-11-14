@@ -36,7 +36,7 @@ public sealed class XmlProjectSerializerFactory : IProjectSerializerFactory {
 		var resourceSchema = XmlSchema.Read(new StringReader(resourceSchemaText), null);
 
 		var resourceSchemaSet = new XmlSchemaSet();
-		resourceSchemaSet.Add(resourceSchema);
+		_ = resourceSchemaSet.Add(resourceSchema);
 
 		return resourceSchemaSet;
 	}

@@ -105,12 +105,12 @@ public class BindableSelectedItemBehavior : Behavior<TreeView> {
 			// virtualizing case even if the item is marked 
 			// expanded we still need to do this step in order to 
 			// regenerate the visuals because they may have been virtualized away.
-			container.ApplyTemplate();
+			_ = container.ApplyTemplate();
 			var itemsPresenter =
 				(ItemsPresenter)container.Template.FindName("ItemsHost", container);
 
 			if (itemsPresenter != null) {
-				itemsPresenter.ApplyTemplate();
+				_ = itemsPresenter.ApplyTemplate();
 			} else {
 				// The Tree template has not named the ItemsPresenter, 
 				// so walk the descendents and find the child.

@@ -78,7 +78,7 @@ public class MenuViewModel : Screen, IHandle<ProjectLoadedEvent> {
 
 	public void Handle(ProjectLoadedEvent message) {
 		if (RecentProjectFiles.Contains(message.ProjectFileName)) {
-			RecentProjectFiles.Remove(message.ProjectFileName);
+			_ = RecentProjectFiles.Remove(message.ProjectFileName);
 			RecentProjectFiles.Insert(0, message.ProjectFileName);
 		} else {
 			RecentProjectFiles.Insert(0, message.ProjectFileName);

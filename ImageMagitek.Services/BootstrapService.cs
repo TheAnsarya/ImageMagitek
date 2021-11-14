@@ -38,7 +38,7 @@ public class BootstrapService {
 
 			var lowerDict = new Dictionary<string, string>();
 			foreach (var item in settings.ExtensionCodecAssociations) {
-				lowerDict.TryAdd(item.Key.ToLower(), item.Value);
+				_ = lowerDict.TryAdd(item.Key.ToLower(), item.Value);
 			}
 
 			settings.ExtensionCodecAssociations = lowerDict;
@@ -108,7 +108,7 @@ public class BootstrapService {
 
 		if (Directory.Exists(layoutPath)) {
 			foreach (var fileName in Directory.GetFiles(layoutPath, "*.json")) {
-				layoutService.LoadLayout(fileName);
+				_ = layoutService.LoadLayout(fileName);
 			}
 		}
 

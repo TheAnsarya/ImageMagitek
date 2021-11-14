@@ -108,7 +108,7 @@ internal partial class SquareSlider : UserControl, INotifyPropertyChanged {
 	private static void OnHueChanged(DependencyObject d, DependencyPropertyChangedEventArgs args) => ((SquareSlider)d).RecalculateGradient();
 
 	private void OnMouseDown(object sender, MouseButtonEventArgs e) {
-		((UIElement)sender).CaptureMouse();
+		_ = ((UIElement)sender).CaptureMouse();
 		UpdatePos(e.GetPosition(this));
 	}
 

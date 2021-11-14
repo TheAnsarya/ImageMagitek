@@ -90,7 +90,7 @@ public class ProjectTreeViewModel : ToolViewModel, IDropTarget, IHandle<AddScatt
 			var projectTree = _projectService.GetContainingProject(parentNodeModel.Node);
 
 			if (parentNodeModel.Children.Any(x => x.Name == dfName)) {
-				_windowManager.ShowMessageBox($"'{parentNodeModel.Name}' already contains a resource named '{dfName}'", "Error");
+				_ = _windowManager.ShowMessageBox($"'{parentNodeModel.Name}' already contains a resource named '{dfName}'", "Error");
 				return;
 			}
 
@@ -119,7 +119,7 @@ public class ProjectTreeViewModel : ToolViewModel, IDropTarget, IHandle<AddScatt
 		_tracker.Track(dialogModel);
 
 		if (dialogModel.DataFiles.Count == 0) {
-			_windowManager.ShowMessageBox("Project does not contain any data files to define a palette", "Project Error");
+			_ = _windowManager.ShowMessageBox("Project does not contain any data files to define a palette", "Project Error");
 			return;
 		}
 
@@ -237,7 +237,7 @@ public class ProjectTreeViewModel : ToolViewModel, IDropTarget, IHandle<AddScatt
 			_editors.Editors.Clear();
 			_editors.ActiveEditor = null;
 
-			_projectService.ApplyResourceDeletionChanges(changes, _paletteService.DefaultPalette);
+			_ = _projectService.ApplyResourceDeletionChanges(changes, _paletteService.DefaultPalette);
 			var projectRootVm = Projects.First(x => ReferenceEquals(tree.Root, x.Node));
 			SynchronizeTree(projectRootVm);
 
@@ -291,7 +291,7 @@ public class ProjectTreeViewModel : ToolViewModel, IDropTarget, IHandle<AddScatt
 
 			if (removedItems is not null) {
 				foreach (var vm in removedItems) {
-					vmNode.Children.Remove(vm);
+					_ = vmNode.Children.Remove(vm);
 				}
 			}
 		}
@@ -391,7 +391,7 @@ public class ProjectTreeViewModel : ToolViewModel, IDropTarget, IHandle<AddScatt
 
 			result.Switch(
 				success => {
-					sourceModel.ParentModel.Children.Remove(sourceModel);
+					_ = sourceModel.ParentModel.Children.Remove(sourceModel);
 					sourceModel.ParentModel = targetModel;
 					targetModel.Children.Add(sourceModel);
 					SelectedNode = sourceModel;
@@ -419,7 +419,7 @@ public class ProjectTreeViewModel : ToolViewModel, IDropTarget, IHandle<AddScatt
 					 );
 			}
 		} catch (Exception ex) {
-			_windowManager.ShowMessageBox($"Unable to save project:\n{ex.Message}\n{ex.StackTrace}");
+			_ = _windowManager.ShowMessageBox($"Unable to save project:\n{ex.Message}\n{ex.StackTrace}");
 		}
 	}
 
@@ -438,7 +438,7 @@ public class ProjectTreeViewModel : ToolViewModel, IDropTarget, IHandle<AddScatt
 					fail => _windowManager.ShowMessageBox($"{fail.Reason}", "Project Error"));
 			}
 		} catch (Exception ex) {
-			_windowManager.ShowMessageBox($"Unable to create new project at location '{projectFileName}'\n{ex.Message}\n{ex.StackTrace}");
+			_ = _windowManager.ShowMessageBox($"Unable to create new project at location '{projectFileName}'\n{ex.Message}\n{ex.StackTrace}");
 		}
 	}
 
@@ -449,7 +449,7 @@ public class ProjectTreeViewModel : ToolViewModel, IDropTarget, IHandle<AddScatt
 		try {
 			if (dataFileName is not null) {
 				if (File.Exists(projectFileName)) {
-					MessageBox.Show($"Project file '{projectFileName}' already exists");
+					_ = MessageBox.Show($"Project file '{projectFileName}' already exists");
 					return;
 				}
 
@@ -476,7 +476,7 @@ public class ProjectTreeViewModel : ToolViewModel, IDropTarget, IHandle<AddScatt
 					fail => _windowManager.ShowMessageBox($"{fail.Reason}", "Project Error"));
 			}
 		} catch (Exception ex) {
-			_windowManager.ShowMessageBox($"Unable to create new project at location '{projectFileName}'\n{ex.Message}\n{ex.StackTrace}");
+			_ = _windowManager.ShowMessageBox($"Unable to create new project at location '{projectFileName}'\n{ex.Message}\n{ex.StackTrace}");
 		}
 	}
 
@@ -508,7 +508,7 @@ public class ProjectTreeViewModel : ToolViewModel, IDropTarget, IHandle<AddScatt
 			fail => {
 				var message = $"Project '{projectFileName}' contained {fail.Reasons.Count} errors{Environment.NewLine}" +
 					string.Join(Environment.NewLine, fail.Reasons);
-				_windowManager.ShowMessageBox(message, "Project Open Error");
+				_ = _windowManager.ShowMessageBox(message, "Project Open Error");
 				return false;
 			});
 	}
@@ -525,7 +525,7 @@ public class ProjectTreeViewModel : ToolViewModel, IDropTarget, IHandle<AddScatt
 		return _projectService.SaveProjectAs(projectTree, newFileName).Match(
 			success => true,
 			fail => {
-				_windowManager.ShowMessageBox(fail.Reason, "Project Save Error");
+				_ = _windowManager.ShowMessageBox(fail.Reason, "Project Save Error");
 				return false;
 			});
 	}
@@ -568,12 +568,12 @@ public class ProjectTreeViewModel : ToolViewModel, IDropTarget, IHandle<AddScatt
 				 );
 
 				_projectService.CloseProject(projectTree);
-				Projects.Remove(projectVM);
+				_ = Projects.Remove(projectVM);
 				NotifyOfPropertyChange(() => HasProject);
 				return true;
 			},
 			fail => {
-				_windowManager.ShowMessageBox(fail.Reason, "Project Save Error");
+				_ = _windowManager.ShowMessageBox(fail.Reason, "Project Save Error");
 				return false;
 			});
 	}

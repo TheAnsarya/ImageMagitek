@@ -16,7 +16,7 @@ public class ExportHandler : ProjectCommandHandler<ExportOptions> {
 		}
 
 		foreach (var resourceKey in options.ResourceKeys) {
-			Exporter.ExportArranger(project, resourceKey, options.ExportDirectory, options.ForceOverwrite);
+			_ = Exporter.ExportArranger(project, resourceKey, options.ExportDirectory, options.ForceOverwrite);
 		}
 
 		return ExitCode.Success;

@@ -45,7 +45,7 @@ public class MouseCaptureBehavior : Behavior<FrameworkElement> {
 
 	private static void OnCapture(object sender, EventArgs e) {
 		if (sender is MouseCaptureBehavior behavior) {
-			behavior.AssociatedObject.CaptureMouse();
+			_ = behavior.AssociatedObject.CaptureMouse();
 		}
 	}
 

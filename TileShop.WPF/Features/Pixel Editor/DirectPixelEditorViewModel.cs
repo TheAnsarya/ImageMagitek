@@ -57,7 +57,7 @@ public class DirectPixelEditorViewModel : PixelEditorViewModel<ColorRgba32> {
 			var changeEvent = new ArrangerChangedEvent(_projectArranger, ArrangerChange.Pixels);
 			_events.PublishOnUIThread(changeEvent);
 		} catch (Exception ex) {
-			_windowManager.ShowMessageBox($"Could not save the pixel arranger contents\n{ex.Message}\n{ex.StackTrace}", "Save Error");
+			_ = _windowManager.ShowMessageBox($"Could not save the pixel arranger contents\n{ex.Message}\n{ex.StackTrace}", "Save Error");
 		}
 	}
 

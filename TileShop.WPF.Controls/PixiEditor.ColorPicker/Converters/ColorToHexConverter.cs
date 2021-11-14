@@ -42,15 +42,15 @@ internal class ColorToHexConverter : DependencyObject, IValueConverter {
 		var final = new StringBuilder();
 		if (text.Length == 3) //short hex with no alpha
 		{
-			final.Append("#FF").Append(text[0]).Append(text[0]).Append(text[1]).Append(text[1]).Append(text[2]).Append(text[2]);
+			_ = final.Append("#FF").Append(text[0]).Append(text[0]).Append(text[1]).Append(text[1]).Append(text[2]).Append(text[2]);
 		} else if (text.Length == 4) //short hex with alpha
 		  {
-			final.Append('#').Append(text[0]).Append(text[0]).Append(text[1]).Append(text[1]).Append(text[2]).Append(text[2]).Append(text[3]).Append(text[3]);
+			_ = final.Append('#').Append(text[0]).Append(text[0]).Append(text[1]).Append(text[1]).Append(text[2]).Append(text[2]).Append(text[3]).Append(text[3]);
 		} else if (text.Length == 6) //hex with no alpha
 		  {
-			final.Append("#FF").Append(text);
+			_ = final.Append("#FF").Append(text);
 		} else {
-			final.Append('#').Append(text);
+			_ = final.Append('#').Append(text);
 		}
 
 		try {
@@ -68,14 +68,14 @@ internal class ColorToHexConverter : DependencyObject, IValueConverter {
 		var final = new StringBuilder();
 		if (text.Length == 3) {
 			//short hex
-			final.Append("#FF").Append(text[0]).Append(text[0]).Append(text[1]).Append(text[1]).Append(text[2]).Append(text[2]);
+			_ = final.Append("#FF").Append(text[0]).Append(text[0]).Append(text[1]).Append(text[1]).Append(text[2]).Append(text[2]);
 		} else if (text.Length == 4) {
 			return DependencyProperty.UnsetValue;
 		} else if (text.Length > 6) {
 			return DependencyProperty.UnsetValue;
 		} else {
 			//regular hex
-			final.Append('#').Append(text);
+			_ = final.Append('#').Append(text);
 		}
 
 		try {

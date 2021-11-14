@@ -61,16 +61,16 @@ public sealed class XmlProjectReader : IProjectReader {
 			var rootElementName = doc.Root.Name.LocalName;
 
 			if (rootElementName == "project") {
-				TryDeserializeProject(doc.Root, resourceName, out var projectModel);
+				_ = TryDeserializeProject(doc.Root, resourceName, out var projectModel);
 				model = projectModel;
 			} else if (rootElementName == "datafile") {
-				TryDeserializeDataFile(doc.Root, resourceName, out var dataFileModel);
+				_ = TryDeserializeDataFile(doc.Root, resourceName, out var dataFileModel);
 				model = dataFileModel;
 			} else if (rootElementName == "palette") {
-				TryDeserializePalette(doc.Root, resourceName, out var paletteModel);
+				_ = TryDeserializePalette(doc.Root, resourceName, out var paletteModel);
 				model = paletteModel;
 			} else if (rootElementName == "arranger") {
-				TryDeserializeScatteredArranger(doc.Root, resourceName, out var arrangerModel);
+				_ = TryDeserializeScatteredArranger(doc.Root, resourceName, out var arrangerModel);
 				model = arrangerModel;
 			} else {
 				_errors.Add($"{xmlFileName} has invalid root element '{rootElementName}'");
@@ -128,7 +128,7 @@ public sealed class XmlProjectReader : IProjectReader {
 			}
 		}
 
-		builder.AddProject(projectModel, _baseDirectory, projectFileName);
+		_ = builder.AddProject(projectModel, _baseDirectory, projectFileName);
 
 		// Add directories
 		var directoryNames = Directory.GetDirectories(_baseDirectory, "*", SearchOption.AllDirectories);
@@ -140,7 +140,7 @@ public sealed class XmlProjectReader : IProjectReader {
 			var parentDirectory = Directory.GetParent(directoryName).FullName;
 			var relativePath = Path.GetRelativePath(_baseDirectory, parentDirectory);
 			var parentKey = relativePath == "." ? "" : relativePath;
-			builder.AddFolder(folderModel, parentKey, Path.GetFullPath(directoryName));
+			_ = builder.AddFolder(folderModel, parentKey, Path.GetFullPath(directoryName));
 		}
 
 		// Add resources

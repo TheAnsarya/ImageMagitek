@@ -18,7 +18,7 @@ public class ArrangerSelection : PropertyChangedBase {
 		get => _snapMode;
 		set {
 			SelectionRect.SnapMode = value;
-			SetAndNotify(ref _snapMode, value);
+			_ = SetAndNotify(ref _snapMode, value);
 		}
 	}
 

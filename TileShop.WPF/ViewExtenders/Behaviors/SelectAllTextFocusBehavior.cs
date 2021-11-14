@@ -57,6 +57,6 @@ public class SelectAllFocusBehavior : Behavior<TextBox> {
 		}
 
 		e.Handled = true;
-		frameworkElement.Focus();
+		_ = frameworkElement.Focus();
 	}
 }

@@ -5,7 +5,7 @@ namespace ImageMagitek.ExtensionMethods;
 
 public static class StreamWriteExtensionMethods {
 	public static void WriteUnshifted(this Stream stream, FileBitAddress address, int writeBits, ReadOnlySpan<byte> writeBuffer) {
-		stream.Seek(address.FileOffset, SeekOrigin.Begin);
+		_ = stream.Seek(address.FileOffset, SeekOrigin.Begin);
 		stream.WriteUnshifted(address.BitOffset, writeBits, writeBuffer);
 	}
 
@@ -14,7 +14,7 @@ public static class StreamWriteExtensionMethods {
 
 		if (totalBytes == 1) {
 			var firstByte = (byte)stream.ReadByte();
-			stream.Seek(-1, SeekOrigin.Current);
+			_ = stream.Seek(-1, SeekOrigin.Current);
 
 			var merged = MergeByte(firstByte, writeBuffer[0], skipBits, writeBits);
 			stream.WriteByte(merged);
@@ -25,7 +25,7 @@ public static class StreamWriteExtensionMethods {
 
 		if (skipBits != 0) {
 			var firstByte = (byte)stream.ReadByte();
-			stream.Seek(-1, SeekOrigin.Current);
+			_ = stream.Seek(-1, SeekOrigin.Current);
 
 			var merged = MergeByte(firstByte, writeBuffer[0], skipBits, 8 - skipBits);
 			stream.WriteByte(merged);
@@ -39,7 +39,7 @@ public static class StreamWriteExtensionMethods {
 			stream.Write(span);
 
 			var lastByte = (byte)stream.ReadByte();
-			stream.Seek(-1, SeekOrigin.Current);
+			_ = stream.Seek(-1, SeekOrigin.Current);
 
 			var merged = MergeByte(lastByte, writeBuffer[totalBytes - 1], 0, lastBits);
 			stream.WriteByte(merged);
@@ -50,7 +50,7 @@ public static class StreamWriteExtensionMethods {
 	}
 
 	public static void WriteShifted(this Stream stream, FileBitAddress address, int writeBits, ReadOnlySpan<byte> writeBuffer) {
-		stream.Seek(address.FileOffset, SeekOrigin.Begin);
+		_ = stream.Seek(address.FileOffset, SeekOrigin.Begin);
 		stream.WriteShifted(address.BitOffset, writeBits, writeBuffer);
 	}
 

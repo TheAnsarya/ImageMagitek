@@ -112,7 +112,7 @@ public sealed class SequentialArranger : Arranger {
 			}
 		}
 
-		Move(FileAddress);
+		_ = Move(FileAddress);
 	}
 
 	/// <summary>
@@ -339,11 +339,11 @@ public sealed class SequentialArranger : Arranger {
 
 			foreach (var el in EnumerateElements().OfType<ArrangerElement>()) {
 				if (el.Palette is not null) {
-					set.Add(el.Palette);
+					_ = set.Add(el.Palette);
 				}
 
 				if (el.DataFile is not null) {
-					set.Add(el.DataFile);
+					_ = set.Add(el.DataFile);
 				}
 			}
 

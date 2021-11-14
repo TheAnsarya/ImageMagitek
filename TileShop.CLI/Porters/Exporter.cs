@@ -21,7 +21,7 @@ public static class Exporter {
 		Console.Write($"Exporting '{arrangerKey}' to '{exportFileName}'...");
 
 		if (!Directory.Exists(Path.GetDirectoryName(exportFileName))) {
-			Directory.CreateDirectory(Path.GetDirectoryName(exportFileName));
+			_ = Directory.CreateDirectory(Path.GetDirectoryName(exportFileName));
 		}
 
 		if (File.Exists(exportFileName) && forceOverwrite == false) {

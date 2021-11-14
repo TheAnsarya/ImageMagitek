@@ -43,7 +43,7 @@ public class ProjectService : IProjectService {
 		var contents = _serializerFactory.CreateWriter(tree).SerializeResource(root);
 		File.WriteAllText(root.DiskLocation, contents);
 
-		_projects.Add(tree);
+		_ = _projects.Add(tree);
 		UpdateNodeModel(tree, root);
 
 		return new MagitekResult<ProjectTree>.Success(tree);
@@ -73,7 +73,7 @@ public class ProjectService : IProjectService {
 
 			return result.Match(
 				success => {
-					_projects.Add(success.Result);
+					_ = _projects.Add(success.Result);
 					return result;
 				},
 				fail => result
@@ -149,7 +149,7 @@ public class ProjectService : IProjectService {
 				file.Close();
 			}
 
-			_projects.Remove(projectTree);
+			_ = _projects.Remove(projectTree);
 		}
 	}
 
@@ -236,7 +236,7 @@ public class ProjectService : IProjectService {
 			var directoryName = ResourceFileLocator.LocateByParent(tree, parentNode, node);
 			node.DiskLocation = directoryName;
 
-			Directory.CreateDirectory(directoryName);
+			_ = Directory.CreateDirectory(directoryName);
 			parentNode.AttachChildNode(node);
 
 			return new MagitekResult<ResourceNode>.Success(node);
@@ -335,7 +335,7 @@ public class ProjectService : IProjectService {
 			try {
 				node.Rename(newName);
 				var serializer = _serializerFactory.CreateWriter(tree);
-				serializer.WriteProject(tree.Root.DiskLocation);
+				_ = serializer.WriteProject(tree.Root.DiskLocation);
 			} catch (Exception ex) {
 				node.Rename(oldName);
 				return new MagitekResult.Failed($"Could not rename '{node.Name}': {ex.Message}");
@@ -437,7 +437,7 @@ public class ProjectService : IProjectService {
 					Directory.Move(oldLocation, newLocation);
 					node.DiskLocation = newLocation;
 
-					node.Parent.DetachChildNode(node.Name);
+					_ = node.Parent.DetachChildNode(node.Name);
 					parentNode.AttachChildNode(node);
 				} catch (Exception ex) {
 					return new MagitekResult.Failed($"Failed to move node '{node.Name}': {ex.Message}");
@@ -450,7 +450,7 @@ public class ProjectService : IProjectService {
 						Directory.Move(newLocation, oldLocation);
 						node.DiskLocation = oldLocation;
 
-						node.Parent.DetachChildNode(node.Name);
+						_ = node.Parent.DetachChildNode(node.Name);
 						oldParent.AttachChildNode(node);
 
 						return failed;
@@ -460,20 +460,20 @@ public class ProjectService : IProjectService {
 					File.Move(oldLocation, newLocation);
 					node.DiskLocation = newLocation;
 
-					node.Parent.DetachChildNode(node.Name);
+					_ = node.Parent.DetachChildNode(node.Name);
 					parentNode.AttachChildNode(node);
 					var result = serializer.WriteProject(tree.Root.DiskLocation);
 
 					if (result.HasFailed) {
 						File.Move(newLocation, oldLocation);
-						node.Parent.DetachChildNode(node.Name);
+						_ = node.Parent.DetachChildNode(node.Name);
 						oldParent.AttachChildNode(node);
 					}
 
 					return result;
 				} catch (Exception ex) {
 					File.Move(oldLocation, newLocation);
-					node.Parent.DetachChildNode(node.Name);
+					_ = node.Parent.DetachChildNode(node.Name);
 					oldParent.AttachChildNode(node);
 					return new MagitekResult.Failed($"Failed to move node '{node.Name}': {ex.Message}");
 				}
@@ -495,7 +495,7 @@ public class ProjectService : IProjectService {
 
 		foreach (var change in changes.Where(x => x.IsChanged)) {
 			foreach (var removeItem in removedItems) {
-				change.Resource.UnlinkResource(removeItem.Resource);
+				_ = change.Resource.UnlinkResource(removeItem.Resource);
 			}
 
 			if (change.LostPalette && change.Resource is ScatteredArranger arranger) {

@@ -33,15 +33,15 @@ public sealed class FileSetWriteTransaction : IFileChangeTransactionRunner {
 		var destName = string.Empty;
 		try {
 			foreach (var action in _actions) {
-				action.Prepare();
+				_ = action.Prepare();
 			}
 
 			foreach (var action in _actions) {
-				action.Execute();
+				_ = action.Execute();
 			}
 
 			foreach (var action in _actions) {
-				action.Complete();
+				_ = action.Complete();
 			}
 
 			return MagitekResult.SuccessResult;

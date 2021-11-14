@@ -117,7 +117,7 @@ public class SequentialArrangerEditorViewModel : ArrangerEditorViewModel, IMouse
 		get => _linearArrangerWidth;
 		set {
 			var preferredWidth = (WorkingArranger as SequentialArranger).ActiveCodec.GetPreferredWidth(value);
-			SetAndNotify(ref _linearArrangerWidth, preferredWidth);
+			_ = SetAndNotify(ref _linearArrangerWidth, preferredWidth);
 			ChangeCodecDimensions(LinearArrangerWidth, LinearArrangerHeight);
 		}
 	}
@@ -127,7 +127,7 @@ public class SequentialArrangerEditorViewModel : ArrangerEditorViewModel, IMouse
 		get => _linearArrangerHeight;
 		set {
 			var preferredHeight = (WorkingArranger as SequentialArranger).ActiveCodec.GetPreferredHeight(value);
-			SetAndNotify(ref _linearArrangerHeight, preferredHeight);
+			_ = SetAndNotify(ref _linearArrangerHeight, preferredHeight);
 			ChangeCodecDimensions(LinearArrangerWidth, LinearArrangerHeight);
 		}
 	}
@@ -296,7 +296,7 @@ public class SequentialArrangerEditorViewModel : ArrangerEditorViewModel, IMouse
 			var model = new AddScatteredArrangerFromCopyEvent(copy, OriginatingProjectResource);
 			_events.PublishOnUIThread(model);
 		} else {
-			_windowManager.ShowMessageBox("Selection must be performed in Element Snap mode to create a new Scattered Arranger", "Error");
+			_ = _windowManager.ShowMessageBox("Selection must be performed in Element Snap mode to create a new Scattered Arranger", "Error");
 		}
 	}
 
@@ -306,7 +306,7 @@ public class SequentialArrangerEditorViewModel : ArrangerEditorViewModel, IMouse
 			var model = new AddScatteredArrangerFromCopyEvent(copy, OriginatingProjectResource);
 			_events.PublishOnUIThread(model);
 		} else {
-			_windowManager.ShowMessageBox("Selection must be performed in Element Snap mode to create a new Scattered Arranger", "Error");
+			_ = _windowManager.ShowMessageBox("Selection must be performed in Element Snap mode to create a new Scattered Arranger", "Error");
 		}
 	}
 

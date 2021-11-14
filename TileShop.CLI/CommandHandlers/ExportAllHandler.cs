@@ -19,7 +19,7 @@ public class ExportAllHandler : ProjectCommandHandler<ExportAllOptions> {
 		}
 
 		foreach (var node in projectTree.EnumerateDepthFirst().Where(x => x.Item is ScatteredArranger)) {
-			Exporter.ExportArranger(projectTree, projectTree.CreatePathKey(node), options.ExportDirectory, options.ForceOverwrite);
+			_ = Exporter.ExportArranger(projectTree, projectTree.CreatePathKey(node), options.ExportDirectory, options.ForceOverwrite);
 		}
 
 		return ExitCode.Success;

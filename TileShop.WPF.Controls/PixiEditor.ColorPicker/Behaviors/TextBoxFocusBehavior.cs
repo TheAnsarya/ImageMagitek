@@ -49,7 +49,7 @@ internal class TextBoxFocusBehavior : Behavior<TextBox> {
 
 	private void AssociatedObjectPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
 		if (!AssociatedObject.IsKeyboardFocusWithin) {
-			AssociatedObject.Focus();
+			_ = AssociatedObject.Focus();
 			e.Handled = true;
 		}
 	}

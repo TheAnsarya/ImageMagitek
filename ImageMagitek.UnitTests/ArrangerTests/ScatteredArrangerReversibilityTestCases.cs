@@ -9,7 +9,7 @@ public class ScatteredArrangerReversibilityTestCases {
 	public static IEnumerable<TestCaseData> ReverseCases {
 		get {
 			var codecService = new CodecService(@"_schemas/CodecSchema.xsd");
-			codecService.LoadXmlCodecs(@"_codecs");
+			_ = codecService.LoadXmlCodecs(@"_codecs");
 			var codecFactory = codecService.CodecFactory;
 
 			yield return new TestCaseData(

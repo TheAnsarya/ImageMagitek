@@ -200,7 +200,7 @@ public class MessageBoxViewModel : Screen, IMessageBoxViewModel {
 	/// </summary>
 	protected override void OnViewLoaded() {
 		// There might not be a sound, or it might be null
-		SoundMapping.TryGetValue(Icon, out var sound);
+		_ = SoundMapping.TryGetValue(Icon, out var sound);
 		if (sound != null) {
 			sound.Play();
 		}

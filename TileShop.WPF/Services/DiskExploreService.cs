@@ -10,6 +10,6 @@ public class DiskExploreService : IDiskExploreService {
 	public void ExploreDiskLocation(string location) {
 		var command = $"explorer.exe";
 		var args = $"/select, {location}";
-		Process.Start(command, args);
+		_ = Process.Start(command, args);
 	}
 }

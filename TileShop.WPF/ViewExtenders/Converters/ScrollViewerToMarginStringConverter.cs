@@ -13,7 +13,7 @@ public class ScrollViewerToMarginStringConverter : IValueConverter {
 		}
 
 		if (value is ScrollViewer scrollViewer) {
-			scrollViewer.ApplyTemplate();
+			_ = scrollViewer.ApplyTemplate();
 			var verticalScroll = scrollViewer.Template.FindName("PART_VerticalScrollBar", scrollViewer) as ScrollBar;
 			var horizontalScroll = scrollViewer.Template.FindName("PART_HorizontalScrollBar", scrollViewer) as ScrollBar;
 

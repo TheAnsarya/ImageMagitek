@@ -163,7 +163,7 @@ internal class Program {
 			.CreateLogger();
 
 		var factory = new LoggerFactory();
-		factory.AddSerilog(Log.Logger);
+		_ = factory.AddSerilog(Log.Logger);
 		return factory;
 	}
 }

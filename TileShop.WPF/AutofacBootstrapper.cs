@@ -29,12 +29,12 @@ public class AutofacBootstrapper<TRootViewModel> : BootstrapperBase where TRootV
 	/// </summary>
 	protected virtual void DefaultConfigureIoC(ContainerBuilder builder) {
 		var viewManagerConfig = ConfigureViewManagerConfig();
-		builder.RegisterInstance<IViewManager>(new ViewManager(viewManagerConfig));
+		_ = builder.RegisterInstance<IViewManager>(new ViewManager(viewManagerConfig));
 
-		builder.RegisterInstance<IWindowManagerConfig>(this).ExternallyOwned();
-		builder.RegisterType<WindowManager>().As<IWindowManager>().SingleInstance();
-		builder.RegisterType<EventAggregator>().As<IEventAggregator>().SingleInstance();
-		builder.RegisterType<MessageBoxViewModel>().As<IMessageBoxViewModel>().ExternallyOwned(); // Not singleton!
+		_ = builder.RegisterInstance<IWindowManagerConfig>(this).ExternallyOwned();
+		_ = builder.RegisterType<WindowManager>().As<IWindowManager>().SingleInstance();
+		_ = builder.RegisterType<EventAggregator>().As<IEventAggregator>().SingleInstance();
+		_ = builder.RegisterType<MessageBoxViewModel>().As<IMessageBoxViewModel>().ExternallyOwned(); // Not singleton!
 
 		ConfigureViewModels(builder);
 		ConfigureViews(builder);
@@ -48,7 +48,7 @@ public class AutofacBootstrapper<TRootViewModel> : BootstrapperBase where TRootV
 			.Where(x => !x.IsAbstract && !x.IsInterface);
 
 		foreach (var vmType in vmTypes) {
-			builder.RegisterType(vmType);
+			_ = builder.RegisterType(vmType);
 		}
 	}
 
@@ -56,7 +56,7 @@ public class AutofacBootstrapper<TRootViewModel> : BootstrapperBase where TRootV
 		var viewTypes = GetType().Assembly.GetTypes().Where(x => x.Name.EndsWith("View"));
 
 		foreach (var viewType in viewTypes) {
-			builder.RegisterType(viewType);
+			_ = builder.RegisterType(viewType);
 		}
 	}
 
