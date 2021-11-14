@@ -151,7 +151,7 @@ public sealed class BitStream {
 	/// </summary>
 	/// <returns></returns>
 	public int ReadBit() {
-		if (_access != BitStreamAccess.Read && _access != BitStreamAccess.ReadWrite) {
+		if (_access is not BitStreamAccess.Read and not BitStreamAccess.ReadWrite) {
 			throw new InvalidOperationException($"{nameof(ReadBit)} does not have read access");
 		}
 
@@ -205,7 +205,7 @@ public sealed class BitStream {
 	/// <param name="numBits">Number of bits to read between 1 and 32</param>
 	/// <returns></returns>
 	public int ReadBits(int numBits) {
-		if (numBits > 32 || numBits < 1) {
+		if (numBits is > 32 or < 1) {
 			throw new ArgumentOutOfRangeException($"{nameof(ReadBits)} parameter {nameof(numBits)} ({numBits}) is out of range");
 		}
 
@@ -270,7 +270,7 @@ public sealed class BitStream {
 			throw new ArgumentOutOfRangeException();
 		}
 
-		if (_access != BitStreamAccess.Write && _access != BitStreamAccess.ReadWrite) {
+		if (_access is not BitStreamAccess.Write and not BitStreamAccess.ReadWrite) {
 			throw new InvalidOperationException($"{nameof(WriteBit)} does not have write access");
 		}
 
@@ -317,7 +317,7 @@ public sealed class BitStream {
 	}
 
 	public void WriteBits(int val, int numBits) {
-		if (numBits > 32 || numBits < 1) {
+		if (numBits is > 32 or < 1) {
 			throw new ArgumentOutOfRangeException($"{nameof(WriteBits)} parameter {nameof(numBits)} ({numBits}) is out of range");
 		}
 

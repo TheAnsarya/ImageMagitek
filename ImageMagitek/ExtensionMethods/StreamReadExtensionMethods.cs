@@ -23,7 +23,7 @@ public static class StreamReadExtensionMethods {
 			throw new ArgumentOutOfRangeException($"{nameof(ReadUnshifted)} parameter '{nameof(readBits)}' ({readBits}) must be positive");
 		}
 
-		if (skipBits > 7 || skipBits < 0) {
+		if (skipBits is > 7 or < 0) {
 			throw new ArgumentOutOfRangeException($"{nameof(ReadUnshifted)} parameter '{nameof(skipBits)}' ({skipBits}) is not within the valid range [0-7]");
 		}
 
@@ -62,7 +62,7 @@ public static class StreamReadExtensionMethods {
 			throw new ArgumentOutOfRangeException($"{nameof(ReadUnshifted)} parameter '{nameof(readBits)}' ({readBits}) must be positive");
 		}
 
-		if (skipBits > 7 || skipBits < 0) {
+		if (skipBits is > 7 or < 0) {
 			throw new ArgumentOutOfRangeException($"{nameof(ReadUnshifted)} parameter '{nameof(skipBits)}' ({skipBits}) is not within the valid range [0-7]");
 		}
 

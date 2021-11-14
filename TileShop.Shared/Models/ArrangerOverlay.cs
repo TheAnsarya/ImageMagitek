@@ -73,7 +73,7 @@ public class ArrangerOverlay : INotifyPropertyChanged {
 	/// <param name="x">X-coordinate of selection end point in pixel coordinates</param>
 	/// <param name="y">Y-coordinate of selection end point in pixel coordinates</param>
 	public void StartPasting(Arranger pasteArranger, SnapMode snapMode, double x, double y) {
-		if (State == OverlayState.Selected || State == OverlayState.Pasting) {
+		if (State is OverlayState.Selected or OverlayState.Pasting) {
 			_pasteArranger = pasteArranger;
 			State = OverlayState.Pasting;
 			PasteRect = new SnappedRectangle(_pasteArranger.ArrangerPixelSize, _pasteArranger.ElementPixelSize, snapMode, ElementSnapRounding.Floor);
@@ -100,9 +100,9 @@ public class ArrangerOverlay : INotifyPropertyChanged {
 	public void Cancel() => State = OverlayState.None;
 
 	public void UpdateSnapMode(SnapMode snapMode) {
-		if (State == OverlayState.Selecting || State == OverlayState.Selected) {
+		if (State is OverlayState.Selecting or OverlayState.Selected) {
 			SelectionRect.SnapMode = snapMode;
-		} else if (State == OverlayState.Pasting || State == OverlayState.Pasted) {
+		} else if (State is OverlayState.Pasting or OverlayState.Pasted) {
 			PasteRect.SnapMode = snapMode;
 		}
 	}

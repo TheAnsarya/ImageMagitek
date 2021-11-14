@@ -94,7 +94,7 @@ public sealed class XmlGraphicsFormatReader : IGraphicsFormatReader {
 			errors.Add($"colordepth could not be parsed on {codec.ColorDepth.LineNumber()}");
 		}
 
-		if (colorDepth < 1 && colorDepth > 32) {
+		if (colorDepth is < 1 or > 32) {
 			errors.Add($"colordepth contains an out of range value '{colorDepth}' on {codec.ColorDepth.LineNumber()}");
 		}
 
@@ -238,7 +238,7 @@ public sealed class XmlGraphicsFormatReader : IGraphicsFormatReader {
 			errors.Add($"colordepth could not be parsed on {codec.ColorDepth.LineNumber()}");
 		}
 
-		if (colorDepth < 1 && colorDepth > 32) {
+		if (colorDepth is < 1 or > 32) {
 			errors.Add($"colordepth contains an out of range value '{colorDepth}' on {codec.ColorDepth.LineNumber()}");
 		}
 

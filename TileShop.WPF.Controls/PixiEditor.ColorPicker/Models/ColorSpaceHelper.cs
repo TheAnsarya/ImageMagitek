@@ -142,7 +142,7 @@ internal static class ColorSpaceHelper {
 	public static Tuple<double, double, double> HsvToHsl(double h, double s, double v) {
 		var hsl_l = v * (1 - (s / 2));
 		double hsl_s;
-		if (hsl_l == 0 || hsl_l == 1) {
+		if (hsl_l is 0 or 1) {
 			hsl_s = -1;
 		} else {
 			hsl_s = (v - hsl_l) / Math.Min(hsl_l, 1 - hsl_l);

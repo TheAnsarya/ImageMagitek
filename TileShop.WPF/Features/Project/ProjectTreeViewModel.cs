@@ -66,7 +66,7 @@ public class ProjectTreeViewModel : ToolViewModel, IDropTarget, IHandle<AddScatt
 		};
 
 	public void ActivateSelectedNode() {
-		if (SelectedNode is ProjectNodeViewModel || SelectedNode is FolderNodeViewModel) {
+		if (SelectedNode is ProjectNodeViewModel or FolderNodeViewModel) {
 			SelectedNode.IsExpanded ^= true;
 		} else if (SelectedNode?.Node?.Item is not null) {
 			_editors.ActivateEditor(SelectedNode.Node.Item);
@@ -326,7 +326,7 @@ public class ProjectTreeViewModel : ToolViewModel, IDropTarget, IHandle<AddScatt
 				success => {
 					nodeModel.Name = newName;
 
-					if (nodeModel.ParentModel is FolderNodeViewModel || nodeModel.ParentModel is ProjectNodeViewModel) {
+					if (nodeModel.ParentModel is FolderNodeViewModel or ProjectNodeViewModel) {
 						nodeModel.ParentModel.NotifyChildrenChanged();
 					}
 

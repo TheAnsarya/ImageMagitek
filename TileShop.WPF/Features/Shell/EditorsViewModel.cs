@@ -67,7 +67,7 @@ public class EditorsViewModel : PropertyChangedBase, IHandle<EditArrangerPixelsE
 	public bool CloseEditor(ResourceEditorBaseViewModel editor) {
 		if (editor.IsModified) {
 			if (RequestSaveUserChanges(editor, true)) {
-				if (editor is not IndexedPixelEditorViewModel && editor is not DirectPixelEditorViewModel) {
+				if (editor is not IndexedPixelEditorViewModel and not DirectPixelEditorViewModel) {
 					var projectTree = _projectService.GetContainingProject(editor.Resource);
 					_projectService.SaveProject(projectTree)
 					.Switch(
@@ -224,12 +224,12 @@ public class EditorsViewModel : PropertyChangedBase, IHandle<EditArrangerPixelsE
 	}
 
 	public void Handle(ArrangerChangedEvent message) {
-		if (message.Change == ArrangerChange.Pixels || message.Change == ArrangerChange.Elements) {
+		if (message.Change is ArrangerChange.Pixels or ArrangerChange.Elements) {
 			var effectedEditors = Editors.OfType<ArrangerEditorViewModel>()
 				.Where(x => ReferenceEquals(x.Resource, message.Arranger));
 
 			foreach (var editor in effectedEditors) {
-				if (editor is SequentialArrangerEditorViewModel || editor is ScatteredArrangerEditorViewModel) {
+				if (editor is SequentialArrangerEditorViewModel or ScatteredArrangerEditorViewModel) {
 					editor.Render();
 				}
 			}

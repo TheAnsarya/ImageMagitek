@@ -97,7 +97,7 @@ public class IndexedPixelEditorViewModel : PixelEditorViewModel<byte> {
 
 	#region Commands
 	public void ConfirmPendingOperation() {
-		if (Paste?.Copy is ElementCopy || Paste?.Copy is IndexedPixelCopy || Paste?.Copy is DirectPixelCopy) {
+		if (Paste?.Copy is ElementCopy or IndexedPixelCopy or DirectPixelCopy) {
 			ApplyPaste(Paste);
 		}
 	}

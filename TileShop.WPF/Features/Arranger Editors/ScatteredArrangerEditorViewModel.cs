@@ -46,7 +46,7 @@ public class ScatteredArrangerEditorViewModel : ArrangerEditorViewModel {
 	public ScatteredArrangerTool ActiveTool {
 		get => _activeTool;
 		set {
-			if (value != ScatteredArrangerTool.Select && value != ScatteredArrangerTool.ApplyPalette) {
+			if (value is not ScatteredArrangerTool.Select and not ScatteredArrangerTool.ApplyPalette) {
 				CancelOverlay();
 			}
 

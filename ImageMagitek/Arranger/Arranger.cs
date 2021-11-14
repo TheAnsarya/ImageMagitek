@@ -88,7 +88,7 @@ public abstract class Arranger : IProjectResource {
 	/// </summary>
 	/// <returns></returns>
 	public virtual Arranger CloneArranger() {
-		if (Layout == ElementLayout.Tiled || Layout == ElementLayout.Single) {
+		if (Layout is ElementLayout.Tiled or ElementLayout.Single) {
 			return CloneArranger(0, 0, ArrangerPixelSize.Width, ArrangerPixelSize.Height);
 		} else {
 			throw new NotSupportedException($"{nameof(CloneArranger)} with {nameof(ElementLayout)} '{Layout}' is not supported");
