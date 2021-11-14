@@ -7,8 +7,7 @@ namespace TileShop.WPF.Converters;
 
 public class EnumToBooleanConverter : IValueConverter {
 	public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
-		var parameterString = parameter as string;
-		if (parameterString is null) {
+		if (parameter is not string parameterString) {
 			return DependencyProperty.UnsetValue;
 		}
 
@@ -22,8 +21,7 @@ public class EnumToBooleanConverter : IValueConverter {
 	}
 
 	public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
-		var parameterString = parameter as string;
-		if (parameterString is null) {
+		if (parameter is not string parameterString) {
 			return DependencyProperty.UnsetValue;
 		}
 

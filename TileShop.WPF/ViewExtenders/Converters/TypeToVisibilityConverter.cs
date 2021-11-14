@@ -7,8 +7,7 @@ namespace TileShop.WPF.Converters;
 
 public class TypeToVisibilityConverter : IValueConverter {
 	public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
-		var parameterType = parameter as Type;
-		if (parameterType is null || value is null) {
+		if (parameter is not Type parameterType || value is null) {
 			return Visibility.Collapsed;
 		}
 

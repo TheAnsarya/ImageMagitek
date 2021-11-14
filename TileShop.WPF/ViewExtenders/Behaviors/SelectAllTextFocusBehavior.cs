@@ -23,7 +23,7 @@ public class SelectAllFocusBehavior : Behavior<TextBox> {
 
 	private static void OnEnableChanged
 			   (DependencyObject d, DependencyPropertyChangedEventArgs e) {
-		if (!(d is FrameworkElement frameworkElement)) {
+		if (d is not FrameworkElement frameworkElement) {
 			return;
 		}
 
@@ -52,7 +52,7 @@ public class SelectAllFocusBehavior : Behavior<TextBox> {
 	}
 
 	private static void IgnoreMouseButton(object sender, System.Windows.Input.MouseButtonEventArgs e) {
-		if (!(sender is FrameworkElement frameworkElement) || frameworkElement.IsKeyboardFocusWithin) {
+		if (sender is not FrameworkElement frameworkElement || frameworkElement.IsKeyboardFocusWithin) {
 			return;
 		}
 

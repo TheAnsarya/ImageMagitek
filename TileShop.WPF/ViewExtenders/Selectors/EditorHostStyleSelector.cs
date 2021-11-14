@@ -9,7 +9,7 @@ public class EditorHostStyleSelector : StyleSelector {
 	public Style ToolStyle { get; set; }
 
 	public override Style SelectStyle(object item, DependencyObject container) {
-		if (item is ResourceEditorBaseViewModel && !(item is IndexedPixelEditorViewModel) && !(item is DirectPixelEditorViewModel)) {
+		if (item is ResourceEditorBaseViewModel && item is not IndexedPixelEditorViewModel && item is not DirectPixelEditorViewModel) {
 			return EditorStyle;
 		} else if (item is ToolViewModel) {
 			return ToolStyle;

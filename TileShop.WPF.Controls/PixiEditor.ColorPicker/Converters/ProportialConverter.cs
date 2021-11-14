@@ -6,8 +6,8 @@ namespace ColorPicker.Converters;
 
 internal class ProportialConverter : IMultiValueConverter {
 	public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture) {
-		if (values[0] is double && values[1] is double && values[2] is double) {
-			return (double)values[0] * ((double)values[1] / (double)values[2]);
+		if (values[0] is double zero && values[1] is double one && values[2] is double two) {
+			return zero * (one / two);
 		}
 
 		return 0;

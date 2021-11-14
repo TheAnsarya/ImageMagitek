@@ -59,8 +59,7 @@ public class BindableSelectedItemBehavior : Behavior<TreeView> {
 	}
 
 	private static Action<int> GetBringIndexIntoView(Panel itemsHostPanel) {
-		var virtualizingPanel = itemsHostPanel as VirtualizingStackPanel;
-		if (virtualizingPanel == null) {
+		if (itemsHostPanel is not VirtualizingStackPanel virtualizingPanel) {
 			return null;
 		}
 
@@ -97,7 +96,7 @@ public class BindableSelectedItemBehavior : Behavior<TreeView> {
 			}
 
 			// Expand the current container
-			if (container is TreeViewItem && !((TreeViewItem)container).IsExpanded) {
+			if (container is TreeViewItem treeItem && !treeItem.IsExpanded) {
 				container.SetCurrentValue(TreeViewItem.IsExpandedProperty, true);
 			}
 
@@ -169,8 +168,7 @@ public class BindableSelectedItemBehavior : Behavior<TreeView> {
 	}
 
 	private static void OnSelectedItemChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e) {
-		var item = e.NewValue as TreeViewItem;
-		if (item != null) {
+		if (e.NewValue is TreeViewItem item) {
 			item.SetCurrentValue(TreeViewItem.IsSelectedProperty, true);
 			return;
 		}

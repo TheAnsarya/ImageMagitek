@@ -233,7 +233,7 @@ public sealed class IndexedImage : ImageBase<byte> {
 		var el = Arranger.GetElementAtPixel(x + Left, y + Top);
 
 		if (el is ArrangerElement element) {
-			if (!(element.Codec is IIndexedCodec)) {
+			if (element.Codec is not IIndexedCodec) {
 				return new MagitekResult.Failed($"Cannot set pixel at ({x}, {y}) because the element's codec is not an indexed color type");
 			}
 
