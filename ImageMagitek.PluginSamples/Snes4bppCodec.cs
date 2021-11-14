@@ -44,7 +44,7 @@ public class Snes4bppCodec : IndexedCodec {
 			throw new ArgumentException(nameof(encodedBuffer));
 		}
 
-		encodedBuffer.Slice(0, _foreignBuffer.Length).CopyTo(_foreignBuffer);
+		encodedBuffer[.._foreignBuffer.Length].CopyTo(_foreignBuffer);
 
 		_bitStream = BitStream.OpenRead(_foreignBuffer, StorageSize);
 

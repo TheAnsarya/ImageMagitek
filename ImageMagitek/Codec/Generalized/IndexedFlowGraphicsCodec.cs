@@ -72,7 +72,7 @@ public class IndexedFlowGraphicsCodec : IIndexedCodec {
 			throw new ArgumentException(nameof(encodedBuffer));
 		}
 
-		encodedBuffer.Slice(0, _foreignBuffer.Length).CopyTo(_foreignBuffer);
+		encodedBuffer[.._foreignBuffer.Length].CopyTo(_foreignBuffer);
 		_bitStream.SeekAbsolute(0);
 
 		var plane = 0;

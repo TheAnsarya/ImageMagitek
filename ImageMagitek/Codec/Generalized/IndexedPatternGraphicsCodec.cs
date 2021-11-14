@@ -43,7 +43,7 @@ public sealed class IndexedPatternGraphicsCodec : IIndexedCodec {
 			throw new ArgumentException(nameof(encodedBuffer));
 		}
 
-		encodedBuffer.Slice(0, _foreignBuffer.Length).CopyTo(_foreignBuffer);
+		encodedBuffer[.._foreignBuffer.Length].CopyTo(_foreignBuffer);
 		_bitStream.SeekAbsolute(0);
 
 		for (var i = 0; i < StorageSize; i++) {

@@ -43,7 +43,7 @@ public sealed class Psx4bppCodec : IndexedCodec {
 			throw new ArgumentException(nameof(encodedBuffer));
 		}
 
-		encodedBuffer.Slice(0, ForeignBuffer.Length).CopyTo(_foreignBuffer);
+		encodedBuffer[..ForeignBuffer.Length].CopyTo(_foreignBuffer);
 
 		_bitStream.SeekAbsolute(0);
 

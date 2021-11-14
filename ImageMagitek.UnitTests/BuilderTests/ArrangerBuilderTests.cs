@@ -54,5 +54,4 @@ public class ArrangerBuilderTests {
 		Assert.That(arranger.ActivePalette is null);
 		Assert.That(arranger.ActiveDataFile.Name == "TestMemoryFile");
 	}
-
 }

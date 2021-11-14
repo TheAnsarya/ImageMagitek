@@ -33,7 +33,7 @@ public static class StreamReadExtensionMethods {
 			throw new ArgumentException($"{nameof(ReadUnshifted)} parameter '{nameof(buffer)}' has insufficient length ({buffer.Length}) than required ({readBytes})");
 		}
 
-		var readBuffer = buffer.Slice(0, readBytes);
+		var readBuffer = buffer[..readBytes];
 		stream.Read(readBuffer);
 
 		// Mask bits skipped on the first byte
@@ -79,13 +79,13 @@ public static class StreamReadExtensionMethods {
 		}
 
 		if (totalReadBytes == 1) {
-			var readBuffer = buffer.Slice(0, totalReadBytes);
+			var readBuffer = buffer[..totalReadBytes];
 			var lastByte = stream.ReadByte();
-			lastByte = (lastByte >> (8 - (skipBits + readBits)));
-			lastByte = (lastByte << (8 - readBits));
+			lastByte >>= (8 - (skipBits + readBits));
+			lastByte <<= (8 - readBits);
 			buffer[0] = (byte)lastByte;
 		} else if (totalReadBytes == firstReadBytes) {
-			var readBuffer = buffer.Slice(0, totalReadBytes);
+			var readBuffer = buffer[..totalReadBytes];
 			stream.Read(readBuffer);
 			buffer.ShiftLeft(skipBits);
 
@@ -93,14 +93,14 @@ public static class StreamReadExtensionMethods {
 			var mask = ((1 << lastBits) - 1) << (8 - lastBits);
 			buffer[totalReadBytes - 1] = (byte)(buffer[totalReadBytes - 1] & mask);
 		} else {
-			var readBuffer = buffer.Slice(0, firstReadBytes);
+			var readBuffer = buffer[..firstReadBytes];
 			stream.Read(readBuffer);
 			buffer.ShiftLeft(skipBits);
 
 			var lastByte = stream.ReadByte();
 			var lastBits = (skipBits + readBits) - (firstReadBytes * 8);
-			lastByte = lastByte >> (8 - lastBits);
-			lastByte = lastByte << (skipBits - lastBits);
+			lastByte >>= (8 - lastBits);
+			lastByte <<= (skipBits - lastBits);
 
 			buffer[firstReadBytes - 1] |= (byte)lastByte;
 		}

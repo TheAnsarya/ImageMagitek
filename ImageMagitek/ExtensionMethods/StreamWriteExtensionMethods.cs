@@ -44,7 +44,7 @@ public static class StreamWriteExtensionMethods {
 			var merged = MergeByte(lastByte, writeBuffer[totalBytes - 1], 0, lastBits);
 			stream.WriteByte(merged);
 		} else {
-			var span = writeBuffer.Slice(writtenBytes, totalBytes - writtenBytes);
+			var span = writeBuffer[writtenBytes..totalBytes];
 			stream.Write(span);
 		}
 	}

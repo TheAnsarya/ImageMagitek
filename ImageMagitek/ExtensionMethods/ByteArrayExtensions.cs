@@ -23,7 +23,7 @@ public static class ByteArrayExtensions {
 			array[i] = (byte)(left | right);
 		}
 
-		array[array.Length - 1] <<= count;
+		array[^1] <<= count;
 	}
 
 	/// <summary>

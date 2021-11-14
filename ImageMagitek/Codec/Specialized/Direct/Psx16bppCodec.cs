@@ -49,7 +49,7 @@ public sealed class Psx16bppCodec : DirectCodec {
 			throw new ArgumentException(nameof(encodedBuffer));
 		}
 
-		encodedBuffer.Slice(0, _foreignBuffer.Length).CopyTo(_foreignBuffer);
+		encodedBuffer[.._foreignBuffer.Length].CopyTo(_foreignBuffer);
 		_bitStream.SeekAbsolute(0);
 
 		for (var y = 0; y < el.Height; y++) {
