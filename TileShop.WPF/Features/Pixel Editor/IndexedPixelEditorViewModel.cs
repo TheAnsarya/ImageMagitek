@@ -16,7 +16,7 @@ namespace TileShop.WPF.ViewModels;
 public class IndexedPixelEditorViewModel : PixelEditorViewModel<byte> {
 	private IndexedImage _indexedImage;
 
-	private BindableCollection<PaletteModel> _palettes = new BindableCollection<PaletteModel>();
+	private BindableCollection<PaletteModel> _palettes = new();
 	public BindableCollection<PaletteModel> Palettes {
 		get => _palettes;
 		set => SetAndNotify(ref _palettes, value);

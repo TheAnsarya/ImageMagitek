@@ -47,11 +47,11 @@ public interface IColorFactory {
 
 /// <inheritdoc/>
 public class ColorFactory : IColorFactory {
-	private readonly ColorConverterBgr15 _bgr15Converter = new ColorConverterBgr15();
-	private readonly ColorConverterAbgr16 _abgr16Converter = new ColorConverterAbgr16();
+	private readonly ColorConverterBgr15 _bgr15Converter = new();
+	private readonly ColorConverterAbgr16 _abgr16Converter = new();
 	private ColorConverterNes _nesConverter;
-	private readonly ColorConverterBgr9 _bgr9Converter = new ColorConverterBgr9();
-	private readonly ColorConverterBgr6 _bgr6Converter = new ColorConverterBgr6();
+	private readonly ColorConverterBgr9 _bgr9Converter = new();
+	private readonly ColorConverterBgr6 _bgr6Converter = new();
 
 	public void SetNesPalette(Palette nesPalette) => _nesConverter = new ColorConverterNes(nesPalette);
 

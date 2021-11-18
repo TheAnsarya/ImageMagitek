@@ -37,7 +37,7 @@ public class CustomElementLayoutViewModel : Screen {
 		set => SetAndNotify(ref _canConfirm, value);
 	}
 
-	private BindableCollection<string> _validationErrors = new BindableCollection<string>();
+	private BindableCollection<string> _validationErrors = new();
 	public BindableCollection<string> ValidationErrors {
 		get => _validationErrors;
 		set => SetAndNotify(ref _validationErrors, value);

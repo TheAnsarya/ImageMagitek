@@ -9,13 +9,13 @@ public abstract class ResourceEditorBaseViewModel : ToolViewModel, IHandle<Resou
 	public IProjectResource Resource { get; protected set; }
 	public IProjectResource OriginatingProjectResource { get; set; }
 
-	private BindableCollection<HistoryAction> _undoHistory = new BindableCollection<HistoryAction>();
+	private BindableCollection<HistoryAction> _undoHistory = new();
 	public BindableCollection<HistoryAction> UndoHistory {
 		get => _undoHistory;
 		set => SetAndNotify(ref _undoHistory, value);
 	}
 
-	private BindableCollection<HistoryAction> _redoHistory = new BindableCollection<HistoryAction>();
+	private BindableCollection<HistoryAction> _redoHistory = new();
 	public BindableCollection<HistoryAction> RedoHistory {
 		get => _redoHistory;
 		set => SetAndNotify(ref _redoHistory, value);

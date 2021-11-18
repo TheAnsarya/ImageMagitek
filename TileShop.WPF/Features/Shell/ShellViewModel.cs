@@ -40,7 +40,7 @@ public class ShellViewModel : Screen, IHandle<ShowToolWindowEvent> {
 		set => SetAndNotify(ref _editors, value);
 	}
 
-	private BindableCollection<ToolViewModel> _tools = new BindableCollection<ToolViewModel>();
+	private BindableCollection<ToolViewModel> _tools = new();
 	public BindableCollection<ToolViewModel> Tools {
 		get => _tools;
 		set => SetAndNotify(ref _tools, value);

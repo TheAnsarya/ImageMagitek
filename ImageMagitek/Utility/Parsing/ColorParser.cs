@@ -10,10 +10,10 @@ public static class ColorParser {
 	private const string _twoByteColorRegexString = "^#([A-Fa-f0-9]{4})$";
 	private const string _oneByteColorRegexString = "^#([A-Fa-f0-9]{2})$";
 
-	private static readonly Regex _nativeRegex = new Regex(_nativeColorRegexString, RegexOptions.Compiled);
-	private static readonly Regex _nesRegex = new Regex(_nesColorRegexString, RegexOptions.Compiled);
-	private static readonly Regex _twoByteRegex = new Regex(_twoByteColorRegexString, RegexOptions.Compiled);
-	private static readonly Regex _oneByteRegex = new Regex(_twoByteColorRegexString, RegexOptions.Compiled);
+	private static readonly Regex _nativeRegex = new(_nativeColorRegexString, RegexOptions.Compiled);
+	private static readonly Regex _nesRegex = new(_nesColorRegexString, RegexOptions.Compiled);
+	private static readonly Regex _twoByteRegex = new(_twoByteColorRegexString, RegexOptions.Compiled);
+	private static readonly Regex _oneByteRegex = new(_twoByteColorRegexString, RegexOptions.Compiled);
 
 	/// <summary>
 	/// Tries to parse a color represented as a hexadecimal string

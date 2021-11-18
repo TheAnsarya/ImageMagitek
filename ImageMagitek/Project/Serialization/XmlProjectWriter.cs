@@ -227,7 +227,7 @@ public sealed class XmlProjectWriter : IProjectWriter {
 		return element;
 	}
 
-	private XElement Serialize(ResourceFolderModel folderModel) => new XElement("folder", new XAttribute("name", folderModel.Name));
+	private XElement Serialize(ResourceFolderModel folderModel) => new("folder", new XAttribute("name", folderModel.Name));
 
 	private XElement Serialize(DataFileModel dataFileModel) {
 		var element = new XElement("datafile");

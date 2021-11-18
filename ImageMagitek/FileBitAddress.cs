@@ -56,7 +56,7 @@ public struct FileBitAddress : IEquatable<FileBitAddress> {
 	/// Casts a long into a FileBitAddress
 	/// </summary>
 	/// <param name="Address">Number of bits</param>
-	public static implicit operator FileBitAddress(long Address) => new FileBitAddress(Address / 8, (int)(Address % 8));
+	public static implicit operator FileBitAddress(long Address) => new(Address / 8, (int)(Address % 8));
 
 	/// <summary>
 	/// Adds two FileBitAddress objects and returns the result

@@ -12,7 +12,7 @@ public class PaletteModel : PropertyChangedBase {
 		set => SetAndNotify(ref _name, value);
 	}
 
-	private BindableCollection<PaletteEntry> _colors = new BindableCollection<PaletteEntry>();
+	private BindableCollection<PaletteEntry> _colors = new();
 	public BindableCollection<PaletteEntry> Colors {
 		get => _colors;
 		set => SetAndNotify(ref _colors, value);

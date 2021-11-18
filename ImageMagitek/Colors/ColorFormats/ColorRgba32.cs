@@ -48,7 +48,7 @@ public struct ColorRgba32 : IColor32 {
 	public int BlueMax => 255;
 	public int AlphaMax => 255;
 
-	private static Vector4 _maxVector = new Vector4(255, 255, 255, 255);
+	private static Vector4 _maxVector = new(255, 255, 255, 255);
 	public Vector4 ColorVector {
 		get => new Vector4(r, g, b, a) / _maxVector;
 		set {
@@ -60,7 +60,7 @@ public struct ColorRgba32 : IColor32 {
 		}
 	}
 
-	public Rgba32 ToRgba32() => new Rgba32(color);
+	public Rgba32 ToRgba32() => new(color);
 
 	public void Deconstruct(out byte A, out byte R, out byte G, out byte B) {
 		A = a;

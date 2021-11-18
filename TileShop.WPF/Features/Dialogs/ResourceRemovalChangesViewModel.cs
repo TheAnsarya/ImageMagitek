@@ -12,13 +12,13 @@ public class ResourceRemovalChangesViewModel : Screen {
 		set => SetAndNotify(ref _removedResource, value);
 	}
 
-	private BindableCollection<ResourceChangeViewModel> _removedResources = new BindableCollection<ResourceChangeViewModel>();
+	private BindableCollection<ResourceChangeViewModel> _removedResources = new();
 	public BindableCollection<ResourceChangeViewModel> RemovedResources {
 		get => _removedResources;
 		set => SetAndNotify(ref _removedResources, value);
 	}
 
-	private BindableCollection<ResourceChangeViewModel> _changedResources = new BindableCollection<ResourceChangeViewModel>();
+	private BindableCollection<ResourceChangeViewModel> _changedResources = new();
 	public BindableCollection<ResourceChangeViewModel> ChangedResources {
 		get => _changedResources;
 		set => SetAndNotify(ref _changedResources, value);

@@ -38,13 +38,13 @@ internal abstract class PreviewColorSlider : Slider, INotifyPropertyChanged {
 		set => SetValue(CurrentColorStateProperty, value);
 	}
 
-	private readonly LinearGradientBrush backgroundBrush = new LinearGradientBrush();
+	private readonly LinearGradientBrush backgroundBrush = new();
 	public GradientStopCollection BackgroundGradient {
 		get => backgroundBrush.GradientStops;
 		set => backgroundBrush.GradientStops = value;
 	}
 
-	private SolidColorBrush _leftCapColor = new SolidColorBrush();
+	private SolidColorBrush _leftCapColor = new();
 	public SolidColorBrush LeftCapColor {
 		get => _leftCapColor;
 		set {
@@ -53,7 +53,7 @@ internal abstract class PreviewColorSlider : Slider, INotifyPropertyChanged {
 		}
 	}
 
-	private SolidColorBrush _rightCapColor = new SolidColorBrush();
+	private SolidColorBrush _rightCapColor = new();
 	public SolidColorBrush RightCapColor {
 		get => _rightCapColor;
 		set {

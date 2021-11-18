@@ -7,19 +7,19 @@ namespace ImageMagitek.Project.Serialization;
 
 public static class SerializationMapperExtensions {
 	public static DataFile MapToResource(this DataFileModel df) =>
-		new DataFile(df.Name, df.Location);
+		new(df.Name, df.Location);
 
-	public static DataFileModel MapToModel(this DataFile df) => new DataFileModel() {
+	public static DataFileModel MapToModel(this DataFile df) => new() {
 		Name = df.Name,
 		Location = df.Location
 	};
 
-	public static ImageProject MapToResource(this ImageProjectModel model) => new ImageProject() {
+	public static ImageProject MapToResource(this ImageProjectModel model) => new() {
 		Name = model.Name,
 		Root = model.Root
 	};
 
-	public static ImageProjectModel MapToModel(this ImageProject project) => new ImageProjectModel() {
+	public static ImageProjectModel MapToModel(this ImageProject project) => new() {
 		Name = project.Name,
 		Root = project.Root
 	};
@@ -88,12 +88,12 @@ public static class SerializationMapperExtensions {
 		return new Palette(model.Name, colorFactory, model.ColorModel, sources, model.ZeroIndexTransparent, model.StorageSource);
 	}
 
-	public static ResourceFolderModel MapToModel(this ResourceFolder folder) => new ResourceFolderModel() {
+	public static ResourceFolderModel MapToModel(this ResourceFolder folder) => new() {
 		Name = folder.Name
 	};
 
 	public static ResourceFolder MapToResource(this ResourceFolderModel model) =>
-		new ResourceFolder(model.Name);
+		new(model.Name);
 
 	public static ScatteredArrangerModel MapToModel(this ScatteredArranger arranger, Dictionary<IProjectResource, string> resourceMap) {
 		var model = new ScatteredArrangerModel() {

@@ -99,29 +99,29 @@ public readonly struct ArrangerElement {
 	}
 
 	public ArrangerElement WithLocation(int x1, int y1) =>
-		new ArrangerElement(x1, y1, DataFile, FileAddress, Codec, Palette, Mirror, Rotation);
+		new(x1, y1, DataFile, FileAddress, Codec, Palette, Mirror, Rotation);
 
 	public ArrangerElement WithFile(DataFile dataFile, FileBitAddress fileAddress) =>
-		new ArrangerElement(X1, Y1, dataFile, fileAddress, Codec, Palette, Mirror, Rotation);
+		new(X1, Y1, dataFile, fileAddress, Codec, Palette, Mirror, Rotation);
 
 	public ArrangerElement WithPalette(Palette palette) =>
-		new ArrangerElement(X1, Y1, DataFile, FileAddress, Codec, palette, Mirror, Rotation);
+		new(X1, Y1, DataFile, FileAddress, Codec, palette, Mirror, Rotation);
 
 	public ArrangerElement WithAddress(FileBitAddress address) =>
-		new ArrangerElement(X1, Y1, DataFile, address, Codec, Palette, Mirror, Rotation);
+		new(X1, Y1, DataFile, address, Codec, Palette, Mirror, Rotation);
 
 	public ArrangerElement WithCodec(IGraphicsCodec codec) =>
-		new ArrangerElement(X1, Y1, DataFile, FileAddress, codec, Palette, Mirror, Rotation);
+		new(X1, Y1, DataFile, FileAddress, codec, Palette, Mirror, Rotation);
 
 	public ArrangerElement WithCodec(IGraphicsCodec codec, int x1, int y1) =>
-		new ArrangerElement(x1, y1, DataFile, FileAddress, codec, Palette, Mirror, Rotation);
+		new(x1, y1, DataFile, FileAddress, codec, Palette, Mirror, Rotation);
 
 	public ArrangerElement WithTarget(DataFile dataFile, FileBitAddress fileAddress, IGraphicsCodec codec, Palette palette) =>
-		new ArrangerElement(X1, Y1, dataFile, fileAddress, codec, palette, Mirror, Rotation);
+		new(X1, Y1, dataFile, fileAddress, codec, palette, Mirror, Rotation);
 
 	public ArrangerElement WithMirror(MirrorOperation mirror) =>
-		new ArrangerElement(X1, Y1, DataFile, FileAddress, Codec, Palette, mirror, Rotation);
+		new(X1, Y1, DataFile, FileAddress, Codec, Palette, mirror, Rotation);
 
 	public ArrangerElement WithRotation(RotationOperation rotation) =>
-		new ArrangerElement(X1, Y1, DataFile, FileAddress, Codec, Palette, Mirror, rotation);
+		new(X1, Y1, DataFile, FileAddress, Codec, Palette, Mirror, rotation);
 }

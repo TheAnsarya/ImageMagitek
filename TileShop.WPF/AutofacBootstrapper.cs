@@ -60,7 +60,7 @@ public class AutofacBootstrapper<TRootViewModel> : BootstrapperBase where TRootV
 		}
 	}
 
-	protected virtual ViewManagerConfig ConfigureViewManagerConfig() => new ViewManagerConfig() {
+	protected virtual ViewManagerConfig ConfigureViewManagerConfig() => new() {
 		ViewFactory = GetInstance,
 		ViewAssemblies = new List<Assembly>() { GetType().Assembly }
 	};

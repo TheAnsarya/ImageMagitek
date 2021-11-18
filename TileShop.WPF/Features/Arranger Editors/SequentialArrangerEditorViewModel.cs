@@ -22,7 +22,7 @@ public class SequentialArrangerEditorViewModel : ArrangerEditorViewModel, IMouse
 	private DirectImage _directImage;
 	private readonly TileLayout _activeLayout;
 
-	private BindableCollection<string> _codecNames = new BindableCollection<string>();
+	private BindableCollection<string> _codecNames = new();
 	public BindableCollection<string> CodecNames {
 		get => _codecNames;
 		set => SetAndNotify(ref _codecNames, value);
@@ -38,7 +38,7 @@ public class SequentialArrangerEditorViewModel : ArrangerEditorViewModel, IMouse
 		}
 	}
 
-	private BindableCollection<PaletteModel> _palettes = new BindableCollection<PaletteModel>();
+	private BindableCollection<PaletteModel> _palettes = new();
 	public BindableCollection<PaletteModel> Palettes {
 		get => _palettes;
 		set => SetAndNotify(ref _palettes, value);

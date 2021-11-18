@@ -27,7 +27,7 @@ public static class ArrangerExtensions {
 	/// <param name="copyWidth">Width of copy in element coordinates</param>
 	/// <param name="copyHeight">Height of copy in element coordinates</param>
 	/// <returns></returns>
-	public static ElementCopy CopyElements(this Arranger arranger, int x, int y, int copyWidth, int copyHeight) => new ElementCopy(arranger, x, y, copyWidth, copyHeight);
+	public static ElementCopy CopyElements(this Arranger arranger, int x, int y, int copyWidth, int copyHeight) => new(arranger, x, y, copyWidth, copyHeight);
 
 	/// <summary>
 	/// Copies all pixels within the specified arranger

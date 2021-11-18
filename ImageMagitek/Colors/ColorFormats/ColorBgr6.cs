@@ -53,7 +53,7 @@ public struct ColorBgr6 : IColor32 {
 
 	public int BlueMax => 3;
 
-	private static Vector4 _maxVector = new Vector4(3f, 3f, 3f, 1f);
+	private static Vector4 _maxVector = new(3f, 3f, 3f, 1f);
 	public Vector4 ColorVector {
 		get => new Vector4(r, g, b, 1f) / _maxVector;
 		set {

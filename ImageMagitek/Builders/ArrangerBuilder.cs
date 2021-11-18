@@ -136,5 +136,5 @@ public class ArrangerBuilder :
 		return arranger;
 	}
 
-	ScatteredArranger IScatteredArrangerBuilder.Build() => new ScatteredArranger(_name, _pixelColorType, _elementLayout, _arrangerElementSize.Width, _arrangerElementSize.Height, _elementPixelSize.Width, _elementPixelSize.Height);
+	ScatteredArranger IScatteredArrangerBuilder.Build() => new(_name, _pixelColorType, _elementLayout, _arrangerElementSize.Width, _arrangerElementSize.Height, _elementPixelSize.Width, _elementPixelSize.Height);
 }

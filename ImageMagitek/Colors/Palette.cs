@@ -30,7 +30,7 @@ public enum PaletteStorageSource { Project = 0, Json }
 /// Foreign colors are the same as the target system
 /// </summary>
 public class Palette : IProjectResource {
-	private static readonly Cie94Comparison _comparator = new Cie94Comparison(Cie94Comparison.Application.GraphicArts);
+	private static readonly Cie94Comparison _comparator = new(Cie94Comparison.Application.GraphicArts);
 	private readonly IColorFactory _colorFactory;
 	private readonly IColorSourceSerializer _colorSerializer;
 

@@ -47,13 +47,13 @@ public class AddScatteredArrangerViewModel : Screen {
 		set => SetAndNotify(ref _elementPixelHeight, value);
 	}
 
-	private BindableCollection<string> _existingResourceNames = new BindableCollection<string>();
+	private BindableCollection<string> _existingResourceNames = new();
 	public BindableCollection<string> ExistingResourceNames {
 		get => _existingResourceNames;
 		set => SetAndNotify(ref _existingResourceNames, value);
 	}
 
-	private BindableCollection<string> _validationErrors = new BindableCollection<string>();
+	private BindableCollection<string> _validationErrors = new();
 	public BindableCollection<string> ValidationErrors {
 		get => _validationErrors;
 		set => SetAndNotify(ref _validationErrors, value);

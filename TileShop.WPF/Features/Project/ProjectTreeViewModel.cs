@@ -48,7 +48,7 @@ public class ProjectTreeViewModel : ToolViewModel, IDropTarget, IHandle<AddScatt
 
 	public bool HasProject => Projects.Any();
 
-	private BindableCollection<ProjectNodeViewModel> _projects = new BindableCollection<ProjectNodeViewModel>();
+	private BindableCollection<ProjectNodeViewModel> _projects = new();
 	public BindableCollection<ProjectNodeViewModel> Projects {
 		get => _projects;
 		set => SetAndNotify(ref _projects, value);
@@ -60,10 +60,11 @@ public class ProjectTreeViewModel : ToolViewModel, IDropTarget, IHandle<AddScatt
 		set => SetAndNotify(ref _selectedNode, value);
 	}
 
-	private readonly Dictionary<MessageBoxResult, string> _messageBoxLabels = new Dictionary<MessageBoxResult, string>
-		{
-			{ MessageBoxResult.Yes, "Save" }, { MessageBoxResult.No, "Discard" }, { MessageBoxResult.Cancel, "Cancel" }
-		};
+	private readonly Dictionary<MessageBoxResult, string> _messageBoxLabels = new() {
+		{ MessageBoxResult.Yes, "Save" },
+		{ MessageBoxResult.No, "Discard" },
+		{ MessageBoxResult.Cancel, "Cancel" }
+	};
 
 	public void ActivateSelectedNode() {
 		if (SelectedNode is ProjectNodeViewModel or FolderNodeViewModel) {

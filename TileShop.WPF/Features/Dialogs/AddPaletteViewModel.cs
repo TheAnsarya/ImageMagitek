@@ -11,7 +11,7 @@ public class AddPaletteViewModel : Screen {
 		set => SetAndNotify(ref _paletteName, value);
 	}
 
-	private BindableCollection<DataFile> _dataFiles = new BindableCollection<DataFile>();
+	private BindableCollection<DataFile> _dataFiles = new();
 	public BindableCollection<DataFile> DataFiles {
 		get => _dataFiles;
 		set => SetAndNotify(ref _dataFiles, value);
@@ -23,7 +23,7 @@ public class AddPaletteViewModel : Screen {
 		set => SetAndNotify(ref _selectedDataFile, value);
 	}
 
-	private BindableCollection<string> _colorModels = new BindableCollection<string>();
+	private BindableCollection<string> _colorModels = new();
 	public BindableCollection<string> ColorModels {
 		get => _colorModels;
 		set => SetAndNotify(ref _colorModels, value);
@@ -41,13 +41,13 @@ public class AddPaletteViewModel : Screen {
 		set => SetAndNotify(ref _zeroIndexTransparent, value);
 	}
 
-	private BindableCollection<string> _existingResourceNames = new BindableCollection<string>();
+	private BindableCollection<string> _existingResourceNames = new();
 	public BindableCollection<string> ExistingResourceNames {
 		get => _existingResourceNames;
 		set => SetAndNotify(ref _existingResourceNames, value);
 	}
 
-	private BindableCollection<string> _validationErrors = new BindableCollection<string>();
+	private BindableCollection<string> _validationErrors = new();
 	public BindableCollection<string> ValidationErrors {
 		get => _validationErrors;
 		set => SetAndNotify(ref _validationErrors, value);

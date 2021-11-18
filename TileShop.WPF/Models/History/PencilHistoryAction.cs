@@ -14,7 +14,7 @@ public class PencilHistoryAction<TColor> : HistoryAction
 		set => SetAndNotify(ref _pencilColor, value);
 	}
 
-	private HashSet<Point> _modifiedPoints = new HashSet<Point>(new PointComparer());
+	private HashSet<Point> _modifiedPoints = new(new PointComparer());
 	public HashSet<Point> ModifiedPoints {
 		get => _modifiedPoints;
 		set => SetAndNotify(ref _modifiedPoints, value);

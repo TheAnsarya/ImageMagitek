@@ -8,7 +8,7 @@ public abstract class ResourceNodeViewModel : Screen {
 	public ResourceNodeViewModel ParentModel { get; set; }
 	public abstract int SortPriority { get; }
 
-	private BindableCollection<ResourceNodeViewModel> _children = new BindableCollection<ResourceNodeViewModel>();
+	private BindableCollection<ResourceNodeViewModel> _children = new();
 	public BindableCollection<ResourceNodeViewModel> Children {
 		get => _children;
 		set => SetAndNotify(ref _children, value);

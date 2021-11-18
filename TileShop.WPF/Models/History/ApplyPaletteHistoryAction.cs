@@ -10,7 +10,7 @@ public class ApplyPaletteHistoryAction : HistoryAction {
 
 	public Palette Palette { get; }
 
-	private HashSet<Point> _modifiedElements = new HashSet<Point>(new PointComparer());
+	private HashSet<Point> _modifiedElements = new(new PointComparer());
 	public HashSet<Point> ModifiedElements {
 		get => _modifiedElements;
 		set => SetAndNotify(ref _modifiedElements, value);

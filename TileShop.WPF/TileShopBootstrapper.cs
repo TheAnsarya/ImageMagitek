@@ -18,7 +18,7 @@ using TileShop.WPF.Views;
 namespace TileShop.WPF;
 
 public class TileShopBootstrapper : AutofacBootstrapper<ShellViewModel> {
-	private readonly Tracker _tracker = new Tracker();
+	private readonly Tracker _tracker = new();
 	private LoggerFactory _loggerFactory;
 
 	protected override void ConfigureIoC(ContainerBuilder builder) {

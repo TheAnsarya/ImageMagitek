@@ -22,7 +22,7 @@ public sealed class Psx16bppCodec : DirectCodec {
 	public override int DefaultHeight => 64;
 
 	private readonly BitStream _bitStream;
-	private readonly ColorConverterAbgr16 _colorConverter = new ColorConverterAbgr16();
+	private readonly ColorConverterAbgr16 _colorConverter = new();
 
 	public Psx16bppCodec() {
 		Width = DefaultWidth;

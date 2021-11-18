@@ -10,7 +10,7 @@ using ImageMagitek.ExtensionMethods;
 namespace ImageMagitek.Codec;
 
 public sealed class XmlGraphicsFormatReader : IGraphicsFormatReader {
-	private readonly XmlSchemaSet _schemas = new XmlSchemaSet();
+	private readonly XmlSchemaSet _schemas = new();
 
 	public XmlGraphicsFormatReader(string schemaFileName) {
 		if (!string.IsNullOrWhiteSpace(schemaFileName)) {
