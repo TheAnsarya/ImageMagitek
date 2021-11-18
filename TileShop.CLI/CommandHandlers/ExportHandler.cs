@@ -4,8 +4,8 @@ using TileShop.CLI.Porters;
 namespace TileShop.CLI.Commands;
 
 public class ExportHandler : ProjectCommandHandler<ExportOptions> {
-	public ExportHandler(IProjectService projectService) :
-		base(projectService) {
+	public ExportHandler(IProjectService projectService)
+		: base(projectService) {
 	}
 
 	public override ExitCode Execute(ExportOptions options) {

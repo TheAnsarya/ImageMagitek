@@ -185,8 +185,8 @@ public class SequentialArrangerEditorViewModel : ArrangerEditorViewModel, IMouse
 	}
 
 	public SequentialArrangerEditorViewModel(SequentialArranger arranger, IEventAggregator events, IWindowManager windowManager,
-		Tracker tracker, ICodecService codecService, IPaletteService paletteService, IElementLayoutService layoutService) :
-		base(events, windowManager, paletteService) {
+		Tracker tracker, ICodecService codecService, IPaletteService paletteService, IElementLayoutService layoutService)
+		: base(events, windowManager, paletteService) {
 		Resource = arranger;
 		WorkingArranger = arranger;
 		_codecService = codecService;

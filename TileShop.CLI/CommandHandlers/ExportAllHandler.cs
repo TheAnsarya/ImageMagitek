@@ -7,8 +7,8 @@ using TileShop.CLI.Porters;
 namespace TileShop.CLI.Commands;
 
 public class ExportAllHandler : ProjectCommandHandler<ExportAllOptions> {
-	public ExportAllHandler(IProjectService projectService) :
-		base(projectService) {
+	public ExportAllHandler(IProjectService projectService)
+		: base(projectService) {
 	}
 
 	public override ExitCode Execute(ExportAllOptions options) {

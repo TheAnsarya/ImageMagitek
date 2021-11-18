@@ -7,8 +7,8 @@ public abstract class ResourceNode : PathNodeBase<ResourceNode, IProjectResource
 	public string DiskLocation { get; set; }
 	public ResourceModel Model { get; set; }
 
-	public ResourceNode(string nodeName, IProjectResource resource) :
-		base(nodeName, resource) {
+	public ResourceNode(string nodeName, IProjectResource resource)
+		: base(nodeName, resource) {
 	}
 
 	public override void Rename(string name) {
@@ -17,7 +17,6 @@ public abstract class ResourceNode : PathNodeBase<ResourceNode, IProjectResource
 	}
 }
 
-#pragma warning disable CS0108
 public abstract class ResourceNode<TModel> : ResourceNode
 	where TModel : ResourceModel {
 	public ResourceNode(string nodeName, IProjectResource resource) : base(nodeName, resource) {

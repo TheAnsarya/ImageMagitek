@@ -51,8 +51,8 @@ public abstract class PixelEditorViewModel<TColor> : ArrangerEditorViewModel
 		set => SetAndNotify(ref _secondaryColor, value);
 	}
 
-	public PixelEditorViewModel(Arranger projectArranger, IEventAggregator events, IWindowManager windowManager, IPaletteService paletteService) :
-		base(events, windowManager, paletteService) {
+	public PixelEditorViewModel(Arranger projectArranger, IEventAggregator events, IWindowManager windowManager, IPaletteService paletteService)
+		: base(events, windowManager, paletteService) {
 		DisplayName = "Pixel Editor";
 		CanAcceptElementPastes = true;
 		CanAcceptPixelPastes = true;

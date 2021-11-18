@@ -9,8 +9,8 @@ public sealed class ProjectTree : PathTreeBase<ResourceNode, IProjectResource> {
 	public ImageProject Project => Root?.Item as ImageProject;
 	public string Name => Root.Item.Name;
 
-	public ProjectTree(ProjectNode root) :
-		base(root) {
+	public ProjectTree(ProjectNode root)
+		: base(root) {
 		if (root?.Item is not ImageProject) {
 			throw new ArgumentException($"{nameof(ProjectTree)} ctor called with invalid" +
 				$" root type '{root.GetType()}'");

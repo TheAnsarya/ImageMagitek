@@ -55,8 +55,8 @@ public class ScatteredArrangerEditorViewModel : ArrangerEditorViewModel {
 	}
 
 	public ScatteredArrangerEditorViewModel(Arranger arranger, IEventAggregator events, IWindowManager windowManager,
-		IPaletteService paletteService, IProjectService projectService, AppSettings settings) :
-		base(events, windowManager, paletteService) {
+		IPaletteService paletteService, IProjectService projectService, AppSettings settings)
+		: base(events, windowManager, paletteService) {
 		Resource = arranger;
 		WorkingArranger = arranger.CloneArranger();
 		DisplayName = Resource?.Name ?? "Unnamed Arranger";

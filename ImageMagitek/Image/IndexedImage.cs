@@ -17,8 +17,8 @@ public sealed class IndexedImage : ImageBase<byte> {
 	/// Creates an IndexedImage of an Arranger
 	/// </summary>
 	/// <param name="arranger">Source Arranger</param>
-	public IndexedImage(Arranger arranger) :
-		this(arranger, 0, 0, arranger.ArrangerPixelSize.Width, arranger.ArrangerPixelSize.Height) {
+	public IndexedImage(Arranger arranger)
+		: this(arranger, 0, 0, arranger.ArrangerPixelSize.Width, arranger.ArrangerPixelSize.Height) {
 	}
 
 	/// <summary>

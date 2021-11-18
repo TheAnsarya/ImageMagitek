@@ -8,8 +8,8 @@ using TileShop.CLI.Porters;
 namespace TileShop.CLI.Commands;
 
 public class ImportAllHandler : ProjectCommandHandler<ImportAllOptions> {
-	public ImportAllHandler(IProjectService projectService) :
-		base(projectService) {
+	public ImportAllHandler(IProjectService projectService)
+		: base(projectService) {
 	}
 
 	public override ExitCode Execute(ImportAllOptions options) {

@@ -5,8 +5,8 @@ using Monaco.PathTree;
 namespace TileShop.CLI.Commands;
 
 public class PrintHandler : ProjectCommandHandler<PrintOptions> {
-	public PrintHandler(IProjectService projectService) :
-		base(projectService) {
+	public PrintHandler(IProjectService projectService)
+		: base(projectService) {
 	}
 
 	public override ExitCode Execute(PrintOptions options) {
