@@ -30,7 +30,7 @@ public class MonsterSerializer {
 		_ = fileStream.Seek(MasterTableOffset, SeekOrigin.Begin);
 
 		var monsterData = new byte[_monsterLength * Entries];
-		var length = await fileStream.ReadAsync(monsterData, 0, monsterData.Length);
+		var length = await fileStream.ReadAsync(monsterData);
 		var bitStream = BitStream.OpenRead(monsterData, monsterData.Length * 8);
 		var monsters = new List<MonsterMetadata>();
 
@@ -73,7 +73,7 @@ public class MonsterSerializer {
 		var formData = new byte[arrangerWidth * arrangerHeight / 8];
 		var formAddress = metadata.TileSetSize == TileSetSize.Small ? FormSmallOffset + (8 * metadata.FormID) : FormLargeOffset + (32 * metadata.FormID);
 		_ = dataFile.Stream.Seek(formAddress, SeekOrigin.Begin);
-		var length = await dataFile.Stream.ReadAsync(formData, 0, formData.Length);
+		var length = await dataFile.Stream.ReadAsync(formData);
 		if (metadata.TileSetSize == TileSetSize.Large) // Requires endian swapping the tile form
 		{
 			EndianSwapArray(formData);

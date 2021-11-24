@@ -7,12 +7,12 @@ using ImageMagitek.Colors;
 namespace ImageMagitek.Benchmarks;
 
 public class Snes3bppDecodeToImage {
-	private const string _nativeFileName = "Snes3bppDecodeToImageNative.bin";
-	private const string _genericFileName = "Snes3bppDecodeToImageGeneric.bin";
-	private const string _genericCodecFileName = @"Resources\SNES3bpp.xml";
-	private const string _paletteFileName = @"_palettes\DefaultRgba32.json";
-	private const string _outputDirectory = @"D:\ImageMagitekTest\Benchmark\";
-	private const string _codecSchemaFileName = @"_schemas\CodecSchema.xsd";
+	private const string NativeFileName = "Snes3bppDecodeToImageNative.bin";
+	private const string GenericFileName = "Snes3bppDecodeToImageGeneric.bin";
+	private const string GenericCodecFileName = @"Resources\SNES3bpp.xml";
+	private const string PaletteFileName = @"_palettes\DefaultRgba32.json";
+	private const string OutputDirectory = @"D:\ImageMagitekTest\Benchmark\";
+	private const string CodecSchemaFileName = @"_schemas\CodecSchema.xsd";
 
 	private IGraphicsCodec _codec;
 
@@ -22,24 +22,24 @@ public class Snes3bppDecodeToImage {
 
 	[GlobalSetup(Target = nameof(DecodeNative))]
 	public void GlobalSetupNative() {
-		var palContents = File.ReadAllText(_paletteFileName);
+		var palContents = File.ReadAllText(PaletteFileName);
 		_pal = PaletteJsonSerializer.ReadPalette(palContents, new ColorFactory());
 
 		_codec = new Snes3bppCodec(8, 8);
-		Setup(_nativeFileName, "native");
+		Setup(NativeFileName, "native");
 	}
 
 	[GlobalSetup(Target = nameof(DecodeGeneric))]
 	public void GlobalSetupGeneric() {
-		var palContents = File.ReadAllText(_paletteFileName);
+		var palContents = File.ReadAllText(PaletteFileName);
 		_pal = PaletteJsonSerializer.ReadPalette(palContents, new ColorFactory());
 
 		//var codecFileName = Path.Combine(Directory.GetCurrentDirectory(), "Resources", _genericCodecFileName);
-		var serializer = new XmlGraphicsFormatReader(_codecSchemaFileName);
-		var format = serializer.LoadFromFile(_genericCodecFileName);
+		var serializer = new XmlGraphicsFormatReader(CodecSchemaFileName);
+		var format = serializer.LoadFromFile(GenericCodecFileName);
 		_codec = new IndexedFlowGraphicsCodec((FlowGraphicsFormat)format.AsSuccess.Result);
 
-		Setup(_genericFileName, "generic");
+		Setup(GenericFileName, "generic");
 	}
 
 	public void Setup(string dataFileName, string arrangerName) {
@@ -65,19 +65,19 @@ public class Snes3bppDecodeToImage {
 	[GlobalCleanup(Target = nameof(DecodeNative))]
 	public void GlobalCleanupNative() {
 		_df.Close();
-		File.Delete(_nativeFileName);
+		File.Delete(NativeFileName);
 	}
 
 	[GlobalCleanup(Target = nameof(DecodeGeneric))]
 	public void GlobalCleanupGeneric() {
 		_df.Close();
-		File.Delete(_genericFileName);
+		File.Delete(GenericFileName);
 	}
 
 	[Benchmark(Baseline = true)]
 	public void DecodeNative() {
 		for (var i = 0; i < 100; i++) {
-			var outputFileName = Path.Combine(_outputDirectory, $"Native.{i}.bmp");
+			var outputFileName = Path.Combine(OutputDirectory, $"Native.{i}.bmp");
 
 			var image = new IndexedImage(_arranger);
 			image.ExportImage(outputFileName, new ImageSharpFileAdapter());
@@ -87,7 +87,7 @@ public class Snes3bppDecodeToImage {
 	[Benchmark]
 	public void DecodeGeneric() {
 		for (var i = 0; i < 100; i++) {
-			var outputFileName = Path.Combine(_outputDirectory, $"Generic.{i}.bmp");
+			var outputFileName = Path.Combine(OutputDirectory, $"Generic.{i}.bmp");
 
 			var image = new IndexedImage(_arranger);
 			image.ExportImage(outputFileName, new ImageSharpFileAdapter());

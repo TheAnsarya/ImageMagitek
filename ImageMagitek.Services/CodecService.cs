@@ -38,11 +38,7 @@ public class CodecService : ICodecService {
 
 		CodecFactory = new CodecFactory(formats);
 
-		if (errors.Any()) {
-			return new MagitekResults.Failed(errors);
-		} else {
-			return MagitekResults.SuccessResults;
-		}
+		return errors.Any() ? new MagitekResults.Failed(errors) : MagitekResults.SuccessResults;
 	}
 
 	public void AddOrUpdateCodec(Type codecType) =>
