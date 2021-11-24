@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using ImageMagitek.Codec;
 using ImageMagitek.Colors;
@@ -45,6 +44,7 @@ public sealed class IndexedImage : ImageBase<byte> {
 		Height = height;
 
 		Image = new byte[Width * Height];
+		EnsurePalettesLoaded();
 		Render();
 	}
 
@@ -151,8 +151,8 @@ public sealed class IndexedImage : ImageBase<byte> {
 			codec.WriteElement(el, encodedImage);
 		}
 
-		foreach (var fs in Arranger.EnumerateElements().OfType<ArrangerElement>().Select(x => x.DataFile?.Stream).OfType<Stream>().Distinct()) {
-			fs.Flush();
+		foreach (var df in Arranger.EnumerateElements().OfType<ArrangerElement>().Select(x => x.DataFile).OfType<DataFile>().Distinct()) {
+			df.Flush();
 		}
 	}
 
@@ -364,4 +364,15 @@ public sealed class IndexedImage : ImageBase<byte> {
 	/// <param name="remap">List containing remapped indices</param>
 	public void RemapColors(IList<byte> remap) =>
 		Image = Image.Select(x => remap[x]).ToArray();
+
+	private void EnsurePalettesLoaded() {
+		var palettes = Arranger.EnumerateElements()
+			.OfType<ArrangerElement>()
+			.Select(x => x.Palette)
+			.Distinct();
+
+		foreach (var palette in palettes) {
+			_ = palette[0];
+		}
+	}
 }

@@ -1,6 +1,6 @@
-﻿using System;
-using ImageMagitek.Services;
+﻿using ImageMagitek.Services;
 using Monaco.PathTree;
+using Serilog;
 
 namespace TileShop.CLI.Commands;
 
@@ -18,7 +18,7 @@ public class PrintHandler : ProjectCommandHandler<PrintOptions> {
 
 		foreach (var res in projectTree.EnumerateDepthFirst()) {
 			var key = projectTree.CreatePathKey(res);
-			Console.WriteLine($"{res.Name}: Type '{res.Item.GetType().Name}'; Resource Key '{key}'");
+			Log.Information($"{res.Name}: Type '{res.Item.GetType().Name}'; Resource Key '{key}'");
 		}
 
 		return ExitCode.Success;

@@ -26,7 +26,7 @@ public enum PaletteStorageSource { Project = 0, Json }
 
 /// <summary>
 /// Palette manages the loading of palettes and colors from a variety of color formats
-/// Local colors are internally ARGB32
+/// Local colors are internally ColorRgba32
 /// Foreign colors are the same as the target system
 /// </summary>
 public class Palette : IProjectResource {
@@ -187,9 +187,7 @@ public class Palette : IProjectResource {
 	/// or
 	/// Palette formats with entry sizes larger than 4 bytes are not supported
 	/// </exception>
-	private IColor[] LoadForeignPalette() =>
-		//return _paletteSerializer.ReadPalette(DataFile, FileAddress, ColorModel, Entries);
-		_colorSerializer.LoadColors(ColorSources, DataFile, ColorModel, Entries);
+	private IColor[] LoadForeignPalette() => _colorSerializer.LoadColors(ColorSources, DataFile, ColorModel, Entries);
 
 	/// <summary>
 	/// Returns the native color at the specified index

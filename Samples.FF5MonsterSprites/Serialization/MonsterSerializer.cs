@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FF5MonsterSprites.Models;
 using ImageMagitek;
+using ImageMagitek.Builders;
 using ImageMagitek.Codec;
 using ImageMagitek.Colors;
 using ImageMagitek.PluginSample;
@@ -81,9 +82,16 @@ public class MonsterSerializer {
 
 		var bitStream = BitStream.OpenRead(formData, formData.Length * 8);
 
-		var arranger = new ScatteredArranger("monsterArranger", PixelColorType.Indexed, ElementLayout.Tiled, arrangerWidth, arrangerHeight, 8, 8);
+		var arranger = ArrangerBuilder.WithTiledLayout()
+			.WithArrangerElementSize(arrangerWidth, arrangerHeight)
+			.WithElementPixelSize(8, 8)
+			.WithPixelColorType(PixelColorType.Indexed)
+			.WithName("monsterArranger")
+			.AsScatteredArranger()
+			.Build();
+
 		var elementsStored = 0;
-		var tileAddress = TileSetOffset + (8 * metadata.TileSetID);
+		var tileAddress = TileSetOffset + 8 * metadata.TileSetID;
 		var tileSize = metadata.ColorDepth == TileColorDepth.Bpp4 ? 32 : 24;
 
 		for (var y = 0; y < arrangerHeight; y++) {

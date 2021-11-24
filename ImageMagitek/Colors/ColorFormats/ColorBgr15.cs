@@ -64,10 +64,10 @@ public struct ColorBgr15 : IColor32 {
 		}
 	}
 
-	public void Deconstruct(out byte A, out byte R, out byte G, out byte B) {
-		A = 0;
+	public void Deconstruct(out byte R, out byte G, out byte B, out byte A) {
 		R = r;
 		G = g;
 		B = b;
+		A = 0;
 	}
 }

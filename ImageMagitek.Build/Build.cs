@@ -49,12 +49,15 @@ class Build : NukeBuild {
 	Project TileShopProject => Solution.GetProject("TileShop.WPF");
 	AbsolutePath TileShopOutputDirectory => OutputDirectory / "TileShop";
 
-	readonly string TileShopRuntime = "win-x64";
-	readonly string TileShopFramework = "net5.0-windows10.0.18362.0";
+	readonly string TileShopPublishProfilex64 = @"Properties\PublishProfiles\TileShop win-x64-single.pubxml";
+	readonly string TileShopPublishProfilex86 = @"Properties\PublishProfiles\TileShop win-x86-single.pubxml";
 
 	Project TileShopCLIProject => Solution.GetProject("TileShop.CLI");
 	AbsolutePath TileShopCLIPortableOutputDirectory => OutputDirectory / "TileShopCLI";
 	AbsolutePath TileShopCLIWinx64OutputDirectory => OutputDirectory / "TileShopCLI-win-x64";
+
+	readonly string TileShopCliPublishProfilex64 = @"Properties\PublishProfiles\TileShop.CLI win-x64-single.pubxml";
+	readonly string TileShopCliPublishProfilePortable = @"Properties\PublishProfiles\TileShop.CLI portable.pubxml";
 
 	readonly string TileShopCLIFramework = "net5.0";
 
@@ -91,18 +94,15 @@ class Build : NukeBuild {
 
 	Target PublishTileShop => _ => _
 		.DependsOn(Test)
-		.Executes(() =>
+		.Executes(() => {
 			// win-x64 single file
 			DotNetPublish(_ => _
 				.SetProject(TileShopProject)
 				.EnableNoRestore()
-				.EnableNoBuild()
 				.SetConfiguration(Configuration)
 				.SetOutput(TileShopOutputDirectory)
-				.SetRuntime(TileShopRuntime)
-				.SetFramework(TileShopFramework)
-				.AddProperty("SelfContained", false)
-				.AddProperty("PublishSingleFile", true)));
+				.SetPublishProfile(TileShopPublishProfilex64));
+		});
 
 	Target PublishTileShopCLI => _ => _
 		.DependsOn(Test)
@@ -111,24 +111,17 @@ class Build : NukeBuild {
 			DotNetPublish(_ => _
 				.SetProject(TileShopCLIProject)
 				.EnableNoRestore()
-				.EnableNoBuild()
 				.SetConfiguration(Configuration)
 				.SetOutput(TileShopCLIPortableOutputDirectory)
-				.SetFramework(TileShopCLIFramework)
-				.AddProperty("SelfContained", false)
-				.AddProperty("PublishSingleFile", false));
+				.SetPublishProfile(TileShopCliPublishProfilePortable));
 
 			// win-x64 single file
 			DotNetPublish(_ => _
 				.SetProject(TileShopCLIProject)
 				.EnableNoRestore()
-				.EnableNoBuild()
 				.SetConfiguration(Configuration)
 				.SetOutput(TileShopCLIWinx64OutputDirectory)
-				.SetRuntime(TileShopRuntime)
-				.SetFramework(TileShopCLIFramework)
-				.AddProperty("SelfContained", false)
-				.AddProperty("PublishSingleFile", true));
+				.SetPublishProfile(TileShopCliPublishProfilex64));
 		});
 
 	Target Package => _ => _

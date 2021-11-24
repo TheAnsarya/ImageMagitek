@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/canton7/Stylet"
+    xmlns:sel="clr-namespace:TileShop.WPF.Selectors"
     xmlns:ui="http://schemas.modernwpf.com/2019"
     xmlns:vm="clr-namespace:TileShop.WPF.ViewModels"
     Title="Resource Removal Changes"
@@ -16,6 +17,37 @@
     SizeToContent="WidthAndHeight"
     WindowStyle="ToolWindow"
     mc:Ignorable="d">
+
+    <Window.Resources>
+        <DataTemplate x:Key="arrangerTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Image Style="{StaticResource iconNodeArrangerSmall}" />
+                <TextBlock Margin="6,0,0,0" Text="{Binding ResourcePath}" />
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="fileTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Image Style="{StaticResource iconNodeFileSmall}" />
+                <TextBlock Margin="6,0,0,0" Text="{Binding ResourcePath}" />
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="paletteTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Image Style="{StaticResource iconNodePaletteSmall}" />
+                <TextBlock Margin="6,0,0,0" Text="{Binding ResourcePath}" />
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="folderTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Image Style="{StaticResource iconNodeFolderSmall}" />
+                <TextBlock Margin="6,0,0,0" Text="{Binding ResourcePath}" />
+            </StackPanel>
+        </DataTemplate>
+        <sel:ResourceRemovalTemplateSelector x:Key="resourceTemplateSelector" ArrangerNodeTemplate="{StaticResource arrangerTemplate}" 
+            DataFileNodeTemplate="{StaticResource fileTemplate}" PaletteNodeTemplate="{StaticResource paletteTemplate}" 
+            FolderNodeTemplate="{StaticResource folderTemplate}" />
+    </Window.Resources>
+    
     <Grid Margin="10,0,10,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -35,17 +67,11 @@
                     FontWeight="Bold"
                     Text="Removed Items"
                     Visibility="{Binding HasRemovedResources, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <ListView
+                <ItemsControl
                     Margin="10"
+                    ItemTemplateSelector="{StaticResource resourceTemplateSelector}"
                     ItemsSource="{Binding RemovedResources}"
-                    Visibility="{Binding HasRemovedResources, Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <ListView.View>
-                        <GridView AllowsColumnReorder="False">
-                            <GridViewColumn DisplayMemberBinding="{Binding ResourceName}" Header="Name" />
-                            <GridViewColumn DisplayMemberBinding="{Binding ResourcePath}" Header="Path" />
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                    Visibility="{Binding HasRemovedResources, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
                 <TextBlock
                     Margin="0,10,0,0"
@@ -53,17 +79,12 @@
                     FontWeight="Bold"
                     Text="Changed Items"
                     Visibility="{Binding HasChangedResources, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <ListView
+                <ItemsControl
                     Margin="10"
+                    ItemTemplateSelector="{StaticResource resourceTemplateSelector}"
                     ItemsSource="{Binding ChangedResources}"
                     Visibility="{Binding HasChangedResources, Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn DisplayMemberBinding="{Binding ResourceName}" Header="Name" />
-                            <GridViewColumn DisplayMemberBinding="{Binding ResourcePath}" Header="Path" />
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                </ItemsControl>
             </StackPanel>
         </ScrollViewer>
 

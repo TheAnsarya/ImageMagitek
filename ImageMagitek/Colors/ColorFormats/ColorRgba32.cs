@@ -62,10 +62,10 @@ public struct ColorRgba32 : IColor32 {
 
 	public Rgba32 ToRgba32() => new(color);
 
-	public void Deconstruct(out byte A, out byte R, out byte G, out byte B) {
-		A = a;
+	public void Deconstruct(out byte R, out byte G, out byte B, out byte A) {
 		R = r;
 		G = g;
 		B = b;
+		A = a;
 	}
 }

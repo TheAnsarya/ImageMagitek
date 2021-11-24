@@ -66,7 +66,7 @@ public sealed class XmlGraphicsFormatReader : IGraphicsFormatReader {
 		};
 
 		if (!int.TryParse(codec.DefaultWidth?.Value, out var defaultWidth)) {
-			errors.Add($"Element width could not be parsed on {codec.DefaultWidth.LineNumber()}");
+			errors.Add($"Element width could not be parsed on line {codec.DefaultWidth.LineNumber()}");
 		}
 
 		if (defaultWidth <= 1) {
@@ -74,7 +74,7 @@ public sealed class XmlGraphicsFormatReader : IGraphicsFormatReader {
 		}
 
 		if (!int.TryParse(codec.DefaultHeight?.Value, out var defaultHeight)) {
-			errors.Add($"Element height could not be parsed on {codec.DefaultHeight.LineNumber()}");
+			errors.Add($"Element height could not be parsed on line {codec.DefaultHeight.LineNumber()}");
 		}
 
 		if (defaultHeight <= 1) {
@@ -91,11 +91,11 @@ public sealed class XmlGraphicsFormatReader : IGraphicsFormatReader {
 		}
 
 		if (!int.TryParse(codec.ColorDepth?.Value, out var colorDepth)) {
-			errors.Add($"colordepth could not be parsed on {codec.ColorDepth.LineNumber()}");
+			errors.Add($"colordepth could not be parsed on line {codec.ColorDepth.LineNumber()}");
 		}
 
 		if (colorDepth is < 1 or > 32) {
-			errors.Add($"colordepth contains an out of range value '{colorDepth}' on {codec.ColorDepth.LineNumber()}");
+			errors.Add($"colordepth contains an out of range value '{colorDepth}' on line {codec.ColorDepth.LineNumber()}");
 		}
 
 		ImageLayout layout = default;
@@ -131,7 +131,7 @@ public sealed class XmlGraphicsFormatReader : IGraphicsFormatReader {
 				if (int.TryParse(mergeItems[i], out var mergePlane)) {
 					format.MergePlanePriority[i] = mergePlane;
 				} else {
-					errors.Add($"Merge priority '{mergeItems[i]}' could not be parsed on {codec.MergePriority.LineNumber()}");
+					errors.Add($"Merge priority '{mergeItems[i]}' could not be parsed on line {codec.MergePriority.LineNumber()}");
 				}
 			}
 		} else {
@@ -160,20 +160,20 @@ public sealed class XmlGraphicsFormatReader : IGraphicsFormatReader {
 					if (int.TryParse(patternInputs[i], out var patternPriority)) {
 						rowPixelPattern[i] = patternPriority;
 					} else {
-						errors.Add($"rowpixelpattern value '{patternInputs[i]}' could not be parsed on {image.RowPixelPattern.LineNumber()}");
+						errors.Add($"rowpixelpattern value '{patternInputs[i]}' could not be parsed on line {image.RowPixelPattern.LineNumber()}");
 					}
 				}
 			} else // Create a default rowpixelpattern
 			  {
-				rowPixelPattern = new int[1];
+				rowPixelPattern = new int[1] { 0 };
 			}
 
 			if (!int.TryParse(image.ColorDepth.Value, out var imageColorDepth)) {
-				errors.Add($"colordepth could not be parsed on {codec.DefaultHeight.LineNumber()}");
+				errors.Add($"colordepth could not be parsed on line {codec.DefaultHeight.LineNumber()}");
 			}
 
 			if (!bool.TryParse(image.RowInterlace.Value, out var imageRowInterlace)) {
-				errors.Add($"rowinterlace could not be parsed on {codec.DefaultHeight.LineNumber()}");
+				errors.Add($"rowinterlace could not be parsed on line {codec.DefaultHeight.LineNumber()}");
 			}
 
 			var ip = new ImageProperty(imageColorDepth, imageRowInterlace, rowPixelPattern);
@@ -210,7 +210,7 @@ public sealed class XmlGraphicsFormatReader : IGraphicsFormatReader {
 		};
 
 		if (!int.TryParse(codec.Width?.Value, out var width)) {
-			errors.Add($"Element width could not be parsed on {codec.Width.LineNumber()}");
+			errors.Add($"Element width could not be parsed on line {codec.Width.LineNumber()}");
 		}
 
 		if (width <= 1) {
@@ -218,7 +218,7 @@ public sealed class XmlGraphicsFormatReader : IGraphicsFormatReader {
 		}
 
 		if (!int.TryParse(codec.Height?.Value, out var height)) {
-			errors.Add($"Element height could not be parsed on {codec.Height.LineNumber()}");
+			errors.Add($"Element height could not be parsed on line {codec.Height.LineNumber()}");
 		}
 
 		if (height <= 1) {
@@ -239,7 +239,7 @@ public sealed class XmlGraphicsFormatReader : IGraphicsFormatReader {
 		}
 
 		if (colorDepth is < 1 or > 32) {
-			errors.Add($"colordepth contains an out of range value '{colorDepth}' on {codec.ColorDepth.LineNumber()}");
+			errors.Add($"colordepth contains an out of range value '{colorDepth}' on line {codec.ColorDepth.LineNumber()}");
 		}
 
 		ImageLayout layout = default;
@@ -263,10 +263,10 @@ public sealed class XmlGraphicsFormatReader : IGraphicsFormatReader {
 		var format = new PatternGraphicsFormat(name, colorType, colorDepth, layout, packing, width, height);
 
 		int[] rowPixelPattern;
-		var patternString = codec.RowPixelPattern?.Value;
-		if (patternString is not null) {
-			patternString = patternString.Replace(" ", "");
-			var patternInputs = patternString.Split(',');
+		var rowPixelPatternString = codec.RowPixelPattern?.Value;
+		if (rowPixelPatternString is not null) {
+			rowPixelPatternString = rowPixelPatternString.Replace(" ", "");
+			var patternInputs = rowPixelPatternString.Split(',');
 
 			rowPixelPattern = new int[patternInputs.Length];
 
@@ -274,7 +274,7 @@ public sealed class XmlGraphicsFormatReader : IGraphicsFormatReader {
 				if (int.TryParse(patternInputs[i], out var patternPriority)) {
 					rowPixelPattern[i] = patternPriority;
 				} else {
-					errors.Add($"rowpixelpattern value '{patternInputs[i]}' could not be parsed on {codec.RowPixelPattern.LineNumber()}");
+					errors.Add($"rowpixelpattern value '{patternInputs[i]}' could not be parsed on line {codec.RowPixelPattern.LineNumber()}");
 				}
 			}
 		} else // Create a default rowpixelpattern
@@ -295,7 +295,7 @@ public sealed class XmlGraphicsFormatReader : IGraphicsFormatReader {
 				if (int.TryParse(mergeItems[i], out var mergePlane)) {
 					format.MergePlanePriority[i] = mergePlane;
 				} else {
-					errors.Add($"Merge priority '{mergeItems[i]}' could not be parsed on {codec.MergePriority.LineNumber()}");
+					errors.Add($"Merge priority '{mergeItems[i]}' could not be parsed on line {codec.MergePriority.LineNumber()}");
 				}
 			}
 		} else {
@@ -309,7 +309,7 @@ public sealed class XmlGraphicsFormatReader : IGraphicsFormatReader {
 		}
 
 		if (patternSize < 1 || patternSize > PatternList.MaxPatternSize) {
-			errors.Add($"Pattern size contains an out of range value '{patternSize}' {codec.Width.LineNumber()}");
+			errors.Add($"Pattern size contains an out of range value '{patternSize}' on line {codec.Width.LineNumber()}");
 		}
 
 		var patternStrings = patternElementRoot

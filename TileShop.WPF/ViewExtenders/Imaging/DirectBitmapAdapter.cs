@@ -70,12 +70,12 @@ public class DirectBitmapAdapter : BitmapAdapter {
 				var backBuffer = (uint*)Bitmap.BackBuffer.ToPointer();
 				var stride = Bitmap.BackBufferStride;
 
-				_ = Parallel.For(yStart, yStart + height - 1, (scanline) => {
-					var dest = backBuffer + (scanline * stride / 4) + xStart;
+				Parallel.For(yStart, yStart + height, (scanline) => {
+					var dest = backBuffer + scanline * stride / 4 + xStart;
 					var src = Image.GetPixelRowSpan(scanline);
 
 					for (var x = 0; x < width; x++) {
-						dest[x] = TranslateColor(x, scanline, src);
+						dest[x] = TranslateColor(x + xStart, src);
 					}
 				});
 			}
@@ -87,7 +87,7 @@ public class DirectBitmapAdapter : BitmapAdapter {
 	}
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	private uint TranslateColor(int x, int y, Span<ColorRgba32> sourceRow) {
+	private uint TranslateColor(int x, in Span<ColorRgba32> sourceRow) {
 		var inputColor = sourceRow[x].Color;
 		var outputColor = (inputColor & 0xFF00FF00) | BitOperations.RotateLeft(inputColor & 0xFF00FF, 16);
 
